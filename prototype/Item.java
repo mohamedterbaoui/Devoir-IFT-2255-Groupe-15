@@ -42,6 +42,11 @@ public class Item{
 		return listeDItems.size();
 	}
 
+	public Item getParent(){
+		return this.parent;
+	}
+
+
 	public String toString(){
 		StringBuilder str = new StringBuilder();
 		for(int i=0;i < listeDItems.size(); i++){
@@ -52,6 +57,8 @@ public class Item{
 		}
 		return str.toString();
 	}
+
+
 		
 			
 

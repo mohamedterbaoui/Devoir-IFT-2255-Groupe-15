@@ -22,6 +22,7 @@ public class Navigateur{
 	public void accueil(){
 		System.out.println("Bienvenue à l'appliation MaVille");
 		System.out.println("Qu'est-ce que nous pouvons faire pour vous\n");
+		this.generateReport();
 		this.boucle();
 
 	}
@@ -30,21 +31,46 @@ public class Navigateur{
 		this.itemActuel = itemActuel.getChild(choix - 1);
 	}
 
+	public Item getActuel(){
+		return this.itemActuel;
+	}
+
+	public void generateReport(){
+		System.out.println(this.getActuel());
+		System.out.println("x. Sortir");
+		System.out.println("d. Revenir au début");
+		System.out.println("r. Revenir en arrière");
+		System.out.println("Veuiller choisir un option");
+
+	}
+
 	public void boucle(){
 		while(true){
-			String str = scn.nextLine();
-			switch (str) {
-				case "x":
-					break;
-				case "r":
+			String input = scn.nextLine();
+			switch (input) {
+				case "x": //sortir
+					return; 
+				case "d": //revenir au début
 					itemActuel = racine;
+					this.generateReport();
+					break;
+				case "r": //revenir en arrière
+					if(itemActuel.getParent() == null){
+						itemActuel = racine;
+					} else {
+						itemActuel = itemActuel.getParent();
+					}
+					this.generateReport();
+					break;
 				default : 
-					int sel = Integer.parseInt(str); //convertir en intéger
+					int sel = Integer.parseInt(input); //convertir en intéger
 								     //pour trouver la séléction
 					this.setActuel(sel);
-					System.out.println(itemActuel);
+					this.generateReport();
 			}
 		}
 	}
+
+	
 	
 }
