@@ -28,7 +28,12 @@ public class Navigateur{
 	}
 
 	public void setActuel(int choix){
+		if (choix >= itemActuel.getNombreItems()){
+			System.out.println("Veuiller choisir une option valide");
+		} else {
+
 		this.itemActuel = itemActuel.getChild(choix - 1);
+		}
 	}
 
 	public Item getActuel(){
