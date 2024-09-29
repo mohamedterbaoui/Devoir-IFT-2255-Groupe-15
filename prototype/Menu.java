@@ -6,10 +6,11 @@ public class Menu {
 	//metadonnées pour le constructeur
 	int[] coord = new int[]{0,0,0};  //coordonnées de chaque item
 	//les noms pour chaque item
-	String[][] nomsItems= new String[][]{{"Menu principle"},{"Option 1","Option 2"},{"Option a", "Option b", "Option c"}};
 	String[][] nomItemsNiveau0 = new String[][]{{"Option 1", "Option 2"}};
 	String[][] nomItemsNiveau1 = new String[][]{{"Option A", "Option B", "Option C"},{"Option D","Option E","Option F"}};
-	String[][] nomItemsNiveau2 = new String[][]{{}};
+	String[][][] nomItemsNiveau2 = new String[][][]{{{"Option a","Option b", "Option c"},
+		{"Option d", "Option e"},{"Option f", "Option g"}},{{"Option h", "Option i"},
+		{"Option j", "Option k"},{"Option l", "Option M"}}};
 	//pointeurs vers les items
 	Item itemActuel; //l'item selectionné par l'usager
 	Item racine = null;     // première élément du menu
@@ -32,7 +33,26 @@ public class Menu {
 				itemActuel.ajouterEnfant(nouveauEnfant);
 			}	
 		}
+		//3e niveau? Il est fort possible qu'on doit modifier cette partie en particulaire...
+		//Pour le moment, on n'a que des items vides. On peut le remplacer par peut être un
+		//tableau des objets "item" qui ont plus de fonctionalités.
+		//
+		//Il y a probablement aussi un façon plus simple pour le faire
+		//avec un algorithme recursive...
+		for(int i=0; i< nomItemsNiveau2.length; i++){
+			//chercher le iem enfant à partir du racine
+			for(int j=0; j < nomItemsNiveau2[i].length; j++){
+				Item itemActuel = this.getItem(new int[]{i,j}, racine);
+				for(int k=0; k < nomItemsNiveau2[i][j].length; k++){
+					Item nouveauEnfant = new Item(nomItemsNiveau2[i][j][k],itemActuel);
+					itemActuel.ajouterEnfant(nouveauEnfant);
+				}
+			}
+		}
 	}
+
+									     
+									      
 
 	public Item getItem(int[] chemin, Item debutDeRecherche){
 		//si le tableau est vide, on retourne l'item de debut
