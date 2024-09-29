@@ -52,30 +52,36 @@ public class Navigateur{
 	public void boucle(){
 		while(true){
 			String input = scn.nextLine();
-			switch (input) {
-				case "x": //sortir
-					return; 
-				case "d": //revenir au début
-					itemActuel = racine;
-					this.generateReport();
-					break;
-				case "r": //revenir en arrière
-					if(itemActuel.getParent() == null){
+				try{
+				switch (input) {
+					case "x": //sortir
+						return; 
+					case "d": //revenir au début
 						itemActuel = racine;
-					} else {
-						itemActuel = itemActuel.getParent();
-					}
+						this.generateReport();
+						break;
+					case "r": //revenir en arrière
+						if(itemActuel.getParent() == null){
+							itemActuel = racine;
+						} else {
+							itemActuel = itemActuel.getParent();
+						}
+						this.generateReport();
+						break;
+					default : 
+						int sel = Integer.parseInt(input); //convertir en intéger
+									     //pour trouver la séléction
+						this.setActuel(sel);
+						this.generateReport();
+				}
+				} catch (NumberFormatException e) {
+					System.err.println("Veuiller saisir une option valide");
 					this.generateReport();
-					break;
-				default : 
-					int sel = Integer.parseInt(input); //convertir en intéger
-								     //pour trouver la séléction
-					this.setActuel(sel);
-					this.generateReport();
+				}
 			}
 		}
 	}
 
 	
 	
-}
+
