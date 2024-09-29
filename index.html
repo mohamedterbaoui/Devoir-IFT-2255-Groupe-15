@@ -621,7 +621,7 @@
                         <span class="member-id">20274993</span>
                     </div> 
                     <span>Discord: @pastry_eater</span>
-                    <a href="mailto:prenom.nom@umontreal.ca">jeremy.faubert@umontreal.ca</a>
+                    <a href="jeremy.faubert@umontreal.ca">jeremy.faubert@umontreal.ca</a>
                     <span class="member-role">Membre de l'équipe</span>
                 </li>
                 <li class="member">
@@ -974,45 +974,116 @@
                 <div>
                     <h3 class="subsection-title">Risques</h3>
                     <ol class="risks">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li><strong>Sécurité des données personnelles</strong>
+                            <p>Justification : Puisque les utilisateurs vont partager leurs informations personnelles, notamment leur adresse de résidence, informations de connexion, leurs trajets fréquents ainsi que leur localisation, il est très important que le système soit robuste et ne laisse personne avoir accès à ces informations.</p>
+                            <p>Solution : Pour régler ce problème, il serait possible d’utiliser différentes techniques comme une authentification multi-facteur et le chiffrement des données. Effectuer des tests de sécurité régulièrement afin de s’assurer que le système soit à jour pourrait également s’avérer pertinent.</p>
+                        </li>
+                        <li><strong>Inefficacité des notifications personnalisées (ne pas recevoir les informations pertinentes)</strong>
+                            <p>Justification : Les utilisateurs utiliseront le système MaVille pour savoir s’ils doivent adapter leur trajet habituel. Si jamais ce trajet n’est pas disponible à cause d’un chantier, ils doivent être au courant le plus tôt possible afin de s’adapter. Également, s’ils reçoivent trop de notifications non pertinentes, celles provenant d’un autre secteur par exemple, ils pourraient commencer à ignorer les notifications, voire arrêter d’utiliser l’application. Il est important de ne pas bombarder d’informations inutiles les utilisateurs non seulement pour faciliter leurs déplacements, mais également pour favoriser leur rétention.</p>
+                            <p>Solution : Afin de résoudre ce problème, le système pourrait permettre aux utilisateurs de personnaliser leurs préférences de notifications. Afin de savoir si des notifications inutiles surviennent, recevoir leur retour sur l’application s’avérerait très pertinent et permettrait d’adapter le système en sachant exactement où le problème se trouve.</p>
+                        </li>
+                        <li><strong>Trop de personne en même temps</strong>
+                            <p>Justification : MaVille a pour clientèle la population montréalaise, soit plus de deux millions de personnes en 2021. Même si seulement une partie d’entre eux vont utiliser l’application, il est important que le système puisse accueillir beaucoup de personnes simultanément, au risque de grandement ralentir le système, voire peut-être même empêcher certaines personnes d’avoir accès à l’information rapidement.</p>
+                            <p>Solution : Afin d’éviter ce risque, agrandir la taille des serveurs et utiliser des services cloud facilement ajustables réduiraient les problèmes engendrés par ce risque. Adapter le système en fonction du trafic serait également une possibilité, notamment aux heures de pointe où il y aura certainement plus d’utilisateurs connectés simultanément sur la plateforme.  </p>
+                        </li>
+                        <li><strong>Difficile à comprendre pour les utilisateurs</strong>
+                            <p>Justification : L’interface doit être simple d’utilisation afin que même les personnes moins familières avec les technologies puissent l’utiliser facilement, au risque de ne pas convaincre cette population à adopter l’application.</p>
+                            <p>Solution : Une interface simple à utiliser et qui est rapide à lire, notamment aux niveaux des notifications, favoriserait l’adoption de MaVille auprès de la population montréalaise. Des tutoriels rapides et concis pour les nouveaux utilisateurs serait également pertinent. Finalement, un groupe de discussion avec des personnes moins familières à la technologie permettrait directement de savoir si l’interface est adéquate et facile à utiliser.</p>
+                        </li>
+                        <li><strong>Fausse signalisation d’un problème</strong>
+                            <p>Justification : Puisqu’il est possible que certains utilisateurs signalent des problèmes inexistant ou non pertinent, le traitement des requêtes serait directement affecté et réduirait l’efficacité du système mis en place dans la vérification des problèmes.</p>
+                            <p>Solution : Lors de l’inscription, les utilisateurs devront prouver leur résidence, assurant ainsi que seuls les résidents pourront soumettre des signalements. Également, chaque signalisation d’un problème nécessitera un formulaire détaillé qui sera ensuite valider par la municipalité. Un signalement pourrait également être accompagné d’une preuve visuelle.</p>
+                        </li>
                     </ol>
                 </div>
 
                 <div>
                     <h3 class="subsection-title">Besoins non-fonctionnelles</h3>
                     <ol class="nf-requirements">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li>
+                            <strong>Performance</strong>
+                            <p>Justification : Le système doit pouvoir gérer plusieurs requêtes simultanément, car le volume de notifications sera élevé. Une transmission rapide des informations est cruciale pour éviter que les utilisateurs ne rencontrent des ralentissements pendant leur trajet.</p>
+                        </li>
+                        <li>
+                            <strong>Disponibilité</strong>
+                            <p>Justification : L’application doit être accessible à tout moment, avec un minimum d’interruptions, y compris lors de mises à jour. Garantir la disponibilité est essentiel pour la population montréalaise, surtout en cas d'urgence où chaque minute compte.</p>
+                        </li>
+                        <li>
+                            <strong>Possibilité de s’agrandir</strong>
+                            <p>Justification : Avec la croissance prévue du nombre d’utilisateurs, le système doit être capable de s'adapter à cette hausse. Cette extensibilité doit aussi inclure l'élargissement de la zone couverte par l'application, notamment dans les banlieues.</p>
+                        </li>
+                        <li>
+                            <strong>Multiplateforme</strong>
+                            <p>Justification : L’application doit être compatible avec les systèmes d’exploitation les plus utilisés, comme Android, iOS et Windows, car les utilisateurs accéderont à l’application via des téléphones, des tablettes ou des ordinateurs.</p>
+                        </li>
+                        <li>
+                            <strong>Efficacité énergétique</strong>
+                            <p>Justification : L'application doit fonctionner efficacement sur des appareils moins puissants ou plus anciens. Il est donc important de limiter la consommation d’énergie, tant au niveau des composants que de l'utilisation de la batterie.</p>
+                        </li>
                     </ol>
                 </div>
                 
                 <div>
-                    <h3 class="subsection-title">Besoins matériels</h3>
-                    <p>
-                        <em>Description et justification des ressourcs nécessaires pour le projet...</em>
-                    </p>
+                    <h3 class="subsection-title">Besoins Matériels</h3>
+                     <p>
+                    <ol class="material-needs">
+                        <li>
+                            <strong>Serveurs</strong>
+                            <p>Pour gérer les requêtes et notifications. Doivent être puissants au risque de ralentir l’accès aux services.</p>
+                        </li>
+                        <li>
+                            <strong>Stockage</strong>
+                            <p>Doit être rapide, comme les SSD ou NVMe, pour que les utilisateurs aient les informations nécessaires en temps réel.</p>
+                        </li>
+                        <li>
+                            <strong>Système de sauvegarde</strong>
+                            <p>Afin d’éviter de « perdre » une requête d’un utilisateur ou une zone de chantier en cours ou à venir.</p>
+                        </li>
+                        <li>
+                            <strong>Réseau Internet</strong>
+                            <p>La vitesse doit être rapide, mais doit également être stable pour que les communications entre l’application et les serveurs soient les plus rapides possible.</p>
+                        </li>
+                        <li>
+                            <strong>Pare-feu</strong>
+                            <p>Afin de protéger le système de potentielles attaques et par conséquent les données personnelles des utilisateurs.</p>
+                        </li>
+                        <li>
+                            <strong>Appareils de test</strong>
+                            <p>Tester l’application sur différents appareils (ordinateurs, tablettes et téléphones) permet de s’assurer que le système fonctionne sur les systèmes d’exploitation couramment utilisés.</p>
+                        </li>
+                    </ol>
                 </div>
 
                 <div>
                     <h3 class="subsection-title">Solution de stockage</h3>
-                    <p>
-                        <em>Description de votre solution de stockage...</em>
-                    </p>
+                    <ol class="storage-solutions">
+                        <li>
+                            <strong>Base de données internes (Disques durs, SSD, NVMe, …)</strong>
+                            <p>Une base de données internes permet un contrôle total sur la gestion des données, donc pour la sécurité, l’accès à l’information et les performances. L’accès aux données est également plus rapide puisque les serveurs sont plus proches des infrastructures et des utilisateurs.</p>
+                        </li>
+                        <li>
+                            <strong>Base de données sur le Cloud</strong>
+                            <p>Gérer le stockage sur le Cloud permet une meilleure flexibilité lorsqu’il y a plus d’utilisateurs en même temps, mais également en prévision d’agrandissement du réseau d’exploitation du système. Il n’y a également pas de maintenance matérielle à faire.</p>
+                        </li>
+                    </ol>
                 </div>
 
                 <div>
                     <h3 class="subsection-title">Solution d'intégration</h3>
-
-                    <p>
-                        <em>Description de votre solution d'intégration...</em>
-                    </p>
+                    <ol class="integration-solutions">
+                        <li>
+                            <strong>Intégration avec des systèmes municipaux</strong>
+                            <p>MaVille doit pouvoir s’intégrer aux systèmes d’information de la ville, notamment pour avoir les informations nécessaires pour les chantiers et les travaux.</p>
+                        </li>
+                        <li>
+                            <strong>API tierces pour les notifications</strong>
+                            <p>Puisque les notifications sont une partie intégrante du projet et pour assurer que celles-ci soient adéquatement envoyées, des API tierces offriraient une meilleure gestion des notifications.</p>
+                        </li>
+                        <li>
+                            <strong>Intégration avec des services de géolocalisation</strong>
+                            <p>Cela permettrait aux utilisateurs de signaler un problème à un endroit précis, mais également pour les intervenants lorsqu’ils vont soumettre un nouveau projet de travaux ou mettre à jour les informations d’un chantier. Google Maps API ou bien OpenStreetMap pourraient ici être très pertinents pour l’application.</p>
+                        </li>
+                    </ol>
                 </div>
             </section>
 
