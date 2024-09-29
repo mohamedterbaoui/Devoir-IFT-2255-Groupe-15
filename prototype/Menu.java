@@ -6,6 +6,10 @@ public class Menu {
 	//metadonnées pour le constructeur
 	int[] coord = new int[]{0,0,0};  //coordonnées de chaque item
 	//les noms pour chaque item
+	//On peut changer le nom pour chaque item en changant les noms ici. C'est structuré
+	//de la même façon que le menu.
+	//Les enfants par exemple nomItemsNiveau1[0] correspond aux enfants de NomItemsNiveau0[0][0]
+	//ou les enfants de nomItemsNiveau1[0][0] sont dans nomItemsNiveau2[0][0]. 
 	String[][] nomItemsNiveau0 = new String[][]{{"Option 1", "Option 2"}};
 	String[][] nomItemsNiveau1 = new String[][]{{"Option A", "Option B", "Option C"},{"Option D","Option E","Option F"}};
 	String[][][] nomItemsNiveau2 = new String[][][]{{{"Option a","Option b", "Option c"},
