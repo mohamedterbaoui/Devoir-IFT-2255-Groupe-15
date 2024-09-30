@@ -556,8 +556,6 @@
 
         .activity-diagram {
             display: block;
-            min-height: 600px;
-            min-width: 600px;
             height: 100%;
             width: auto;
             background-color: #d5d5d5;
@@ -855,7 +853,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Préconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le résident doit avoir un accès à Internet.</li>
+                                <li class="dash">Aucunes</li>
                             </ul>
                         </div>
                         
@@ -889,7 +887,7 @@
                                     Les informations soumises sont invalides.
                                     <ol class="bare-list">
                                         <li value="4">Le système affiche un message d'erreur indiquant les informations manquantes.</li>
-                                        <li value="4">Le scénario se termine.</li>
+                                        <li value="4">Retour à l'étape 2</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -897,8 +895,8 @@
                                 <li class="scenario-alt-step" value="6">
                                     Le courriel est déjà utilisé.
                                     <ol class="bare-list">
-                                        <li value="6">Le système informe le résident que l'adresse e-mail est déjà enregistrée.</li>
-                                        <li value="6">Le scénario se termine.</li>
+                                        <li value="4">Le système informe le résident que l'adresse e-mail est déjà enregistrée.</li>
+                                        <li value="4">Propose à l'utilisateur de se connecter avec son compte existant</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -934,7 +932,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le résident visualise la liste des travaux en cours et à venir.</li>
+                                <li class="dash">Aucunes</li>
                             </ul>
                         </div>
                         
@@ -959,7 +957,7 @@
                                 <li class="scenario-alt-step" value="4">
                                     Aucun travail à afficher.
                                     <ol class="bare-list">
-                                        <li value="4">Le système affiche un message indiquant qu'aucun travail n'est actuellement prévu.</li>
+                                        <li value="4">Le système affiche un message indiquant qu'aucun travail n'est en cours ou actuellement prévu.</li>
                                         <li value="4">Le scénario se termine.</li>
                                     </ol>
                                 </li>
@@ -996,7 +994,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">Le résident visualise les résultats de sa recherche de travaux.</li>
+                                <li class="dash">Aucunes</li>
                             </ul>
                         </div>
                         
@@ -1009,7 +1007,8 @@
                         <h5 class="scenario-main-title">Scénario principal</h5>
                         <ol class="scenario-main-steps">
                             <li class="scenario-main-step">Le résident se connecte à son compte sur la plateforme.</li>
-                            <li class="scenario-main-step">Le résident accède à la fonction de recherche de travaux.</li>
+                            <li class="scenario-main-step">Le résident accède à la section des travaux en cours et à venir</li>
+                            <li class="scenario-main-step">Le résident utilise la fonction de recherche de travaux.</li>
                             <li class="scenario-main-step">Le résident saisit ses critères de recherche (titre, type de travaux, ou quartier).</li>
                             <li class="scenario-main-step">Le résident soumet la recherche.</li>
                             <li class="scenario-main-step">Le système traite la demande et affiche les résultats correspondants.</li>
@@ -1021,8 +1020,8 @@
                                 <li class="scenario-alt-step" value="4">
                                     Aucun résultat trouvé.
                                     <ol class="bare-list">
-                                        <li value="4">Le système affiche un message indiquant qu'aucun travail ne correspond aux critères de recherche.</li>
-                                        <li value="4">Le scénario se termine.</li>
+                                        <li value="5">Le système affiche un message indiquant qu'aucun travail ne correspond aux critères de recherche.</li>
+                                        <li value="5">Le scénario se termine.</li>
                                     </ol>
                                 </li>
                             </ol>
@@ -1046,7 +1045,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Résident (Principal)</li>
-                                <li class="cu-actor">Agent Municipal (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1110,7 +1108,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Résident (Principal)</li>
-                                <li class="cu-actor">Agent Municipal (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1174,7 +1171,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Résident (Principal)</li>
-                                <li class="cu-actor">Agent Municipal (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1381,7 +1377,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">L'intervenant peut visualiser la liste des requêtes de travaux.</li>
+                                <li class="dash">Aucunes</li>
                             </ul>
                         </div>
                         
@@ -1431,7 +1427,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Intervenant (Principal)</li>
-                                <li class="cu-actor">Agent municipal (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1497,7 +1492,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Intervenant (Principal)</li>
-                                <li class="cu-actor">Agent municipal (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1511,7 +1505,7 @@
                         <div class="cu-part">
                             <h5 class="cu-part-title">Postconditions</h5>
                             <ul class="bare-list cu-conditions">
-                                <li class="dash">L'intervenant a accès à la liste des projets et peut voir leurs détails.</li>
+                                <li class="dash">Aucunes</li>
                             </ul>
                         </div>
                         
@@ -1561,7 +1555,6 @@
                             <h5 class="cu-part-title">Acteurs</h5>
                             <ul class="bare-list cu-actors">
                                 <li class="cu-actor">Intervenant (Principal)</li>
-                                <li class="cu-actor">Agent municipal (Secondaire)</li>
                             </ul>
                         </div>
                         
@@ -1624,12 +1617,12 @@
                   
                 <h3 class="subsection-title">Diagramme d'activités</h3>
                 <div class="activity">
-                    <h4>Titre du diagramme 1</h4>
-                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+                    <h4>Diagramme d'activité pour le résident</h4>
+                    <img class="activity-diagram" src="images/activity_diagram_resident.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
-                    <h4>Titre du diagramme 2</h4>
-                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+                    <h4>Diagramme d'activité pour l'intervenant</h4>
+                    <img class="activity-diagram" src="images/activity_diagram_intervenant.svg" alt="Diagramme d'activités">
                 </div>
             </section>
 
