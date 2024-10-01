@@ -1,17 +1,28 @@
 //Resident.java
 //IFT2255 - Équipe 15
 //Objet qui stock les parametres d'un résident
+package usagers
 
 class Resident {
 	private String prenom;
 	private String nom;
 	private String adresse;
+        private String telephone;
 	private String courriel;
 	private String motDePasse;
+	private String type; //Cela serait mieux comme Enum au lieu de String
 
 	public Resident(String prenom, String nom, String adresse, String courriel, String motDePasse){
-		//Constructeur	
+		this.prenom = prenom;
+		this.nom = nom;
+		this.adresse = adresse;
+		this.courriel = courriel;
+		this.motDePasse = motDePasse;
 	}
+
+	public bool verifierMotDePasse(String mot){
+		return(mot == this.motDePasse);
+	} 
 
 	//getters
 	public String getPrenom(){
@@ -24,6 +35,10 @@ class Resident {
 
 	public String getAdresse(){
 		return this.adresse;
+	}
+
+	public String getTelephone(){
+		return this.telephone;
 	}
 
 	public String getCourriel(){
@@ -46,6 +61,10 @@ class Resident {
 
 	public void setAdresse(String adresse){
 		this.adresse= adresse;
+	}
+
+	public void setTelephone(String telephone){
+		this.telephone = telephone;
 	}
 
 	public void setCourriel(String courriel){
