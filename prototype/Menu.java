@@ -1,7 +1,7 @@
 //Menu.java
 //IFT2255 - Équipe 15
 //Classe qui gère le menu
-import menuItems.*
+import menuItems.*;
 import java.util.Arrays;
 public class Menu {
 	//metadonnées pour le constructeur

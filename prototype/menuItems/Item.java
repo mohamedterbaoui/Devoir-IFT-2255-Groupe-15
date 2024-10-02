@@ -1,7 +1,7 @@
 //Item.java
 //IFT2255 - Équipe 15
 //Cette classe crée les nouveaux Items
-package menuItems
+package menuItems;
 
 import java.util.LinkedList;
 public class Item{

@@ -3,6 +3,7 @@
 //Cette classe sert à gérer la navigation dans le système des menus
 
 import java.util.Scanner;
+import menuItems.*;
 
 public class Navigateur{
 	//déclarations
