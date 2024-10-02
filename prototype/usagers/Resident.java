@@ -1,9 +1,9 @@
 //Resident.java
 //IFT2255 - Équipe 15
 //Objet qui stock les parametres d'un résident
-package usagers
+package usagers;
 
-class Resident {
+public class Resident {
 	private String prenom;
 	private String nom;
 	private String adresse;
@@ -20,7 +20,7 @@ class Resident {
 		this.motDePasse = motDePasse;
 	}
 
-	public bool verifierMotDePasse(String mot){
+	public boolean verifierMotDePasse(String mot){
 		return(mot == this.motDePasse);
 	} 
 
@@ -47,7 +47,7 @@ class Resident {
 
 	//cela n'est probablement pas une bonne idée
 	public String getMotDePasse(){
-		return this.motDePasse();
+		return this.motDePasse;
 	}
 
 	//setters
@@ -72,6 +72,7 @@ class Resident {
 	}
 
 	public void setMotDePasse(String motDePasse){
-		this.motDePasse = motDePasse);
+		this.motDePasse = motDePasse;
 	}
+}
 
