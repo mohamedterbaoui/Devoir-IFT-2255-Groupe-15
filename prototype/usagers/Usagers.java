@@ -10,6 +10,10 @@ import java.util.LinkedList;
 
 public class Usagers {
 	private LinkedList<Resident> residents = new LinkedList<>();
+	public Usagers(){
+		//création d'utilisateur de teste
+		this.ajouterResident("Test","Test", "124 boul de la maisoneuve", "test@montreal.ca","chose");
+	}
 	//methodes
 	
 	//Il serait peut-être mieux si on retourne l'objet resident au lieu juste de le stocker.
@@ -20,7 +24,7 @@ public class Usagers {
         //méthode on a utiliser pour ce connecter
 	public Resident chercherResident(String courriel){
 		for (Resident resident : residents){
-			if (resident.getCourriel() == courriel){
+			if (resident.getCourriel().equals(courriel)){
 				return resident;
 			}
 			
@@ -33,9 +37,13 @@ public class Usagers {
 	//si l'utilisateur n'est pas trouvé. Je veux le gèrer ailleurs
 	public Resident Authentication(String courriel, String motDePasse){
 		Resident ceResident = this.chercherResident(courriel);
-		if(ceResident.getMotDePasse() == motDePasse){
-			return ceResident;
-		} else {
+		try{
+			if(ceResident.verifierMotDePasse(motDePasse)){
+				return ceResident;
+			} else {
+				return null;
+			}
+		} catch (NullPointerException e){
 			return null;
 		}
 	}

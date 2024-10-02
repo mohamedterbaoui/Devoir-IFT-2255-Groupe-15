@@ -2,7 +2,9 @@
 //IFT2255 - Équipe 15
 //Classe qui gère le menu
 import menuItems.*;
+import usagers.*;
 import java.util.Arrays;
+
 public class Menu {
 	//metadonnées pour le constructeur
 	int[] coord = new int[]{0,0,0};  //coordonnées de chaque item
@@ -19,8 +21,9 @@ public class Menu {
 	//pointeurs vers les items
 	Item itemActuel; //l'item selectionné par l'usager
 	Item racine = null;     // première élément du menu
-	//
-	Menu() { //constructeur
+	Resident resActuel;     // L'utilisateur qui s'est connecté
+	Menu(Resident resActuel) { //constructeur
+		this.resActuel = resActuel;
 		//0e niveau
 		racine = new Item("Menu principle",null);
 		//1e niveau
@@ -69,6 +72,9 @@ public class Menu {
 			return this.getItem(Arrays.copyOfRange(chemin, 1, chemin.length),
 				       	debutDeRecherche.getChild(chemin[0]));
 		}
+	}
+	public Resident getResActuel(){
+		return this.resActuel;
 	}
 
 	public Item getRacine(){

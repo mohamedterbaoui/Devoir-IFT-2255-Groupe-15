@@ -4,28 +4,34 @@
 
 import java.util.Scanner;
 import menuItems.*;
-
+import usagers.*;
 public class Navigateur{
 	//déclarations
 	Item itemActuel; //Item actuellement séléctionné
 	Item racine;     //Il se peut que cela n'est pas necessaire... à suivre
 	Menu m;
 	Scanner scn = new Scanner(System.in);
+	Resident resActuel;
 
 	//méthodes
-	public Navigateur(){
-		m = new Menu();
+	public Navigateur(Resident resActuel){
+		
+		m = new Menu(resActuel);
 		racine = m.getRacine();
 		itemActuel = racine;
 		this.accueil();
 	}
 
 	public void accueil(){
-		System.out.println("Bienvenue à l'appliation MaVille");
+	//	System.out.println("Bienvenue à l'appliation MaVille");
 		System.out.println("Qu'est-ce que nous pouvons faire pour vous\n");
 		this.generateReport();
 		this.boucle();
 
+	}
+
+	public Resident getResActuel(){
+		return m.getResActuel();
 	}
 
 	public void setActuel(int choix){

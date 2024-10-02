@@ -4,7 +4,8 @@
 
 public class Main{
 	public static void main(String[] args){
-		Navigateur n = new Navigateur();
+		Interface I = new Interface();
+		//	Navigateur n = new Navigateur();
 	}
 }
 

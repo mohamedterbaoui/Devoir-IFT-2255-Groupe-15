@@ -21,7 +21,7 @@ public class Resident {
 	}
 
 	public boolean verifierMotDePasse(String mot){
-		return(mot == this.motDePasse);
+		return(mot.equals(this.motDePasse));
 	} 
 
 	//getters
