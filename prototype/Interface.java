@@ -23,9 +23,11 @@ public class Interface{
 		String input = scn.nextLine();
 		switch(input) {
 			case "1":
-				this.seConnecter();	
+				this.seConnecter();
+				break;	
 			case "2":
-				//s'inscrire
+				this.sInscrire();
+				break;
 
 		}
 	} 
@@ -45,9 +47,29 @@ public class Interface{
 			Navigateur n = new Navigateur(resActuel);
 		}	
 		
-	} 	
+	}
 
-	
+	public void sInscrire(){
+		System.out.println("Veuiller saisir les informations suivants");
+		System.out.println("Prenom : ");
+		String prenom = scn.nextLine();
+
+		System.out.println("Nom de famille : ");
+		String nom = scn.nextLine();
+
+		System.out.println("Adresse : ");
+		String adresse = scn.nextLine();
+
+		System.out.println("Courriel");
+		String courriel = scn.nextLine();
+
+		System.out.println("Mot de passe");
+		String motDePasse = scn.nextLine();
+
+		u.ajouterResident(prenom,nom,adresse,courriel,motDePasse);
+
+		this.accueil();
+	}
 
 }
 
