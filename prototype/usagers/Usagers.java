@@ -12,7 +12,7 @@ public class Usagers {
 	private LinkedList<Resident> residents = new LinkedList<>();
 	public Usagers(){
 		//création d'utilisateur de teste
-		this.ajouterResident("Test","Test", "124 boul de la maisoneuve", "test@montreal.ca","chose");
+		this.ajouterResident("Test","Test", "124 boul de la maisoneuve", "test@test.ca","chose");
 	}
 	//methodes
 	

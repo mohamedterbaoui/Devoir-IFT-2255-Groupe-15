@@ -19,6 +19,7 @@ public class Interface{
 		System.out.println("Veullez choisir une option");
 		System.out.println("1. Se connecter");
 		System.out.println("2. S'inscrire");
+		System.out.println("q. Quitter l'application");
 
 		String input = scn.nextLine();
 		switch(input) {
@@ -27,6 +28,8 @@ public class Interface{
 				break;	
 			case "2":
 				this.sInscrire();
+				break;
+			case "q":
 				break;
 
 		}
