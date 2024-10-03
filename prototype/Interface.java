@@ -5,6 +5,7 @@
 //Il faut que ce soit réglé dès qu'on a quelque chose qui fonctionne)
 
 import usagers.*;
+import menuItems.*;
 import java.util.Scanner;
 
 public class Interface{
@@ -13,6 +14,8 @@ public class Interface{
 		this.accueil();
 	}
 	Usagers u = new Usagers();
+	Navigateur n;
+	boolean continuer = true; //signal pour quitter la boucle
 
 	public void accueil(){
 		System.out.println("Bienvenue à l'application #MaVille");
@@ -47,7 +50,8 @@ public class Interface{
 			System.out.println("Nom d'utilisateur ou mot de passe n'est pas correct");
 			this.accueil();
 		} else {
-			Navigateur n = new Navigateur(resActuel);
+			n = new Navigateur(resActuel);
+			this.boucle();
 		}	
 		
 	}
@@ -74,6 +78,56 @@ public class Interface{
 		this.accueil();
 	}
 
+	public void boucle(){
+		while(this.continuer==true){
+			Item itemActuel = n.getActuel();
+			this.itemActions(itemActuel);
+			this.continuer = this.naviguer();
+		}
+	}
+
+	public void itemActions(Item itemActuel){
+		if(itemActuel.hasAction()){
+			Action action = itemActuel.getAction();
+			System.out.println(action.actionDeSortie());
+			if (action.hasActionDEntree()){
+				action.actionDEntree(scn.nextLine());
+			}
+		}
+	}
+
+	public boolean naviguer(){
+		String input = scn.nextLine();
+		try{
+			switch(input) {
+				case "x": //sortir
+					return false;
+				case "d": //revenir au debut
+					n.revenirAuDebut();
+					this.generateOptions();
+					break;
+				case "r": //revenir en arrière
+					n.revenirEnArriere();
+					this.generateOptions();
+					break;
+				default : 
+					int sel = Integer.parseInt(input);
+					n.setActuel(sel);
+					this.generateOptions();
+			}
+		} catch (NumberFormatException e){
+			System.out.println("Veuillez saisir une option valide");
+			this.generateOptions();
+
+		}
+
+		return true;			
 }
 
-	
+	public void generateOptions(){
+		System.out.println(n.getActuel());
+		System.out.println("x. Sortir");
+		System.out.println("d. Revenir au début");System.out.println("r. Revenir en arrière");
+		System.out.println("Veuillez choisir un option");
+	}
+}

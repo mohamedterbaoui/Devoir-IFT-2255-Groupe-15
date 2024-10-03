@@ -13,11 +13,11 @@ public class Menu {
 	//de la même façon que le menu.
 	//Les enfants par exemple nomItemsNiveau1[0] correspond aux enfants de NomItemsNiveau0[0][0]
 	//ou les enfants de nomItemsNiveau1[0][0] sont dans nomItemsNiveau2[0][0]. 
-	String[][] nomItemsNiveau0 = new String[][]{{"Option 1", "Option 2"}};
-	String[][] nomItemsNiveau1 = new String[][]{{"Option A", "Option B", "Option C"},{"Option D","Option E","Option F"}};
-	String[][][] nomItemsNiveau2 = new String[][][]{{{"Option a","Option b", "Option c"},
-		{"Option d", "Option e"},{"Option f", "Option g"}},{{"Option h", "Option i"},
-		{"Option j", "Option k"},{"Option l", "Option M"}}};
+	String[][] nomItemsNiveau0 = new String[][]{{"Travaux", "Préférences de notifications","Communiquer avec nous"}};
+	String[][] nomItemsNiveau1 = new String[][]{{"Travaux en cours", "Travaux à venir","Participez à la planification"},{"Type d'événements","Fréquence", "courriel/texto"},{"Signaler un problème", "Requète de travail"}};
+	String[][][] nomItemsNiveau2 = new String[][][]{{{"Aucune travaux actuellement en cours"},//Travaux en cours
+		{"Aucune travaux à venir"}/*Travaux à venir*/, {"choississez vos préférences"}/*Participez à la planification*/},
+		{{},{},{}}};
 	//pointeurs vers les items
 	Item itemActuel; //l'item selectionné par l'usager
 	Item racine = null;     // première élément du menu
@@ -26,6 +26,7 @@ public class Menu {
 		this.resActuel = resActuel;
 		//0e niveau
 		racine = new Item("Menu principle",null);
+		this.itemActuel = this.racine;
 		//1e niveau
 		for(int i=0;i < nomItemsNiveau0[0].length; i++){
 			//créer le nouveau item
@@ -61,6 +62,10 @@ public class Menu {
 
 									     
 									      
+	//getters
+	public Item getActuel(){
+		return this.itemActuel;
+	}
 
 	public Item getItem(int[] chemin, Item debutDeRecherche){
 		//si le tableau est vide, on retourne l'item de debut
@@ -80,6 +85,14 @@ public class Menu {
 	public Item getRacine(){
 		return this.racine;
 	}
+
+	//setters
+	
+	public void setActuel(Item item){
+		this.itemActuel = item;
+	}
+	
+
 
 
 	

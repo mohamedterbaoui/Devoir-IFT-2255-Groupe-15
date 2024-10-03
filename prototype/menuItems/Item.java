@@ -10,6 +10,7 @@ public class Item{
 	int id;     //l'index de ces items
 	String nom; //nom d'item
 	String[][] items; //tout le structure du menu
+	Action action = null;
 	//pointeurs
 	Item parent = null; //pour revenir en arrière 
 	LinkedList<Item> listeDItems = new LinkedList<Item>();
@@ -48,6 +49,9 @@ public class Item{
 		return this.parent;
 	}
 
+	public Action getAction(){
+		return this.action;
+	}
 
 	public String toString(){
 		StringBuilder str = new StringBuilder();
@@ -59,17 +63,19 @@ public class Item{
 		}
 		return str.toString();
 	}
-
-
-		
-			
-
+	//setters
+	public void setAction(Action action){
+		this.action = action;
+	}
 
 	//autres choses
 	public void ajouterEnfant(Item newItem){
 		//ce methode sert à ajouter des nouveaux enfants à la liste
 		listeDItems.add(newItem);	
+	}
 
+	public boolean hasAction(){
+		return(this.action != null);
 	}	
 }
 
