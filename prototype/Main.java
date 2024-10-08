@@ -3,9 +3,10 @@
 //Classe Main pour le prototype
 
 public class Main{
-	public static void main(String[] args){
-		Interface I = new Interface();
-		//	Navigateur n = new Navigateur();
-	}
+    public static void main(String[] args){
+        Interface I = new Interface();
+        //	Navigateur n = new Navigateur();
+
+    }
 }
 

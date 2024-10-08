@@ -1,18 +1,17 @@
-//Resident.java
+//Intervenant.java
 //IFT2255 - Équipe 15
-//Objet qui stock les parametres d'un résident
-package usagers;
+//Objet qui stock les parametres d'un inervenant
 
-public class Resident {
+package usagers;
+public class Intervenant {
     private String prenom;
     private String nom;
     private String adresse;
     private String telephone;
     private String courriel;
     private String motDePasse;
-    private String type; //Cela serait mieux comme Enum au lieu de String
 
-    public Resident(String prenom, String nom, String adresse, String courriel, String motDePasse){
+    public Intervenant(String prenom, String nom, String adresse, String courriel, String motDePasse){
         this.prenom = prenom;
         this.nom = nom;
         this.adresse = adresse;
@@ -75,4 +74,3 @@ public class Resident {
         this.motDePasse = motDePasse;
     }
 }
-
