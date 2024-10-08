@@ -10,3 +10,7 @@ Une application de gestion des travaux publics et privés à Montréal, visant �
 - **index.html** : Rapport du projet en format HTML.
 - **/prototype** : Contient le code source du prototype de l'application développé en Java.
 - **/images** : Contient les diagrammes utilisés dans le rapport.
+
+## Compte préconfigurés pour tester les prototype : 
+- Résident : test@test.ca   chose
+- Intervenant : intervenant@test.ca   admin
