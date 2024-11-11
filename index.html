@@ -19,6 +19,11 @@
             overflow-x: hidden;
         }
 
+        img, table { 
+            max-width: 100%; 
+            height: auto; 
+        }
+
         h1, h2 { margin: 0; }
 
         h1 { font-size: 4em; font-weight: normal; }
@@ -1664,27 +1669,31 @@
                 </div>
                 <div class="activity">
                     <h4>Diagramme d'activité pour soumettre une requête de travail</h4>
-                    <img class="activity-diagram" src="Images/Soumettre_requete_travail.jpg" alt="Diagramme d'activité pour soumettre une requête de travail">
+                    <img class="activity-diagram" src="Images/diag_classe_soumettre_requete_travail.jpg" alt="Diagramme d'activité pour soumettre une requête de travail">
                 </div>
                 
                 <div class="activity">
                     <h4>Diagramme d'activité pour signaler un problème à la ville</h4>
-                    <img class="activity-diagram" src="Images/Signaler_probleme_ville.jpg" alt="Diagramme d'activité pour signaler un problème à la ville">
+                    <img class="activity-diagram" src="Images/diag_classe_signaler_probleme_a_la_ville.jpg" alt="Diagramme d'activité pour signaler un problème à la ville">
                 </div>
                 
                 <div class="activity">
                     <h4>Diagramme d'activité pour recevoir des notifications personnalisées</h4>
-                    <img class="activity-diagram" src="Images/Recevoir_notifications_personnalisees.jpg" alt="Diagramme d'activité pour recevoir des notifications personnalisées">
+                    <img class="activity-diagram" src="Images/diag_classe_recevoir_notif_personalisees.jpg" alt="Diagramme d'activité pour recevoir des notifications personnalisées">
                 </div>
                 
                 <div class="activity">
                     <h4>Diagramme d'activité pour participer à la planification</h4>
-                    <img class="activity-diagram" src="Images/Participer_planification.jpg" alt="Diagramme d'activité pour participer à la planification">
+                    <img class="activity-diagram" src="Images/diag_classe_participer_planif_corrige.jpg" alt="Diagramme d'activité pour participer à la planification">
                 </div>
                 
                 <div class="activity">
                     <h4>Diagramme d'activité pour consulter les travaux en cours ou à venir</h4>
-                    <img class="activity-diagram" src="Images/Consulter_travaux.jpg" alt="Diagramme d'activité pour consulter les travaux en cours ou à venir">
+                    <img class="activity-diagram" src="Images/diag_classe_consulter_travaux_en_cours_ou_a_venir.jpg" alt="Diagramme d'activité pour consulter les travaux en cours ou à venir">
+                </div>
+                <div class="activity">
+                    <h4>Diagramme d'activité pour consulter les entraves</h4>
+                    <img class="activity-diagram" src="Images/diag_classe_consulter_entraves.jpg" alt="Diagramme d'activité pour consulter les travaux en cours ou à venir">
                 </div>
                 <div class="activity">
                     <h4>Diagramme d'activité pour l'intervenant</h4>
@@ -1710,9 +1719,9 @@
                             <p>Justification : MaVille a pour clientèle la population montréalaise, soit plus de deux millions de personnes en 2021. Même si seulement une partie d’entre eux vont utiliser l’application, il est important que le système puisse accueillir beaucoup de personnes simultanément, au risque de grandement ralentir le système, voire peut-être même empêcher certaines personnes d’avoir accès à l’information rapidement.</p>
                             <p>Solution : Afin d’éviter ce risque, agrandir la taille des serveurs et utiliser des services cloud facilement ajustables réduiraient les problèmes engendrés par ce risque. Adapter le système en fonction du trafic serait également une possibilité, notamment aux heures de pointe où il y aura certainement plus d’utilisateurs connectés simultanément sur la plateforme.  </p>
                         </li>
-                        <li><strong>Difficile à comprendre pour les utilisateurs</strong>
-                            <p>Justification : L’interface doit être simple d’utilisation afin que même les personnes moins familières avec les technologies puissent l’utiliser facilement, au risque de ne pas convaincre cette population à adopter l’application.</p>
-                            <p>Solution : Une interface simple à utiliser et qui est rapide à lire, notamment aux niveaux des notifications, favoriserait l’adoption de MaVille auprès de la population montréalaise. Des tutoriels rapides et concis pour les nouveaux utilisateurs serait également pertinent. Finalement, un groupe de discussion avec des personnes moins familières à la technologie permettrait directement de savoir si l’interface est adéquate et facile à utiliser.</p>
+                        <li><strong>Changement des sources de données et des partenaires de gestion</strong>
+                            <p>Justification : L'application "MaVille" dépend de données fournies par la Ville de Montréal et ses partenaires pour afficher les travaux et les entraves en cours. Si ces sources changent de format, si l’API est modifiée, ou si des responsables externes décident de retirer leur accès, cela causerait potentiellement signaler aucun travail ou entrave sur l’application.</p>
+                            <p>Solution : Il sera essentiel de travailler en étroite collaboration avec la ville afin d'être au courant, à l'avance, de tout changements sur les sources de données et des partenaires de gestion. Il pourrait également être envisageable de signer es contrats ou accords de services pour prévenir des changements soudains.</p>
                         </li>
                         <li><strong>Fausse signalisation d’un problème</strong>
                             <p>Justification : Puisqu’il est possible que certains utilisateurs signalent des problèmes inexistant ou non pertinent, le traitement des requêtes serait directement affecté et réduirait l’efficacité du système mis en place dans la vérification des problèmes.</p>
@@ -1775,6 +1784,18 @@
                             <strong>Appareils de test</strong>
                             <p>Tester l’application sur différents appareils (ordinateurs, tablettes et téléphones) permet de s’assurer que le système fonctionne sur les systèmes d’exploitation couramment utilisés.</p>
                         </li>
+                        <li>
+                            <strong>Déploiement du programme</strong>
+                            <p>Le déploiement de l’application se fera sur une plateforme Cloud (comme AWS ou Azure) permettant des mises à jour régulières et automatiques. La maintenance se fera également à distance pour garantir une disponibilité continue et pour faciliter les mises à jour sans interruption de service.</p>
+                        </li>
+                        <li>
+                            <strong>Interface utilisateur</strong>
+                            <p>L'interface utilisateur doit être intuitive et fluide, compatible avec les écrans tactiles pour smartphones et tablettes et les ordinateurs avec Windows, macOS et Linux. Des tests vont devoir être effectués pour s'assurer que l'interface fonctionne avec différents types d'appareils.</p>
+                        </li>
+                        <li>
+                            <strong>Analyse de coût </strong>
+                            <p>Le coût initial pour les serveurs et le stockage Cloud est estimé à X par mois (difficile à estimer dans le cadre de ce projet). Les appareils de test et le développement du programme pourront également augmenter le coût initial.</p>
+                        </li>
                     </ol>
                 </div>
 
@@ -1782,12 +1803,36 @@
                     <h3 class="subsection-title">Solution de stockage</h3>
                     <ol class="storage-solutions">
                             <p>
-                                Une base de données internes permet un contrôle total sur la gestion des données, donc pour la sécurité, l’accès à l’information et les performances. 
-                                L’accès aux données est également plus rapide puisque les serveurs sont plus proches des infrastructures et des utilisateurs.
-                                D'un autre côté, gérer le stockage sur le Cloud permet une meilleure flexibilité lorsqu’il y a plus d’utilisateurs en même temps, mais également en prévision 
-                                d’agrandissement du réseau d’exploitation du système. Il n’y a également pas de maintenance matérielle à faire.
-                                Pour ce projet, étant donné son ampleur, le nombre d'utilisateurs qui est prévu d'être croissant ainsi qu'à cause des périodes de trafic plus élevée, nous 
-                                considérons que le stockage sur le Cloud permettra une meilleure flexibilité et sera donc la meilleure option dans le cadre du projet de l'application MaVille.
+                                <li>
+                                    <strong>Base de données internes</strong>
+                                    <p>Une base de données internes permet un contrôle total sur la gestion des données, donc pour la sécurité, l’accès à l’information et les 
+                                        performances. L’accès aux données est également plus rapide puisque les serveurs sont plus proches des infrastructures et des utilisateurs.</p>
+                                </li>
+                                <li>
+                                    <strong>Stockage sur le Cloud</strong>
+                                    <p>Gérer le stockage sur le Cloud permet une meilleure flexibilité lorsqu’il y a plus d’utilisateurs en même temps, mais également en 
+                                        prévision d’agrandissement du réseau d’exploitation du système. Il n’y a également pas de maintenance matérielle à faire.</p>
+                                </li>
+                                <li>
+                                    <strong>Architecture du stockage</strong>
+                                    <p>Pour ce projet, étant donné son ampleur, le nombre d'utilisateurs qui est prévu d'être croissant ainsi qu'à cause des périodes de trafic plus élevée, nous 
+                                        considérons que le stockage sur le Cloud permettra une meilleure flexibilité et sera donc la meilleure option dans le cadre du projet de l'application MaVille.</p>
+                                </li>
+                                <li>
+                                    <strong>Types de données</strong>
+                                    <p>Les données stockées incluront les informations personnelles des utilisateurs, les informations sur les travaux en cours et à venir, 
+                                        ainsi que les préférences de notification personnalisées.</p>
+                                </li>
+                                <li>
+                                    <strong>Sécurité des données</strong>
+                                    <p>Toutes les informations personnelles et les données de géolocalisation sensibles seront chiffrées, 
+                                        en utilisant un chiffrement pour le stockage et pour les communications.</p>
+                                </li>
+                                <li>
+                                    <strong>Exemple ou procédure concrète</strong>
+                                    <p>Les données de travaux sont envoyées depuis l’application via une API sécurisée vers un serveur Cloud. Ces données sont ensuite traitées et stockées 
+                                        dans une base de données pour finalement être affichées selon les requêtes des utilisateurs.</p>
+                                </li>
                             </p>
                     </ol>
                 </div>
@@ -1797,15 +1842,24 @@
                     <ol class="integration-solutions">
                         <li>
                             <strong>Intégration avec des systèmes municipaux</strong>
-                            <p>MaVille doit pouvoir s’intégrer aux systèmes d’information de la ville, notamment pour avoir les informations nécessaires pour les chantiers et les travaux.</p>
+                            <p>L'application MaVille utilise les API de la Ville de Montréal pour accès aux données de travaux à venir et en cours ainsi que les entraves. Il faut donc intégrer
+                                les API dans le code de l'application afin de pouvoir accéder aux données. 
+                            </p>
                         </li>
                         <li>
                             <strong>API tierces pour les notifications</strong>
-                            <p>Puisque les notifications sont une partie intégrante du projet et pour assurer que celles-ci soient adéquatement envoyées, des API tierces offriraient une meilleure gestion des notifications.</p>
+                            <p>Puisque les notifications sont une partie intégrante du projet et pour assurer que celles-ci soient adéquatement envoyées, des API tierces offriraient 
+                                une meilleure gestion des notifications. Par exemple, selon les préférences des utilisateurs, L'API des notifications envoieraient des notifications s'il y a un changement
+                                d'horaire, un ajout de travaux ou de nouvelles entraves par exemple.
+                            </p>
                         </li>
                         <li>
                             <strong>Intégration avec des services de géolocalisation</strong>
-                            <p>Cela permettrait aux utilisateurs de signaler un problème à un endroit précis, mais également pour les intervenants lorsqu’ils vont soumettre un nouveau projet de travaux ou mettre à jour les informations d’un chantier. Google Maps API ou bien OpenStreetMap pourraient ici être très pertinents pour l’application.</p>
+                            <p>Cela permettrait aux utilisateurs de signaler un problème à un endroit précis, mais également pour les intervenants lorsqu’ils vont soumettre un nouveau projet 
+                                de travaux ou mettre à jour les informations d’un chantier. Google Maps API ou bien OpenStreetMap pourraient ici être très pertinents pour l’application.
+                                Par exemple, l'utilisateur remplirait un formulaire pour signaler un problème, Google Maps API viendrait gérer la localisation du problème (alternativement, l'utilisateur
+                                pourrait fournir sa localisation manuellement en choisissant un quartier ou une rue) et le tout serait envoyé au service municipal.
+                            </p>
                         </li>
                     </ol>
                 </div>
