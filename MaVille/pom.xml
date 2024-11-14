@@ -65,7 +65,14 @@
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.4.2</version>
+	  <version>3.4.2</version>
+	  <configuration>
+		  <archive>
+			  <manifest>
+				  <mainClass>com.ift2255.MaVille.App</mainClass>
+			  </manifest>
+	  	  </archive>
+  	  </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
