@@ -2,3 +2,5 @@
 *.jar
 .DS_Store
 MaVille/target
+codeSource
+codeTest
