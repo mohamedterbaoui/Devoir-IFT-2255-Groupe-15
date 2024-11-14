@@ -1,2 +1,4 @@
 *.class
+*.jar
 .DS_Store
+MaVille/target
