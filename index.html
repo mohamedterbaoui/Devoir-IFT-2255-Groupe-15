@@ -1865,6 +1865,23 @@
                 </div>
             </section>
 
+            <section class="Architecture">
+                <h2 id="architecture" class="section-title">Architecture</h2>
+                    <img class="Architecture" src="Images/c4_model_dev2(2).drawio(1).png">
+
+                    <p>
+                        L'architecture choisie utilise une approche modulaire ou chaque service est indépendant, nous permettant ainsi de plus monter le système, mais d'éventuellement le maintenir.
+                        Le modèle C4 sépare en 3 niveaux de couche, ce qui permet de mieux visualiser les relations entre les composants, rendant le système plus robuste et facile à corriger. Les utilisateurs
+                        ne peuvent pas avoir accès aux informations du système et ne peuvent qu'intéragir avec les menus et interfaces. Ceux-ci ont ensuite accès aux services et les composants selon chaque
+                        cas d'utilisation possible. 
+
+                        Nous séparons également l'application en deux, l'application mobile et l'application web car ils sont conçus différemment. Toutefois, ils ont accès aux mêmes composants et services.
+
+                        Il est à noter qu'à l'intérieur des interfaces utilisateurs, les résidents et intervenants n'ont pas accès aux même services. Il y aurait donc une séparation interne dans ces 2 composants.
+                        Il était plus facile de l'illustrer ainsi afin de ne pas complexifier l'architecture.
+                    </p>
+            </section>
+
             <section class="main-section">
                 <h2 id="prototype" class="section-title">Prototype</h2>
                     <h3>Informations pour exécuter et tester le prototype</h3>
