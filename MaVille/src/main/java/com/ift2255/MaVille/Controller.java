@@ -8,10 +8,10 @@ abstract class Controller{
     protected User user;
     protected String action;
 
-    public abstract void operation();
-    public abstract void initialize();
-    public abstract void updateView();
-    public abstract void handleInput();
+    public void operation(){};
+    public void initialize(){};
+    public void updateView(){};
+    public void handleInput(){};
 
     //getters
     public View getView(){
