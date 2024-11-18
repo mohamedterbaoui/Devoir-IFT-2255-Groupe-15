@@ -4,15 +4,22 @@
 
 package com.ift2255.MaVille;
 
+import java.util.Scanner;
+
 public abstract class View {
-    Controller controller;
-    User user;
-    Menu menu;
-    String title;
+    protected Controller controller;
+    protected User user;
+    protected String title;
+    protected Scanner scn = new Scanner(System.in);
 
     public void display(){}
 
-    public String getUserInput(){}
+    /**Classe pour encapsuler la logique de Scanner.nextLine()
+     * @return l'Input d'utilisateur
+     */
+    public String getUserInput(){
+    	return scn.nextLine();
+    }
 
     public void updateView(){}
 
@@ -20,9 +27,6 @@ public abstract class View {
 
     public Controller getController() {
         return controller;
-    }
-    public Menu getMenu() {
-        return menu;
     }
 
     public String getTitle() {
@@ -35,10 +39,6 @@ public abstract class View {
 
     public void setController(Controller controller) {
         this.controller = controller;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
     }
 
     public void setTitle(String title) {
