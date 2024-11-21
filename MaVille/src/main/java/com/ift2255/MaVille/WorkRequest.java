@@ -2,6 +2,7 @@
 //IFT2255 - Équipe 15
 //Classe WorkRequest
 package com.ift2255.MaVille;
+import java.util.Date;
 
 public class WorkRequest {
     int requestID;
@@ -14,11 +15,10 @@ public class WorkRequest {
     String workRequestAddress;
     Intervenant intervenant;
 
-    WorkRequest(int id, String title, String description, String address){
-        this.requestID = id;
+    WorkRequest(String title, String description, Date expectedStartDate){
         this.title = title;
         this.description = description;
-        this.workRequestAddress = address;
+        this.expectedStartDate = expectedStartDate;
     }
 
     public void sendNotification(){

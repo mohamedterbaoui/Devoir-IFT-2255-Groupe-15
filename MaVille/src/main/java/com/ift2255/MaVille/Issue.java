@@ -2,6 +2,7 @@
 //IFT2255 - Équipe 15
 // Classe issue
 package com.ift2255.MaVille;
+import java.util.Date;
 
 public class Issue {
     String issueType;

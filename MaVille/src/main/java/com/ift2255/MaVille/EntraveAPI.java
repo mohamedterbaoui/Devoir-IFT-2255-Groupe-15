@@ -4,5 +4,7 @@
 package com.ift2255.MaVille;
 import java.util.LinkedList;
 public class EntraveAPI {
-    public LinkedList<Entrave> importEntraveList(){}
+    public LinkedList<Entrave> importEntraveList(){
+        return null;
+    }
 }

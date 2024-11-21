@@ -4,15 +4,15 @@
 package com.ift2255.MaVille;
 
 import java.util.LinkedList;
-
+import java.util.Date;
 public class Intervenant extends User{
-    private Type typeIntervenant;
+    private String typeIntervenant;
     private int cityId;
     private LinkedList<WorkRequest> workRequests;
-    private LinkedList<Projects> projects;
+    private LinkedList<Project> projects;
 
-    public Intervenant(String fullName,Date birthDate, String email, String password, int phone, String userAddress, Type typeIntervenant, int cityId){
-        Super(fullName, birthDate, email,password, phone, userAddress);
+    public Intervenant(String fullName, Date birthDate, String email, String password, int phone, String userAddress, String typeIntervenant, int cityId){
+        super(fullName, birthDate, email,password, phone, userAddress);
         this.typeIntervenant = typeIntervenant;
         this.cityId = cityId;
     }
@@ -25,17 +25,17 @@ public class Intervenant extends User{
         //fonction
     }
 
-    public LinkedList<String> viewResidentPreferences(){
-        //fonction
+    public LinkedList<String> viewResidentPreferences(Resident resident){
+       return(resident.getPreferredProjectTimes());
     }
 
-    public editProjectDetails(Project project){
+    public void editProjectDetails(Project project){
         //fonction
     }
 
 
     //getters
-    public Type getTypeIntervenant() {
+    public String getTypeIntervenant() {
         return typeIntervenant;
     }
 
@@ -56,11 +56,11 @@ public class Intervenant extends User{
         this.cityId = cityId;
     }
 
-    public void setProjects(LinkedList<Projects> projects) {
+    public void setProjects(LinkedList<Project> projects) {
         this.projects = projects;
     }
     
-    public void setTypeIntervenant(Type typeIntervenant) {
+    public void setTypeIntervenant(String typeIntervenant) {
         this.typeIntervenant = typeIntervenant;
     }
 

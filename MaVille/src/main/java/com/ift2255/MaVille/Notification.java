@@ -4,6 +4,7 @@
 
 
 package com.ift2255.MaVille;
+import java.util.Date;
 
 public class Notification {
     int notificationId;

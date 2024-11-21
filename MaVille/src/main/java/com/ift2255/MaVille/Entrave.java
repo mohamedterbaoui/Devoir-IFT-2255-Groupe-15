@@ -1,7 +1,9 @@
 //Entrave.java
 //IFT2255 - Équipe 15
 // Classe Entrave
+package com.ift2255.MaVille;
 
+import java.util.Date;
 public class Entrave {
     int entraveId;
     String description;
@@ -9,6 +11,7 @@ public class Entrave {
     Date endDate;
     String entraveAddress;
     Project project;
+    Boolean completed;
 
     public Entrave(int id, String description, Date start, Date end, String address, Project project){
         this.entraveId = id;
@@ -17,10 +20,11 @@ public class Entrave {
         this.endDate = end;
         this.entraveAddress = address;
         this.project = project;
+        this.completed = false;
     }
 
     public Boolean isCompleted(){
-
+        return this.completed;
     }
 
     public String getDescription() {

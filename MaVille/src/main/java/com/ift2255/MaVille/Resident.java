@@ -4,6 +4,7 @@
 package com.ift2255.MaVille;
 
 import java.util.LinkedList;
+import java.util.Date;
 
 public class Resident extends User{
     private String city;
@@ -12,7 +13,7 @@ public class Resident extends User{
     private LinkedList<WorkRequest> workRequests;
 
     public Resident(String fullName,Date birthDate, String email, String password, int phone, String userAddress, String city){
-        Super(fullName, birthDate, email,password, phone, userAddress);
+        super(fullName, birthDate, email,password, phone, userAddress);
         this.city = city;
     }
 
@@ -25,11 +26,14 @@ public class Resident extends User{
     }
 
     public void addWorkRequest(String title, String workType, Date expectedStartDate){
-        workRequests.add(new WorkRequest(title, workType, expectedStartDate));
+        WorkRequest newWorkRequest = new WorkRequest(title, workType, expectedStartDate);
+        newWorkRequest.setResident(this);
+        newWorkRequest.setWorkRequestAddress(this.userAddress);
+        workRequests.add(newWorkRequest);
     }
 
     public Project searchProject(){
-        
+      return null;
     }
 
     //getters
@@ -41,7 +45,7 @@ public class Resident extends User{
         return preferredProjectTimes;
     }
 
-    public LinkedList<String> getSubscriptions() {
+    public LinkedList<Project> getSubscriptions() {
         return subscriptions;
     }
 
@@ -58,7 +62,7 @@ public class Resident extends User{
         this.preferredProjectTimes = preferredProjectTimes;
     }
 
-    public void setSubscriptions(LinkedList<String> subscriptions) {
+    public void setSubscriptions(LinkedList<Project> subscriptions) {
         this.subscriptions = subscriptions;
     }
     

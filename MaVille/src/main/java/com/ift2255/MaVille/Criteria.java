@@ -2,7 +2,7 @@
 //IFT2255 - Équipe 15
 //Classe Criteria
 package com.ift2255.MaVille;
-
+import java.util.Date;
 public class Criteria {
     String searchName;
     ProjectType projectType;

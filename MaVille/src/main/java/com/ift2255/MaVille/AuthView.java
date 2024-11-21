@@ -3,9 +3,13 @@ package com.ift2255.MaVille;
 public class AuthView extends View{
     private String emailField;
     private String passwordField;
-    private Boolean intervenant = false;
 
-    
+    private AuthController authController;
+
+    public AuthView(AuthController controller){
+        this.authController = controller;
+
+    }
     public void displayWelcomePage(){
 	    afficherLogo();
 	    System.out.println("Bienvenue à l'Application MaVille");
@@ -13,21 +17,40 @@ public class AuthView extends View{
 	    System.out.println("1. Résident\n2. Intervenant");
 	    int choix = scn.nextInt();
 	    switch (choix) {
-		    case 1: this.displayLoginPage();
+		    case 1: this.displayLoginPageResident();
 			    break;
-	 	    case 2: this.intervenant = true;
-			    this.displayLoginPage();
+	 	    case 2: this.displayLoginPageIntervenant();
+			    break;
 	    }
-
 	    
-    } 
-    /**Montre à l'utilisatuer la page pour ce connecter
-     * Cette methode va, par la suite communiquer avec
-     * le controller pour trouver le compte utilisatuer
-     */
-    public void displayLoginPage(){
-        
     }
+
+    /**Fonction qui gère le logique pour qu'un résident puisse se connecter
+     */
+    private void displayLoginPageResident() {
+        String[] loginDetails = this.displayLoginPage();
+        authController.loginResident(loginDetails[0], loginDetails[1]);
+    }
+	   
+    private void displayLoginPageIntervenant(){
+        String[] loginDetails = this.displayLoginPage();
+        authController.loginIntervenant(loginDetails[0], loginDetails[1]);
+    }
+
+    /**Montre à l'utilisatuer la page pour ce connecter.
+     * Il va le renvoyer vers le methode parent qui va le
+     * dériger vers le bon controlleur
+     * @return [courriel, motDePasse];
+     */
+    public String[] displayLoginPage(){
+	String input[] = new String[2];
+	System.out.println("Adresse courriel : ");
+	input[0] = scn.nextLine();
+	System.out.println("Mot de Passe");
+	input[1] = scn.nextLine();
+	return input;
+    }
+
     /**Montre à l'utilisateur la page pour s'inscrire.
      * Cette methode va, par la suite, communiquer avec
      * le controlleur pour créer un compte utilisateur
@@ -101,5 +124,7 @@ public class AuthView extends View{
         }
     }
 }
+
+
     
 

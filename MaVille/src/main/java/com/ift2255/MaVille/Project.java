@@ -4,6 +4,7 @@
 
 package com.ift2255.MaVille;
 import java.util.LinkedList;
+import java.util.Date;
 public class Project {
     private int projectId;
     private String title;
@@ -17,6 +18,7 @@ public class Project {
     private LinkedList<Resident> affectedResidents;
     private String projectSchedule;
     private ProjectType projectType;
+    private Boolean completed;
 
     public Project(int projectId, String title, String projectAddress, Date startDate, Date endDate){
         this.projectId = projectId;
@@ -24,6 +26,7 @@ public class Project {
         this.projectAddress = projectAddress;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.completed = false;
     }
     public void addEntrave(){
 
@@ -31,10 +34,11 @@ public class Project {
 
     public String getProjectDetails(){
         //fonction
+        return("NON!!!!!!!!");
     }
 
-    public bool isCompleted(){
-        //cela est mieux comme un attribute au lieu d'un méthode?
+    public Boolean isCompleted(){
+        return this.completed;
     }
 
     public void removeEntrave(Entrave entrave){
@@ -91,7 +95,6 @@ public class Project {
     public String getTitle() {
         return title;
     }
-
     //setters
 
     public void setAffectedResidents(LinkedList<Resident> affectedResidents) {
