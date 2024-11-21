@@ -30,26 +30,26 @@
             box-sizing: border-box;
         }
 
-        p, li, td, th {
-            max-width: 100%; /* Ensures no text exceeds container width */
-            overflow: hidden; /* Prevents text spilling */
-            text-overflow: ellipsis; /* Adds "..." for trimmed text */
+        p, td, th {
+            max-width: 100%; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
         }
 
         table {
             width: 100%;
-            table-layout: fixed; /* Prevents columns from resizing excessively */
-            overflow: hidden; /* Ensures content does not spill */
+            table-layout: fixed; 
+            overflow: hidden;
         }
         th, td {
-            word-wrap: break-word; /* Keeps table content manageable */
+            word-wrap: break-word; 
         }
 
         .btn {
             max-width: 100%;
             display: inline-block;
-            overflow: hidden; /* Prevent long content spill */
-            white-space: nowrap; /* Avoid text wrapping within buttons */
+            overflow: hidden;
+            white-space: nowrap;
             text-overflow: ellipsis;
         }
 
@@ -76,7 +76,7 @@
             word-wrap: break-word;
             word-break: break-word;
             overflow-wrap: break-word;
-            white-space: normal; /* Ensure text wraps within its container */
+            white-space: normal; 
             }
 
         p, li, td, th { font-size: 1.5em; }
@@ -726,10 +726,33 @@
                 <p>
                     <em>
                         <p>
-                            MaVille est une application de gestion des travaux publics et privés à Montréal, qui vise à améliorer la communication 
-                            entre les résidents et les différents acteurs pour réduire les perturbations et faciliter la mobilité en ville, notamment 
-                            en ce qui concerne les chantiers et les travaux.
+                            La ville de Montréal rencontre des défis dans la communication des travaux publics et privés aux résidents et intervenants. 
+                            Les informations sur les projets en cours ou planifiés sont souvent dispersées, ce qui rend difficile pour les citoyens 
+                            de s'informer des impacts sur leur quotidien. De plus, il n'existe pas de moyen efficace pour les résidents de soumettre des 
+                            demandes ou pour les intervenants de collaborer directement avec la ville.
                         </p>
+
+                        <h3>Problèmes à Résoudre</h3>
+                        <ul>
+                            <li><strong>Manque de centralisation de l'information :</strong> Les résidents ont du mal à accéder à une source fiable et complète sur les travaux affectant leur quartier.</li>
+                            <li><strong>Absence de participation citoyenne :</strong> Les résidents ne disposent pas d'un canal simple pour exprimer leurs préférences sur les horaires des travaux ou soumettre des demandes spécifiques.</li>
+                            <li><strong>Difficulté de communication avec les intervenants :</strong> Les intervenants n'ont pas d'outil dédié pour consulter les requêtes des résidents ou soumettre des projets à la ville.</li>
+                        </ul>
+                    
+                        <h3>Propositions</h3>
+                        <p>
+                            Le projet <strong>MaVille</strong> vise à résoudre ces problèmes grâce à une application accessible en ligne qui :
+                        </p>
+                        <ul>
+                            <li>Centralise les informations sur les travaux publics et privés, consultables par quartier, rue ou type de travaux.</li>
+                            <li>Permet aux résidents de s'inscrire, consulter les projets en cours, soumettre des demandes, et recevoir des notifications personnalisées.</li>
+                            <li>Offre aux intervenants un outil pour gérer leurs projets, répondre aux demandes des résidents et s'adapter aux préférences locales.</li>
+                            <li>Favorise la collaboration en proposant un espace où résidents et intervenants peuvent interagir de manière structurée.</li>
+                        </ul>
+                        <p>
+                            Cette solution permettra une communication fluide et une meilleure gestion des travaux pour tous les utilisateurs.
+                        </p>
+
                         <h5>Étapes de développement du projet</h5>
                         <ol>
                             <li><strong>Analyse des besoins et des exigences :</strong> Cette étape consistera à recueillir les attentes des utilisateurs 
