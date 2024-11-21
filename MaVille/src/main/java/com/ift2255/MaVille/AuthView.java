@@ -1,3 +1,6 @@
+//AuthView.java
+//IFT2255 - Équipe 15
+//Classe AuthView
 package com.ift2255.MaVille;
 
 public class AuthView extends View{
@@ -8,6 +11,7 @@ public class AuthView extends View{
 
     public AuthView(AuthController controller){
         this.authController = controller;
+        this.displayWelcomePage();
     }
     public AuthView(){
         this.authController = new AuthController();
@@ -48,9 +52,9 @@ public class AuthView extends View{
     public String[] displayLoginPage(){
 	String input[] = new String[2];
 	System.out.println("Adresse courriel : ");
-	input[0] = scn.nextLine();
+    input[0] = scn.nextLine().trim(); // Suppression des espaces
 	System.out.println("Mot de Passe");
-	input[1] = scn.nextLine();
+    input[1] = scn.nextLine().trim(); // Suppression des espaces
 	return input;
     }
 

@@ -6,7 +6,17 @@ package com.ift2255.MaVille;
 
 public class ResidentController extends Controller{
     
-    public void viewProjcets(){
+    private Resident currentResident;
+
+    public ResidentController(Resident resident) {
+        this.currentResident = resident;
+    }
+
+    public Resident getCurrentResident() {
+        return currentResident;
+    }
+    
+    public void viewProjects(){
         //fonction
     }
 

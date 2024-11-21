@@ -15,6 +15,7 @@ public class Resident extends User{
     public Resident(String fullName,Date birthDate, String email, String password, int phone, String userAddress, String city){
         super(fullName, birthDate, email,password, phone, userAddress);
         this.city = city;
+        this.workRequests = new LinkedList<>(); // Initialisation de la liste
     }
 
     public void subscribeToProject(Project project){
@@ -25,11 +26,11 @@ public class Resident extends User{
         // fonction
     }
 
-    public void addWorkRequest(String title, String workType, Date expectedStartDate){
-        WorkRequest newWorkRequest = new WorkRequest(title, workType, expectedStartDate);
+    public void addWorkRequest(String title, String desription, String workType, Date expectedStartDate, Street workRequestAddress){
+        WorkRequest newWorkRequest = new WorkRequest(title, desription, expectedStartDate, workType, workRequestAddress);
         newWorkRequest.setResident(this);
-        newWorkRequest.setWorkRequestAddress(this.userAddress);
-        workRequests.add(newWorkRequest);
+        newWorkRequest.setWorkRequestAddress(workRequestAddress);
+        AuthController.workRequests.add(newWorkRequest);
     }
 
     public Project searchProject(){

@@ -5,24 +5,36 @@ package com.ift2255.MaVille;
 import java.util.Date;
 
 public class WorkRequest {
-    int requestID;
-    Resident resident;
-    String title;
-    String description;
-    String workType;
-    Date expectedStartDate;
-    String status;
-    String workRequestAddress;
-    Intervenant intervenant;
+    private static int idCounter = 0;  // Compteur pour générer un ID unique pour chaque requête
+    private int requestID;
+    private Resident resident;
+    private String title;
+    private String description;
+    private String workType; // Initialisé dans le constructeur
+    private Date expectedStartDate;
+    private String status;
+    private Street workRequestAddress;  // Utilisation de la classe Street pour l'adresse
+    private Intervenant intervenant;
 
-    WorkRequest(String title, String description, Date expectedStartDate){
+    // Constructeur
+    public WorkRequest(String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
+        this.requestID = idCounter++;  // Incrémenter l'ID pour chaque nouvelle requête
         this.title = title;
         this.description = description;
         this.expectedStartDate = expectedStartDate;
+        this.status = "Pas encore commencé";  // Valeur par défaut pour le statut
+
+        if (workType == null) {
+            this.workType = "Non spécifié";  // Utilise un type par défaut si null
+        } else { this.workType = workType; }
+        
+        if (workRequestAddress == null) {
+            this.workRequestAddress = new Street(0, "Non spécifiée");  // Utilise une adresse par défaut si null
+        } else { this.workRequestAddress = workRequestAddress; }
     }
 
     public void sendNotification(){
-
+        // Function
     }
 
     public String getDescription() {
@@ -53,7 +65,7 @@ public class WorkRequest {
         return title;
     }
 
-    public String getWorkRequestAddress() {
+    public Street getWorkRequestAddress() {
         return workRequestAddress;
     }
 
@@ -89,7 +101,7 @@ public class WorkRequest {
         this.title = title;
     }
 
-    public void setWorkRequestAddress(String workRequestAddress) {
+    public void setWorkRequestAddress(Street workRequestAddress) {
         this.workRequestAddress = workRequestAddress;
     }
 

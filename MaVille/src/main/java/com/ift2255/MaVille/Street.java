@@ -24,5 +24,9 @@ public class Street {
         this.streetName = streetName;
     }
 
-    
+    // Pour affichage 
+    @Override
+    public String toString() {
+        return streetName; 
+    }
 }

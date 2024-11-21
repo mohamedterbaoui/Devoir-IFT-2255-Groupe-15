@@ -12,19 +12,31 @@ public class AuthController extends Controller {
      */
     LinkedList<Resident> residents = new LinkedList<Resident>();
     LinkedList<Intervenant> intervenants = new LinkedList<Intervenant>();
-    public void loginResident(String email, String password){
-        for(Resident resident: residents)
+
+    private ResidentController residentController; // Contrôleur pour les résidents
+    private IntervenantController intervenantController; // Contrôleur pour les intervenants
+    public static LinkedList<WorkRequest> workRequests = new LinkedList<WorkRequest>(); // Liste globale des requêtes de travail
+    
+    public void loginResident(String email, String password) {
+        for (Resident resident : residents) {
             if (resident.getEmail().equals(email) && resident.getPassword().equals(password)) {
-                ResidentController residentController = new ResidentController();
+                residentController = new ResidentController(resident); // Passe le résident connecté
+                System.out.println("Connexion réussie en tant que résident : " + email);
+                return;
             }
+        }
+        System.out.println("Échec de la connexion : email ou mot de passe invalide.");
     }
 
-    public void loginIntervenant(String email, String password){
-       for(Intervenant intervenant : intervenants){
-           if (intervenant.getEmail().equals(email) && intervenant.getPassword().equals(password)){
-               IntervenantController intCont = new IntervenantController();
-           }
-       }
+    public void loginIntervenant(String email, String password) {
+        for (Intervenant intervenant : intervenants) {
+            if (intervenant.getEmail().equals(email) && intervenant.getPassword().equals(password)) {
+                intervenantController = new IntervenantController(intervenant); // Passe l'intervenant connecté
+                System.out.println("Connexion réussie en tant qu'intervenant : " + email);
+                return;
+            }
+        }
+        System.out.println("Échec de la connexion : email ou mot de passe invalide.");
     }
 
     public void signUp(User user){
@@ -35,4 +47,14 @@ public class AuthController extends Controller {
         //fonction
     }
     
+    // Pour pouvoir faire référence au résident connecté
+    public ResidentController getResidentController() {
+        return residentController;
+    }
+
+    // Pour pouvoir faire référence à l'intervenant connecté
+    public IntervenantController getIntervenantController() {
+        return intervenantController;
+    }
+
 }
