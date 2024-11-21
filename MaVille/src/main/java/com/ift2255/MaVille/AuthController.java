@@ -10,33 +10,37 @@ public class AuthController extends Controller {
      * @param email : String avec l'adresse courriel
      * @param password: String qui contient le mot de passe
      */
-    LinkedList<Resident> residents = new LinkedList<Resident>();
-    LinkedList<Intervenant> intervenants = new LinkedList<Intervenant>();
+    LinkedList<Resident> residents = new LinkedList<>();
+    LinkedList<Intervenant> intervenants = new LinkedList<>();
 
-    private ResidentController residentController; // Contrôleur pour les résidents
-    private IntervenantController intervenantController; // Contrôleur pour les intervenants
-    public static LinkedList<WorkRequest> workRequests = new LinkedList<WorkRequest>(); // Liste globale des requêtes de travail
-    
-    public void loginResident(String email, String password) {
+    private ResidentController residentController;
+    private IntervenantController intervenantController;
+
+    private boolean isResidentConnected = false;  // Variable pour suivre l'état de la connexion résident
+    private boolean isIntervenantConnected = false;  // Variable pour suivre l'état de la connexion intervenant
+
+    public AuthController() {}
+
+    public boolean loginResident(String email, String password) {
         for (Resident resident : residents) {
             if (resident.getEmail().equals(email) && resident.getPassword().equals(password)) {
-                residentController = new ResidentController(resident); // Passe le résident connecté
-                System.out.println("Connexion réussie en tant que résident : " + email);
-                return;
+                residentController = new ResidentController(resident); // Passer l'utilisateur dans le contrôleur
+                isResidentConnected = true;
+                return true;
             }
         }
-        System.out.println("Échec de la connexion : email ou mot de passe invalide.");
+        return false;
     }
 
-    public void loginIntervenant(String email, String password) {
+    public boolean loginIntervenant(String email, String password) {
         for (Intervenant intervenant : intervenants) {
             if (intervenant.getEmail().equals(email) && intervenant.getPassword().equals(password)) {
-                intervenantController = new IntervenantController(intervenant); // Passe l'intervenant connecté
-                System.out.println("Connexion réussie en tant qu'intervenant : " + email);
-                return;
+                intervenantController = new IntervenantController(intervenant); // Passer l'utilisateur dans le contrôleur
+                isIntervenantConnected = true;
+                return true;
             }
         }
-        System.out.println("Échec de la connexion : email ou mot de passe invalide.");
+        return false;
     }
 
     public void signUpResident(Resident resident){
@@ -62,4 +66,12 @@ public class AuthController extends Controller {
         return intervenantController;
     }
 
+    // Méthodes pour vérifier si un résident ou un intervenant est connecté
+    public boolean isResidentConnected() {
+        return isResidentConnected;
+    }
+
+    public boolean isIntervenantConnected() {
+        return isIntervenantConnected;
+    }
 }

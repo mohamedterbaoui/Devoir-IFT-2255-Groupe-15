@@ -6,30 +6,28 @@ package com.ift2255.MaVille;
 /**
  * Hello world!
  */
+
 public class App {
     public static void main(String[] args) {
         AuthController authController = new AuthController();
 
-        // Initialisation des données - nouvelle instance
+        // Initialisation des données
         Initialization.initialize(authController);
 
-        // Affiche les résidents initialisés (DEBUG)
-        System.out.println("\nRésidents initialisés :");
-        for (Resident resident : authController.residents) {
-            System.out.println("Email : " + resident.getEmail() + ", Mot de passe : " + resident.getPassword());
-        }
+        // Page de bienvenue et login via AuthView
+        AuthView authView = new AuthView(authController); 
+   
+        // Pour le résident 
+        if (authController.isResidentConnected()) { 
+            ResidentController residentController = authController.getResidentController();
+            ResidentView residentView = new ResidentView(residentController);
+            residentView.displayOptions();
 
-        // Affiche les intervenants initialisés (DEBUG)
-        System.out.println("\nIntervenants initialisés :");
-        for (Intervenant intervenant : authController.intervenants) {
-            System.out.println("Email : " + intervenant.getEmail() + ", Mot de passe : " + intervenant.getPassword());
+        // Pour l'intervenant
+        } else {
+            IntervenantController intervenantController = authController.getIntervenantController();
+            IntervenantView intervenantView = new IntervenantView(intervenantController);
+            intervenantView.displayOptions();
         }
-        
-        AuthView view = new AuthView(authController); // Initialiser avec authController pour les tests (ça doit être dans la même instance)
-
-        // Affiche les requêtes de travail (DEBUG)
-        IntervenantController intervenantController = authController.getIntervenantController();
-        intervenantController.viewWorkRequests();        
-        System.out.println();
     }
 }

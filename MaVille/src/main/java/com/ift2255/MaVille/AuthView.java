@@ -58,7 +58,7 @@ public class AuthView extends View{
 	return input;
     }
 
-    /**Montre à l'utilisateur la page pour s'inscrire.
+    /*Montre à l'utilisateur la page pour s'inscrire.
      * Cette methode va, par la suite, communiquer avec
      * le controlleur pour créer un compte utilisateur
      */

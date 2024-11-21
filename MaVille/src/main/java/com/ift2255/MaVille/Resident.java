@@ -26,11 +26,8 @@ public class Resident extends User{
         // fonction
     }
 
-    public void addWorkRequest(String title, String desription, String workType, Date expectedStartDate, Street workRequestAddress){
-        WorkRequest newWorkRequest = new WorkRequest(title, desription, expectedStartDate, workType, workRequestAddress);
-        newWorkRequest.setResident(this);
-        newWorkRequest.setWorkRequestAddress(workRequestAddress);
-        AuthController.workRequests.add(newWorkRequest);
+    public void addWorkRequest(ResidentController residentController, String title, String description, String workType, Date expectedStartDate, Street workRequestAddress) {
+        residentController.addWorkRequest(title, description, workType, expectedStartDate, workRequestAddress);
     }
 
     public Project searchProject(){
