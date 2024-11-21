@@ -27,12 +27,17 @@ public class AuthController extends Controller {
        }
     }
 
-    public void signUp(User user){
-        //fonction
+    public void signUpResident(Resident resident){
+        residents.add(resident);
+    }
+
+    public void signUpIntervenant(Intervenant intervenant){
+        intervenants.add(intervenant);
+        //Je dois aussi ajouter la logique pour Gson pour stocker les données
     }
 
     public void logout(){
-        //fonction
+
     }
     
 }

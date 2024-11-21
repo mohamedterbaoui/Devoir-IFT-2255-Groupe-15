@@ -5,15 +5,17 @@ package com.ift2255.MaVille;
 import java.util.Date;
 
 public class User {
-    protected String fullName;
+    protected String firstName;
+    protected String lastName;
     protected Date birthDate;
     protected String email;
     protected String password;
-    protected int phone; //Ça serait un peu mieux commme string n'est-ce pas?
+    protected String phone; //Ça serait un peu mieux commme string n'est-ce pas?
     protected String userAddress; //on a probablement besoin d'un autre object d'adresse au lieu d'utiliser un String
 
-    public User(String fullName,Date birthDate, String email, String password, int phone, String userAddress){
-        this.fullName = fullName;
+    public User(String firstName, String lastName, Date birthDate, String email, String password, String phone, String userAddress){
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.birthDate = birthDate;
         this.email = email;
         this.password = password;
@@ -45,7 +47,14 @@ public class User {
     }
 
     //getters
-    public String getName(){return this.fullName;}
+    public String getFirstName(){return this.firstName;}
+
+    public String getLastName(){return this.lastName;}
+
+    public String getName(){
+        String name = firstName + " " + lastName;
+        return name;
+    }
 
     public Date getBirthDate(){return this.birthDate;}
 
@@ -53,13 +62,15 @@ public class User {
 
     public String getPassword(){return password;}
 
-    public int getPhone(){return phone;}
+    public String getPhone(){return phone;}
 
     public String getUserAddress(){return userAddress;}
 
 // setters
 
-    public void setName(String name){this.fullName = name;}
+    public void setFirstName(String firstName){this.firstName = firstName;}
+
+    public void setLastName(String lastName){this.lastName = lastName;};
 
     public void setBirthDate(Date birthDate){this.birthDate = birthDate;}
 
@@ -67,7 +78,7 @@ public class User {
 
     public void setPassword(String password){this.password = password;}
 
-    public void setPhone(int phone){this.phone = phone;}
+    public void setPhone(String phone){this.phone = phone;}
 
     public void setUserAddress(String address){this.userAddress = address;}
 
