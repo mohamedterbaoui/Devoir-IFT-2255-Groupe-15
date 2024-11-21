@@ -65,6 +65,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
+
 	  <version>3.4.2</version>
 	  <configuration>
 		  <archive>
@@ -73,6 +74,7 @@
 			  </manifest>
 	  	  </archive>
   	  </configuration>
+
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
