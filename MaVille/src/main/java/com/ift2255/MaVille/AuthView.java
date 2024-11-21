@@ -59,6 +59,7 @@ public class AuthView extends View{
      * le controlleur pour créer un compte utilisateur
      */
     public void displayRegistrationPage(){
+        
         //fonction
     }
 
