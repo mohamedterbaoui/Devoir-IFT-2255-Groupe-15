@@ -12,16 +12,19 @@ public class AuthController extends Controller {
      */
     LinkedList<Resident> residents = new LinkedList<Resident>();
     LinkedList<Intervenant> intervenants = new LinkedList<Intervenant>();
-    public Resident loginResident(String email, String password){
+    public void loginResident(String email, String password){
         for(Resident resident: residents)
             if (resident.getEmail().equals(email) && resident.getPassword().equals(password)) {
-                return resident;
+                ResidentController residentController = new ResidentController();
             }
-        return null;
     }
 
     public void loginIntervenant(String email, String password){
-        //fonction
+       for(Intervenant intervenant : intervenants){
+           if (intervenant.getEmail().equals(email) && intervenant.getPassword().equals(password)){
+               IntervenantController intCont = new IntervenantController();
+           }
+       }
     }
 
     public void signUp(User user){
