@@ -11,10 +11,9 @@ public class Intervenant extends User{
     private LinkedList<WorkRequest> workRequests;
     private LinkedList<Project> projects;
 
-    public Intervenant(String fullName, Date birthDate, String email, String password, int phone, String userAddress, String typeIntervenant, int cityId){
-        super(fullName, birthDate, email,password, phone, userAddress);
-        this.typeIntervenant = typeIntervenant;
-        this.cityId = cityId;
+    public Intervenant(String firstName, String lastName, Date birthDate, String email, String password, String phone, String userAddress, String typeIntervenant, int cityId) {
+        super(firstName, lastName, birthDate, email, password, phone, userAddress);
+        this.workRequests = new LinkedList<>();
     }
 
     public void applyToWorkRequest(){

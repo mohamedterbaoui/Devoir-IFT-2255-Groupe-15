@@ -12,8 +12,8 @@ public class Resident extends User{
     private LinkedList<Project> subscriptions;
     private LinkedList<WorkRequest> workRequests;
 
-    public Resident(String fullName,Date birthDate, String email, String password, int phone, String userAddress, String city){
-        super(fullName, birthDate, email,password, phone, userAddress);
+    public Resident(String firstName, String lastName,Date birthDate, String email, String password, String phone, String userAddress, String city){
+        super(firstName, lastName, birthDate, email, password, phone, userAddress);
         this.city = city;
         this.workRequests = new LinkedList<>(); // Initialisation de la liste
     }
