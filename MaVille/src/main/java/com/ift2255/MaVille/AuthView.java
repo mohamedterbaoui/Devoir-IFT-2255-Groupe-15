@@ -8,14 +8,17 @@ public class AuthView extends View{
 
     public AuthView(AuthController controller){
         this.authController = controller;
-
+    }
+    public AuthView(){
+        this.authController = new AuthController();
+        this.displayWelcomePage();
     }
     public void displayWelcomePage(){
 	    afficherLogo();
 	    System.out.println("Bienvenue à l'Application MaVille");
 	    System.out.println("Vous-êtes: ");
 	    System.out.println("1. Résident\n2. Intervenant");
-	    int choix = scn.nextInt();
+	    int choix = Integer.parseInt(scn.nextLine());
 	    switch (choix) {
 		    case 1: this.displayLoginPageResident();
 			    break;
