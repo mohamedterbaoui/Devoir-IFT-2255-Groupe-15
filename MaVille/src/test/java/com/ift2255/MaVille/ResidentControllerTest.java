@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 
-public class testResidentController {
+public class ResidentControllerTest {
 
     @Test
     void testJsonParsing() {
@@ -105,7 +105,6 @@ public class testResidentController {
         assertEquals(100, projectCount);
 
     }
-
 
 }
 

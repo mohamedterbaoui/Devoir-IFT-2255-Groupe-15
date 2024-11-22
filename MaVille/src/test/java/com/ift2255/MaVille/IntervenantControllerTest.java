@@ -8,7 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class testIntervenantController {
+public class IntervenantControllerTest {
     private IntervenantController intervenantController;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     AuthController authController = new AuthController();
