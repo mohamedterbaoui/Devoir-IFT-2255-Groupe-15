@@ -17,7 +17,9 @@ public class ResidentView extends View {
         System.out.println("Voici les options disponibles :");
         System.out.println("1. Voir mes requêtes de travail");
         System.out.println("2. Ajouter une requête de travail");
-        System.out.println("3. Se déconnecter");
+        System.out.println("3. Consulter les travaux en cours ou à venir");
+        System.out.println("4. Consulter les entraves");
+        System.out.println("5. Se déconnecter");
         // Les autres options pourront être ajoutées ici avec le switch plus bas
 
         Scanner scanner = new Scanner(System.in);
@@ -32,6 +34,14 @@ public class ResidentView extends View {
                 // Appel la méthode pour ajouter une requête de travail
                 break;
             case 3:
+                // Consulter la listes des travaux
+                viewProjectsfromApi();
+                break;
+            case 4:
+                // Consulter les entraves
+                viewEntravesfromApi();
+                break;
+            case 5:
                 // Se déconnecte ou revient à l'écran d'accueil
                 break;
             default:
@@ -44,6 +54,16 @@ public class ResidentView extends View {
     public void viewWorkRequestsResident() {
         System.out.println("Voici vos requêtes de travail :");
         residentController.viewWorkRequests(); 
+    }
+
+    public void viewProjectsfromApi(){
+        System.out.println("Voici la liste des travaux en cours ou à venir:");
+        residentController.viewAllProjects();
+    }
+
+    public void viewEntravesfromApi(){
+        System.out.println("Voici la liste des Entraves:");
+        residentController.viewAllEntraves();
     }
 
     // Autres méthodes pour les actions du résident

@@ -3,78 +3,47 @@
 // Classe Entrave
 package com.ift2255.MaVille;
 
-import java.util.Date;
 public class Entrave {
-    int entraveId;
-    String description;
-    Date startDate;
-    Date endDate;
-    String entraveAddress;
-    Project project;
-    Boolean completed;
+    private int id; // "_id"
+    private String idRequest; // "id_request"
+    private String streetName; // "name"
+    private String impactWidth; // "streetimpactwidth"
+    private String impactType; // "streetimpacttype"
+    private int freeParkingPlaces; // "nbfreeparkingplace"
+    private String sidewalkBlocked; // "sidewalk_blockedtype"
+    private String bikePathBlocked; // "bikepath_blockedtype"
+    private String fromName; // "fromname"
+    private String toName; // "toname"
+    private double length; // "length"
 
-    public Entrave(int id, String description, Date start, Date end, String address, Project project){
-        this.entraveId = id;
-        this.description = description;
-        this.startDate = start;
-        this.endDate = end;
-        this.entraveAddress = address;
-        this.project = project;
-        this.completed = false;
+    // Constructor
+    public Entrave(int id, String idRequest, String streetName, String impactWidth, String impactType,
+                   int freeParkingPlaces, String sidewalkBlocked, String bikePathBlocked,
+                   String fromName, String toName, double length) {
+        this.id = id;
+        this.idRequest = idRequest;
+        this.streetName = streetName;
+        this.impactWidth = impactWidth;
+        this.impactType = impactType;
+        this.freeParkingPlaces = freeParkingPlaces;
+        this.sidewalkBlocked = sidewalkBlocked;
+        this.bikePathBlocked = bikePathBlocked;
+        this.fromName = fromName;
+        this.toName = toName;
+        this.length = length;
     }
 
-    public Boolean isCompleted(){
-        return this.completed;
+    // toString method for display
+    @Override
+    public String toString() {
+        return "Entrave{" +
+                "ID=" + id +
+                ", Street='" + streetName + '\'' +
+                ", Impact Width='" + impactWidth + '\'' +
+                ", Impact Type='" + impactType + '\'' +
+                ", From='" + fromName + '\'' +
+                ", To='" + toName + '\'' +
+                ", Length=" + length + " meters" +
+                '}';
     }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-    
-    public String getEntraveAddress() {
-        return entraveAddress;
-    }
-
-    public int getEntraveId() {
-        return entraveId;
-    }
-
-    public Project getProject() {
-        return project;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public void setEntraveAddress(String entraveAddress) {
-        this.entraveAddress = entraveAddress;
-    }
-
-    public void setEntraveId(int entraveId) {
-        this.entraveId = entraveId;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-
-    
 }
