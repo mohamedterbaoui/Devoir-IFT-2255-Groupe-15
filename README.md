@@ -20,7 +20,7 @@ Notre application a été développée en utilisant plusieurs outils et biblioth
 - **Maven** : Utilisé pour gérer le build et les dépendances du projet.  
 - **Gson** : Employé pour traiter les fichiers JSON, notamment pour la sérialisation et la désérialisation des données.  
 - **JUnit** : Utilisé pour écrire et exécuter les tests unitaires, garantissant la qualité et la robustesse du code.  
-- **Architecture MVC** : Le projet est structuré selon le modèle MVC (Modèle-Vue-Contrôleur), permettant une séparation claire des responsabilités entre la logique métier, l'interface utilisateur et le contrôle des interactions.  
+- **Architecture MVC** : Le projet est structuré selon le modèle MVC (Modèle-Vue-Contrôleur), permettant une séparation claire des responsabilités entre la logique métier, l'interface utilisateur et le contrôle des interactions. 
 
 ### Cas d'utilisation implémentés
 
