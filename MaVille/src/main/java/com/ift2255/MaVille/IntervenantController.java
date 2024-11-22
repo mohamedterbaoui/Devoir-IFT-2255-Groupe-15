@@ -4,6 +4,8 @@
 
 package com.ift2255.MaVille;
 
+import java.util.List;
+
 public class IntervenantController extends Controller {
     private Intervenant currentIntervenant;
 
@@ -22,6 +24,10 @@ public class IntervenantController extends Controller {
     // Afficher toutes les requêtes de travail
     public void viewWorkRequests() {
         WorkRequestController.printAllRequests();
+    }
+
+    public List<WorkRequest> getWorkRequestsTest() {
+        return WorkRequestController.getAllRequests(); // Assurez-vous que cette méthode existe et retourne une liste
     }
 
     public void applyToWorkRequest(int requestId) {

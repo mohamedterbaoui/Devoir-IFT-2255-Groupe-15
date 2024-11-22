@@ -23,7 +23,7 @@ public class WorkRequestController extends Controller {
         if (workRequests.isEmpty()) {
             System.out.println("Aucune requête de travail disponible.");
         } else {
-            System.out.println("Liste des requêtes de travail disponibles :");
+            System.out.println("\nListe des requêtes de travail disponibles :");
             for (WorkRequest request : workRequests) {
                 System.out.println("-------------------------------------");
                 System.out.println("ID : " + request.getRequestID());

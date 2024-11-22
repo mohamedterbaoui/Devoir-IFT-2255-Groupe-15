@@ -13,6 +13,12 @@ public class Intervenant extends User{
 
     public Intervenant(String firstName, String lastName, Date birthDate, String email, String password, String phone, String userAddress, String typeIntervenant, int cityId) {
         super(firstName, lastName, birthDate, email, password, phone, userAddress);
+        this.typeIntervenant = typeIntervenant; 
+        // Vérification si cityId est valide
+        if (cityId <= 0) {
+            throw new IllegalArgumentException("cityId doit être supérieur à 0");
+        }
+        this.cityId = cityId; 
         this.workRequests = new LinkedList<>();
     }
 

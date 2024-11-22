@@ -18,30 +18,62 @@ public class AuthView extends View{
         this.displayWelcomePage();
     }
     public void displayWelcomePage(){
-	    afficherLogo();
-	    System.out.println("Bienvenue à l'Application MaVille");
-	    System.out.println("Vous-êtes: ");
-	    System.out.println("1. Résident\n2. Intervenant");
-	    int choix = Integer.parseInt(scn.nextLine());
-	    switch (choix) {
-		    case 1: this.displayLoginPageResident();
-			    break;
-	 	    case 2: this.displayLoginPageIntervenant();
-			    break;
-	    }
-	    
+        afficherLogo();
+        System.out.println("Bienvenue à l'Application MaVille");
+        System.out.println("Vous-êtes: ");
+        System.out.println("1. Résident\n2. Intervenant\n3. Quitter");
+        int choix = -1;
+        boolean validChoice = false;
+    
+        while (!validChoice) {
+            try {
+                choix = Integer.parseInt(scn.nextLine());
+                if (choix < 1 || choix > 3) {
+                    System.out.println("Veuillez choisir une option valide\n1. Résident\n2. Intervenant\n3. Quitter");
+                } else {
+                    validChoice = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Veuillez choisir une option valide\n1. Résident\n2. Intervenant\n3. Quitter");
+            }
+        }
+    
+        switch (choix) {
+            case 1: this.displayLoginPageResident();
+                break;
+            case 2: this.displayLoginPageIntervenant();
+                break;
+            case 3: 
+                System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
+                System.exit(0); // Quitte le programme
+                break;
+        }
     }
 
     /**Fonction qui gère le logique pour qu'un résident puisse se connecter
      */
     private void displayLoginPageResident() {
-        String[] loginDetails = this.displayLoginPage();
-        authController.loginResident(loginDetails[0], loginDetails[1]);
+        String[] loginDetails;
+        boolean success = false;
+        while (!success) {
+            loginDetails = this.displayLoginPage();
+            success = authController.loginResident(loginDetails[0], loginDetails[1]);
+            if (!success) {
+                System.out.println("Identifiants incorrects. Veuillez réessayer.");
+            }
+        }
     }
-	   
-    private void displayLoginPageIntervenant(){
-        String[] loginDetails = this.displayLoginPage();
-        authController.loginIntervenant(loginDetails[0], loginDetails[1]);
+    
+    private void displayLoginPageIntervenant() {
+        String[] loginDetails;
+        boolean success = false;
+        while (!success) {
+            loginDetails = this.displayLoginPage();
+            success = authController.loginIntervenant(loginDetails[0], loginDetails[1]);
+            if (!success) {
+                System.out.println("Identifiants incorrects. Veuillez réessayer.");
+            }
+        }
     }
 
     /**Montre à l'utilisatuer la page pour ce connecter.
