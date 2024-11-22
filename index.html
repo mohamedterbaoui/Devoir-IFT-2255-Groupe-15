@@ -1972,6 +1972,19 @@
                     <img class="sequence" src="Images/Diag_sequence_consulter_liste_requetes_travail.png">
                 </div>
             </section>
+            
+            <section class="main-section"></section>
+                <h2 id="Justification choix design" class="section-title">Justification choix design</h2>
+                    <p>
+                        Notre code a été construit avec comme objectifs que chaque module soit indépendant et qu'ils aient une seule responsabilité. Pour ce faire, nous avons utilisé
+                        des classes abstraites comme "View" et "Controller" qui définissent des interfaces pour les autres classes View (pour les résidents et intervenants) et les différents 
+                        controllers respectivement. Celles-ci assurent également qu'il y ait un faible couplage entre les classes ou, en d'autres mots, que chaque classe ait une seule responsabilité 
+                        afin d'assurer une forte cohésion dans chacune d'elle, permettant ainsi que le code puisse facilement être modifiable dans le futur, 
+                        notamment lors de l'ajout des autres besoins à couvrir ou potentiellement un agrandissement du projet dans le futur. L'encapsulation est respesctée avec les attributs 
+                        privés et les méthodes publiques pour accéder et modifier les données. Bref, cette approche nous permet d'avoir une application plus flexible, l'ajout plus facile de 
+                        nouvelles fonctionnalités et nous permet de tester individuellement chacune d'elles. 
+                    <p>
+            </section>
 
             <section class="main-section">
                 <h2 id="prototype" class="section-title">Prototype</h2>
