@@ -62,13 +62,12 @@ public class ResidentController extends Controller {
         if (responseTravaux != null && responseTravaux.getStatusCode() == 200) {
             try {
 
-                // Parse JSON using Gson
-                JsonObject rootObject = JsonParser.parseString(responseTravaux.getBody()).getAsJsonObject();
-                JsonObject result = rootObject.getAsJsonObject("result");
-                JsonArray records = result.getAsJsonArray("records");
+                // Parse Json using Gson library
+                JsonArray records = jsonParsing(responseTravaux);
 
                 // Loop through each record
                 for (int i = 0; i < records.size(); i++) {
+
                     JsonObject record = records.get(i).getAsJsonObject();
 
                     // Extract fields
@@ -120,10 +119,9 @@ public class ResidentController extends Controller {
 
         if (responseEntrave != null && responseEntrave.getStatusCode() == 200) {
             try {
-                // Parse JSON using Gson
-                JsonObject rootObject = JsonParser.parseString(responseEntrave.getBody()).getAsJsonObject();
-                JsonObject result = rootObject.getAsJsonObject("result");
-                JsonArray records = result.getAsJsonArray("records");
+
+                // Parse JSON using Gson library
+                JsonArray records = jsonParsing(responseEntrave);
 
 
                 // Loop through each record
@@ -161,6 +159,12 @@ public class ResidentController extends Controller {
         } else {
             System.out.println("Failed to retrieve data: " + (responseEntrave != null ? responseEntrave.getMessage() : "No responseEntrave"));
         }
+    }
+
+    public JsonArray jsonParsing(ApiResponse responseEntrave){
+        JsonObject rootObject = JsonParser.parseString(responseEntrave.getBody()).getAsJsonObject();
+        JsonObject result = rootObject.getAsJsonObject("result");
+        return result.getAsJsonArray("records");
     }
 }
 
