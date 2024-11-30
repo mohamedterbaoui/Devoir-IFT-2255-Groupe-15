@@ -5,4 +5,5 @@ MaVille/target
 codeSource
 codeTest
 MaVille/.idea
-
+MaVille/.vscode
+mvnOutput.txt
