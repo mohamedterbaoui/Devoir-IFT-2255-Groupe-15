@@ -22,20 +22,25 @@ public class Intervenant extends User{
         this.workRequests = new LinkedList<>();
     }
 
-    public void applyToWorkRequest(){
-        //fonction
+    public void applyToWorkRequest() { // Fonction qui appelle applyToWorkRequest() de IntervenantController
+        IntervenantController intervenantController = new IntervenantController(this); // Créez une instance avec l'intervenant actuel
+        intervenantController.applyToWorkRequest(); // Appelez la méthode d'instance
     }
 
-    public void addNewProject(){
-        //fonction
+    public void addNewProject(){ //fonction qui appelle submitProject(Project project) de IntervenantController
+        
     }
 
     public LinkedList<String> viewResidentPreferences(Resident resident){
        return(resident.getPreferredProjectTimes());
     }
 
-    public void editProjectDetails(Project project){
-        //fonction
+    public void modifyProjectStatus(Project project, String newStatus){ //fonction qui appelle modifyProjectStatus(Project project, String newStatus) de IntervenantController
+        
+    }
+
+    public void trackApplicationStatus() { // Fonction qui appelle trackApplicationStatus(int requestID) de IntervenantController
+
     }
 
 
