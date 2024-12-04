@@ -18,7 +18,7 @@ public class WorkRequest {
 
     // Constructeur
     public WorkRequest(String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
-        this.requestID = idCounter++;  // Incrémenter l'ID pour chaque nouvelle requête
+        this.requestID = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
         this.title = title;
         this.description = description;
         this.expectedStartDate = expectedStartDate;

@@ -5,7 +5,9 @@
 package com.ift2255.MaVille;
 import java.util.LinkedList;
 import java.util.Date;
+
 public class Project {
+    private static int idCounter = 0;  // Compteur pour générer un ID unique pour chaque projet
     private int projectId;
     private String title;
     private String description;
@@ -16,18 +18,26 @@ public class Project {
     private Intervenant intervenant;
     private LinkedList<Entrave> entraves;
     private LinkedList<Resident> affectedResidents;
-    private String projectSchedule;
+    private String heureDebut;
+    private String heureFin;
     private ProjectType projectType;
     private Boolean completed;
 
-    public Project(int projectId, String title, String projectAddress, Date startDate, Date endDate){
-        this.projectId = projectId;
+    public Project(String title, String projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
+        this.projectId = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
         this.title = title;
         this.projectAddress = projectAddress;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.completed = false;
+        this.description = description;
+        this.status = "Pas encore commencé"; 
+        this.intervenant = intervenant; 
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin; 
+        this.projectType = projectType; 
+        this.completed = false; // Not completed par défaut
     }
+
     public void addEntrave(){
 
     }
@@ -76,8 +86,12 @@ public class Project {
         return projectId;
     }
 
-    public String getProjectSchedule() {
-        return projectSchedule;
+    public String getHeureDebut() {
+        return heureDebut;
+    }
+
+    public String getHeureFin() {
+        return heureFin;
     }
 
     public ProjectType getProjectType() {
@@ -125,8 +139,12 @@ public class Project {
         this.projectId = projectId;
     }
 
-    public void setProjectSchedule(String projectSchedule) {
-        this.projectSchedule = projectSchedule;
+    public void setHeureDebut(String heureDebut) {
+        this.heureDebut = heureDebut;
+    }
+
+    public void setHeureFin(String heureFin) {
+        this.heureFin = heureFin;
     }
 
     public void setProjectType(ProjectType projectType) {

@@ -8,18 +8,17 @@ import java.util.List;
 import java.util.Scanner;
 
 public class IntervenantController extends Controller {
-    private Intervenant currentIntervenant;
+    private static Intervenant currentIntervenant;
 
     public IntervenantController(Intervenant intervenant) {
-        this.currentIntervenant = intervenant;
+        currentIntervenant = intervenant;
     }
 
-    public Intervenant getCurrentIntervenant() {
+    public static Intervenant getCurrentIntervenant() {
         return currentIntervenant;
     }
 
-    public void submitProject(Project project) { // Soumettre un projet - Envoyer une notification aux résidents du
-                                                 // quartier
+    public void submitProject(Project project) { // Soumettre un projet - Envoyer une notification aux résidents du quartier
     }
 
     public void viewWorkRequests() { // Afficher toutes les requêtes de travail
@@ -27,7 +26,7 @@ public class IntervenantController extends Controller {
     }
 
     public List<WorkRequest> getWorkRequestsTest() {
-        return WorkRequestController.getAllRequests(); // Assurez-vous que cette méthode existe et retourne une liste
+        return WorkRequestController.getAllRequests(); 
     }
 
     public void applyToWorkRequest() { // Fonction pour postuler à une requête de travail     
@@ -46,7 +45,7 @@ public class IntervenantController extends Controller {
                     validChoice = true; // Sort de la loop
                     WorkRequest currentRequest = WorkRequestController.getWorkRequestOnId(choice);
                     if (currentRequest != null) { // Vérifier si la requête existe (déjà vérifié, mais au cas où)
-                        currentRequest.setStatus(this.currentIntervenant.getFirstName() + " a appliqué à ce projet");
+                        currentRequest.setStatus(currentIntervenant.getFirstName() + " a appliqué à ce projet");
                         System.out.println("Status correctement modifié. Vous avez correctement appliqué à cette requête de travail");
 
                         // Pour DEBUG
