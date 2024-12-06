@@ -34,11 +34,11 @@ public class IntervenantController extends Controller {
      */
     public void viewWorkRequests() {
        List<WorkRequest> workRequests = WorkRequestController.getAllRequests();
-       if workRequests.isEmpty(){
+       if (workRequests.isEmpty()){
 	      view.display("Aucune requête de travail disponible.");
        } else {
 	      for(WorkRequest wr : workRequests){
-		     view.display(wr.toString);
+		     view.display(wr.toString());
 	      } 
     }
     }
@@ -49,6 +49,7 @@ public class IntervenantController extends Controller {
     }
     /** Passer un application pour travailler pour un certain workRequest
      * @param requestId Id de la demande
+     */
     public void applyToWorkRequest(int requestId) {
         // Fonction pour postuler à une requête de travail
     }   

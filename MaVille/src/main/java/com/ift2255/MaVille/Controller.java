@@ -30,6 +30,7 @@ abstract class Controller{
     }
     /** Retourne l'utilisateur actuel
      * @return L'utilisateur
+     */
     public User getUser(){
         return this.user;
     }
