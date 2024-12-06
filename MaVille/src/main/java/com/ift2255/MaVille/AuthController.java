@@ -19,9 +19,9 @@ public class AuthController extends Controller {
     public AuthController() {}
     /**Méthode pour qu'un résident puisse se connecter. Cela accepte le courriel et le mot de passe de l'utilisateur
      * et retourne un objet Resident
-     * @param email : String avec l'adresse courriel
-     * @param password: String qui contient le mot de passe
-     * @return boolean pour dire au vue que la connexion a réussi
+     * @param email    String avec l'adresse courriel
+     * @param password String qui contient le mot de passe
+     * @return         Boolean qui indique le réussite ou échec de la connexion
      */
     public boolean loginResident(String email, String password) {
         for (Resident resident : residents) {
@@ -35,9 +35,9 @@ public class AuthController extends Controller {
     }
     /**Méthode qui gère la connexion pour un intérvenant. On accepte l'adresse courriel et le mot passe
      * et on retourne un boolean pour le vue si la connexion est réussi ou non. 
-     * @param email : String avec l'adresse courriel
-     * @param password: String qui contient le mot de passe
-     * @return Boolean qui indique que la connexion a réussi
+     * @param email    Adresse courriel 
+     * @param password Mot de passe
+     * @return         Boolean qui indique le réussite ou échec de la connexion
      */
     public boolean loginIntervenant(String email, String password) {
         for (Intervenant intervenant : intervenants) {
@@ -51,7 +51,7 @@ public class AuthController extends Controller {
     }
     /**Méthode pour ajouter un nouveau résident.
      * Cela ajoute le résident dans la liste des résidents
-     * @param resident: un objet resident
+     * @param resident un objet resident
      */
     public void signUpResident(Resident resident){
         residents.add(resident);
@@ -59,7 +59,7 @@ public class AuthController extends Controller {
         //au lieu de le faire dans la vue
     }
     /**Méthode pour qu'un intérvenant puisse s'inscrire
-     * @param intervenant: l'intérvenant qui est ajouté à la liste
+     * @param intervenant l'intérvenant qui est ajouté à la liste
     */
     public void signUpIntervenant(Intervenant intervenant){
         intervenants.add(intervenant);
@@ -98,7 +98,7 @@ public class AuthController extends Controller {
     }
     /**
      * Méthode pour demander si l'utilisateur connecté est un intervenant
-     * @return boolean pour indiquer que l'utilisateur qui est connecté est un intervenant
+     * @return boolean pour indiquer qu'un résident est connecté
      */
     public boolean isIntervenantConnected() {
         return isIntervenantConnected;

@@ -1,21 +1,19 @@
  ## Progrès sur le javadoc
   
-- [ ] ApiResponse.java
+- [x] ApiResponse.java
 - [x] App.java
-- [ ] AuthController.java
-- [ ] AuthView.java
-- [ ] Controller.java
+- [x] AuthController.java
+- [x] AuthView.java
+- [x] Controller.java
 - [ ] Criteria.java
 - [ ] District.java
 - [ ] Entrave.java
-- [ ] FileOps.class
-- [ ] FileOps.java
-- [ ] Hash.class
-- [ ] Hash.java
+- [x] FileOps.java
+- [x] Hash.java
 - [ ] HttpClientApi.java
 - [ ] Initialization.java
 - [ ] Intervenant.java
-- [ ] IntervenantController.java
+- [x] IntervenantController.java
 - [ ] IntervenantView.java
 - [ ] Issue.java
 - [ ] Notification.java
@@ -28,8 +26,7 @@
 - [ ] ResidentView.java
 - [ ] Street.java
 - [ ] Travaux.java
-- [ ] User.java
-- [ ] View.java
+- [x] User.java
+- [x] View.java
 - [ ] WorkRequest.java
 - [ ] WorkRequestController.java
-- [ ] javadocProgress.md
