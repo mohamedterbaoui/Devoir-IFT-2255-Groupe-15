@@ -20,11 +20,20 @@ class Hash{
 	    StringBuffer hexString = new StringBuffer();
 
 	    for (int i = 0; i<digest.length;i++) {
-		    hexString.append(Integer.toHexString(0xFF & digest[i]));
+		    hexString.append(String.format("%02x", 0xFF & digest[i]));
 	    }
 
 	    return hexString.toString();
 	}
+
+	public static void main(String[] args){
+		System.out.println(args[0]);
+		try{
+			System.out.println(hasher(args[0]));
+	} catch (Exception e){
+	}
+	}
+
 
 }
 
