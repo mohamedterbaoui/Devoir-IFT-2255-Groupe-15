@@ -55,6 +55,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.userAddress = userAddress;
+    } 
 
     //methodes
     /**Cherche a savoir si la personne a plus que 18 ans
@@ -71,8 +72,12 @@ public class User {
         //on doit modifier le fonction eventuellement pour calculer l'age
         //à partir de la date d'aujourd'hui 
     }
-
+   
     //getters
+    /**Afficher le mot de passe pour le comparison
+     * @return le mot de passe de l'utilisateur
+     */
+    public String getPassword(){return this.password;};
     /**retourn le prénom de la personne
      * @return prénom de l'utilisateur
      */
