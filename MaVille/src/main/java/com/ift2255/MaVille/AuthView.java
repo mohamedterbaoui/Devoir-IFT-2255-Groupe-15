@@ -77,7 +77,7 @@ public class AuthView extends View{
         boolean success = false;
         while (!success) {
             loginDetails = this.displayLoginPage();
-            success = authController.loginIntervenant(loginDetails[0], loginDetails[1]);
+            success = authController.loginIntervenant(loginDetails[0],loginDetails[1]);
             if (!success) {
                 System.out.println("Identifiants incorrects. Veuillez réessayer.");
             }
@@ -95,6 +95,11 @@ public class AuthView extends View{
     input[0] = scn.nextLine().trim(); // Suppression des espaces
 	System.out.println("Mot de Passe");
     input[1] = scn.nextLine().trim(); // Suppression des espaces
+    try{
+	    input[1] = Hash.hasher(input[1]);
+    } catch (Exception e){
+	    e.printStackTrace();
+    }
 	return input;
     }
 
