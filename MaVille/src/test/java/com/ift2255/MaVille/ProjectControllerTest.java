@@ -1,10 +1,29 @@
 package com.ift2255.MaVille;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ProjectControllerTest {
+
+    // ... existing code ...
+
+    private SimpleDateFormat dateFormat;
+    private AuthController authController;
+
+    @BeforeEach
+    void setUp() throws ParseException {
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        authController = new AuthController();
+
+        // Création de l'intervenant, comme dans IntervenantControllerTest
+        Intervenant intervenant1 = new Intervenant("Entreprise A", "Public", dateFormat.parse("1981-08-15"), "entrepriseA@mail.com", "password123", "1234567890", "321 Rue D", "Entreprise publique", 101);
+        authController.intervenants.add(intervenant1);
+    }
 
     @Test
     void testAddProject() {
@@ -12,7 +31,7 @@ public class ProjectControllerTest {
         System.setOut(new PrintStream(outContent));
 
         // Simule les entrées de l'utilisateur
-        String input = "Mon Projet\n123 Rue Test\n2024-01-01\n2024-12-31\nDescription du projet\n10:00\n17:00\n1\n"; 
+        String input = "Mon Projet\n123 Rue Test\n2024-01-01\n2024-12-31\nDescription du projet\n10:00\n17:00\n1\n";
         InputStream inContent = new ByteArrayInputStream(input.getBytes());
         System.setIn(inContent);
 
@@ -26,8 +45,10 @@ public class ProjectControllerTest {
         assertNotNull(newProject, "Le projet n'a pas été créé.");
         assertEquals("Mon Projet", newProject.getTitle(), "Le titre du projet est incorrect.");
         assertEquals("123 Rue Test", newProject.getProjectAddress(), "L'adresse du projet est incorrecte.");
-        assertEquals(java.sql.Date.valueOf("2024-01-01"), newProject.getStartDate(), "La date de début du projet est incorrecte.");
-        assertEquals(java.sql.Date.valueOf("2024-12-31"), newProject.getEndDate(), "La date de fin du projet est incorrecte.");
+        assertEquals(java.sql.Date.valueOf("2024-01-01"), newProject.getStartDate(),
+                "La date de début du projet est incorrecte.");
+        assertEquals(java.sql.Date.valueOf("2024-12-31"), newProject.getEndDate(),
+                "La date de fin du projet est incorrecte.");
         assertEquals("Description du projet", newProject.getDescription(), "La description du projet est incorrecte.");
         assertEquals("10:00", newProject.getHeureDebut(), "L'heure de début du projet est incorrecte.");
         assertEquals("17:00", newProject.getHeureFin(), "L'heure de fin du projet est incorrecte.");
@@ -45,7 +66,8 @@ public class ProjectControllerTest {
 
         int initialSize = ProjectController.getProjectList().size(); // Taille de la liste avant l'ajout
 
-        // Simule les entrées de l'utilisateur.  L'utilisateur entre "annuler" pour la date de fin pour sortir.
+        // Simule les entrées de l'utilisateur. L'utilisateur entre "annuler" pour la
+        // date de fin pour sortir.
         String input = "Mon Projet\n123 Rue Test\n2024-01-01\nannuler\nDescription du projet\n10:00\n17:00\n1\n";
         InputStream inContent = new ByteArrayInputStream(input.getBytes());
         System.setIn(inContent);
@@ -60,6 +82,33 @@ public class ProjectControllerTest {
         assertNull(newProject, "Le projet a été créé alors que l'utilisateur a entré 'annuler'.");
 
         // Vérifie que la taille de la liste n'a pas changé
-        assertEquals(initialSize, ProjectController.getProjectList().size(), "Le projet a été ajouté à la liste malgré l'annulation.");
+        assertEquals(initialSize, ProjectController.getProjectList().size(),
+                "Le projet a été ajouté à la liste malgré l'annulation.");
+    }
+
+    @Test
+    void testUpdateProjectStatus() throws ParseException {
+        // Création d'un projet
+        Project newProject = new Project("Mon Projet", "123 Rue Test", dateFormat.parse("2024-01-01"), dateFormat.parse("2024-12-31"), "Description du projet", authController.intervenants.get(0), "10:00", "17:00", ProjectType.values()[0]);
+        int projectId = ProjectController.getProjectList().size() +1; //obtenir le prochain ID
+        ProjectController.getProjectList().add(newProject);
+
+        // Simule l'entrée utilisateur pour updateProjectStatus()
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+
+        String input = projectId + "\nNouveau statut\n"; // Utiliser le bon ID
+        InputStream inContent = new ByteArrayInputStream(input.getBytes());
+        System.setIn(inContent);
+
+        // Mise à jour du statut du projet
+        Project updatedProject = ProjectController.updateProjectStatus();
+
+        System.setOut(System.out);
+        System.setIn(System.in);
+
+        // Vérification que le statut a été mis à jour
+        assertNotNull(updatedProject);
+        assertEquals("Nouveau statut", updatedProject.getStatus());
     }
 }

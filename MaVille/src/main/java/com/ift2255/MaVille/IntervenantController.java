@@ -18,7 +18,9 @@ public class IntervenantController extends Controller {
         return currentIntervenant;
     }
 
-    public void submitProject(Project project) { // Soumettre un projet - Envoyer une notification aux résidents du quartier
+    public static void addProject() { // Soumettre un projet - RESTE à Envoyer une notification aux résidents du quartier
+        ProjectController.addProject();
+
     }
 
     public void viewWorkRequests() { // Afficher toutes les requêtes de travail
@@ -72,13 +74,11 @@ public class IntervenantController extends Controller {
         } while (!validChoice);
     }
 
-    public void modifyProjectStatus(Project project, String newStatus) { // Fonction pour Modifier le statut d'un projet
-                                                                         // - Envoyer une notification aux résidents du
-                                                                         // quartier
-
+    public static void updateProjectStatus() { // Fonction pour Modifier le statut d'un projet - RESTE À Envoyer une notification aux résidents du quartier
+        ProjectController.updateProjectStatus();
     }
 
     public void trackApplicationStatus(int requestID) { // Fonction pour faire le suivi de sa candidature
-
+        
     }
 }

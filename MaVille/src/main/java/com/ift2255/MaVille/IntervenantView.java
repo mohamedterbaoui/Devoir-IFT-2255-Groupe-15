@@ -52,11 +52,11 @@ public class IntervenantView extends View {
                 break;                
             case 3:
                 // Soumettre un projet
-                ProjectController.addProject();
+                IntervenantController.addProject();
                 displayOptions();
                 break;
             case 4:
-                // Modifier le statut d'un projet
+                IntervenantController.updateProjectStatus();
                 displayOptions();
                 break;
             case 5:

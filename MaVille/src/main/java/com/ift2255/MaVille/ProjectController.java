@@ -16,8 +16,55 @@ public class ProjectController extends Controller {
         return projectList;
     }
 
-    public void updateProjectStatus(int projectId, String newStatus) {
-        // fonction
+    public static Project updateProjectStatus() {
+        Scanner scanner = new Scanner(System.in);
+        Project project = null;
+    
+        while (project == null) {
+            System.out.println("Choisissez le projet que vous voulez modifier le status (ou tapez '-1' pour annuler) :");
+            displayProjects();
+            int input = scanner.nextInt();
+            scanner.nextLine(); // Consomme le caractère de nouvelle ligne
+            if (input == -1) {
+                return null;
+            }
+    
+            project = findProjectById(input - 1); // '-1' car sinon ça commence à 0 au lieu de 1 (ça montre 1 dans le display)
+    
+            if (project == null) {
+                System.out.println("Projet introuvable. Veuillez réessayer.");
+            }
+        }
+    
+        System.out.println("Entrez le nouveau statut du projet :\n ");
+        String newStatus = scanner.nextLine();
+        project.setStatus(newStatus);
+    
+        return project;
+    }
+
+    public static void displayProjects() {
+        if (projectList.isEmpty()) {
+            System.out.println("Aucun projet trouvé.");
+            return;
+        }
+        for (int i = 0; i < projectList.size(); i++) {
+            System.out.println((i + 1) + ". " + projectList.get(i).getTitle());
+        }
+    }
+
+    private static Project findProjectById(int input) {
+        try {
+            for (Project project : projectList) {
+                if (project.getProjectId() == input) {
+                    return project;
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Entrée invalide. Veuillez entrer un nombre.");
+            return null;
+        }
+        return null;
     }
 
     public void editProjectDetails(int projectId, String description, Date endDate) {
@@ -118,15 +165,17 @@ public class ProjectController extends Controller {
         ProjectType projectType = null;
         while (projectType == null) {
             System.out.println("Entrez le type de projet (ou tapez 'annuler' pour annuler) :");
-            String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
-            }
             try {
+                
                 // Afficher la liste des types de projet avec leur numéro
                 System.out.println("Types de projet disponibles :");
                 for (int i = 0; i < ProjectType.values().length; i++) {
                     System.out.println((i + 1) + ". " + ProjectType.values()[i]);
+                }
+
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("annuler")) {
+                    return null; // Annulation de la création du projet
                 }
 
                 int choix = Integer.parseInt(input);
@@ -142,6 +191,7 @@ public class ProjectController extends Controller {
 
         Project newProject = new Project(title, projectAddress, startDate, endDate, description, IntervenantController.getCurrentIntervenant(), heureDebut, heureFin, projectType);
         projectList.add(newProject);
+        System.out.println("Le projet a bien été ajouté.");
         return newProject;
     }
 

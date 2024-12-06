@@ -27,6 +27,14 @@ public class Intervenant extends User{
         intervenantController.applyToWorkRequest(); // Appelez la méthode d'instance
     }
 
+    public String getName() {
+        return firstName;
+    }
+
+    public String getType() {
+        return typeIntervenant;
+    }
+
     public void addNewProject(){ //fonction qui appelle submitProject(Project project) de IntervenantController
         
     }
@@ -40,7 +48,7 @@ public class Intervenant extends User{
     }
 
     public void trackApplicationStatus() { // Fonction qui appelle trackApplicationStatus(int requestID) de IntervenantController
-
+        
     }
 
 
