@@ -14,8 +14,8 @@ import java.nio.file.Paths;
 public class FileOps {
 	/**
 	 * Méthode pour sauvgarder les données dans un fichier
-	 * @param String qui contient des données
-	 * @param String qui contien le chemin vers le fichier
+	 * @param Data Les données à écrire
+	 * @param NomDuFichier le chemin vers le fichier
 	 */
 	public static void saveFileData(String data, String nomDuFichier){
 		try{
@@ -27,8 +27,8 @@ public class FileOps {
 		}
 	}
 	/**Méthode pour chercher des données à partir d'un fichier
-	 * @return String qui contient tout le contenu d'un fichier
-	 * @param String chemin vers le fichier
+	 * @return tout le contenu d'un fichier
+	 * @param nomDuFicher chemin vers le fichier
 	 */
 	public static String getFileData(String nomDuFichier){
 		Path path = Paths.get(nomDuFichier);
