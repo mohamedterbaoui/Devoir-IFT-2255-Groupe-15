@@ -2,21 +2,28 @@
 //IFT2255 - Équipe 15
 //Classe AuthView
 package com.ift2255.MaVille;
-
+/** Gère le vue pour l'authentication et l'inscription d'un utilisateur
+ */
 public class AuthView extends View{
     private String emailField;
     private String passwordField;
 
     private AuthController authController;
-
+    /**Constructeur pour la classe AuthView
+     * @param controller Un auth controller
+     */
     public AuthView(AuthController controller){
         this.authController = controller;
         this.displayWelcomePage();
     }
+    /**Constructeur pour la classe AuthController
+     */
     public AuthView(){
         this.authController = new AuthController();
         this.displayWelcomePage();
     }
+    /**Montre à l'utilisateur la page d'accueil
+     */
     public void displayWelcomePage(){
         afficherLogo();
         System.out.println("Bienvenue à l'Application MaVille");
@@ -50,7 +57,7 @@ public class AuthView extends View{
         }
     }
 
-    /**Fonction qui gère le logique pour qu'un résident puisse se connecter
+    /**Gère le logique pour qu'un résident puisse se connecter
      */
     private void displayLoginPageResident() {
         String[] loginDetails;
@@ -63,7 +70,8 @@ public class AuthView extends View{
             }
         }
     }
-    
+   /**Gère les entrées pour qu'un intérvenant puisse se connecter
+    */ 
     private void displayLoginPageIntervenant() {
         String[] loginDetails;
         boolean success = false;
@@ -90,15 +98,17 @@ public class AuthView extends View{
 	return input;
     }
 
-    /*Montre à l'utilisateur la page pour s'inscrire.
+    /**Montre à l'utilisateur la page pour s'inscrire.
      * Cette methode va, par la suite, communiquer avec
      * le controlleur pour créer un compte utilisateur
      */
     public void displayRegistrationPage(){
-        
-        //fonction
+    //fonction    
+       
     }
-
+    /**
+     * Affichage de logo de MaVille pour l'ouverture de l'application
+     */
     public void afficherLogo(){
         String[] hashtag = {
             "  #   #   ",

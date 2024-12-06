@@ -109,5 +109,19 @@ public class WorkRequest {
         this.workType = workType;
     }
     
-    
+   public String toString(){
+	StringBuilder sb = new StringBuilder();
+	   
+        sb.append("-------------------------------------\n");
+        sb.append("ID : " + request.getRequestID()+"\n");
+        sb.append("Titre : " + request.getTitle() + "\n");
+        sb.append("Description : " + request.getDescription()+ "\n");
+        sb.append("Type de travaux : " + request.getWorkType()+"\n");
+        sb.append("Date prévue de début : " + request.getExpectedStartDate()+"\n");
+        sb.append("Adresse : " + request.getWorkRequestAddress()+"\n");
+        sb.append("Statut : " + request.getStatus()+"\n");
+        sb.append("Résident affecté : " + request.getResident().getFirstName() + " " + request.getResident().getLastName()+"\n");
+        sb.append("-------------------------------------\n");
+	return sb.toString();
+   }
 }

@@ -23,12 +23,13 @@ abstract class Controller{
 
     //getters
     /**Retourne le vue actuel 
-     * @return Le vue
+     * @return Le vue 
     */
     public View getView(){
         return this.view;
     }
-    /** Retourne l'utilisateur actuel */
+    /** Retourne l'utilisateur actuel
+     * @return L'utilisateur
     public User getUser(){
         return this.user;
     }
