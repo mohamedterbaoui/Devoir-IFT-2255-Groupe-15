@@ -5,28 +5,28 @@
 - [x] AuthController.java
 - [x] AuthView.java
 - [x] Controller.java
-- [ ] Criteria.java
-- [ ] District.java
-- [ ] Entrave.java
+- [x] Criteria.java
+- [x] District.java
+- [x] Entrave.java
 - [x] FileOps.java
 - [x] Hash.java
-- [ ] HttpClientApi.java
+- [x] HttpClientApi.java
 - [ ] Initialization.java
-- [ ] Intervenant.java
+- [x] Intervenant.java
 - [x] IntervenantController.java
-- [ ] IntervenantView.java
-- [ ] Issue.java
-- [ ] Notification.java
-- [ ] Preference.java
-- [ ] Project.java
-- [ ] ProjectController.java
-- [ ] ProjectType.java
-- [ ] Resident.java
-- [ ] ResidentController.java
-- [ ] ResidentView.java
-- [ ] Street.java
-- [ ] Travaux.java
+- [x] IntervenantView.java
+- [x] Issue.java
+- [x] Notification.java
+- [x] Preference.java
+- [x] Project.java
+- [x] ProjectController.java - non pas complété en fait
+- [x] ProjectType.java
+- [x] Resident.java
+- [x] ResidentController.java
+- [x] ResidentView.java
+- [x] Street.java
+- [x] Travaux.java
 - [x] User.java
 - [x] View.java
-- [ ] WorkRequest.java
-- [ ] WorkRequestController.java
+- [x] WorkRequest.java
+- [x] WorkRequestController.java

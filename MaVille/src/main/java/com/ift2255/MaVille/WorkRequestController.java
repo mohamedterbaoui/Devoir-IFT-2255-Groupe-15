@@ -7,18 +7,24 @@ package com.ift2255.MaVille;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**Controller poure les requêtes de travail
+ */
 public class WorkRequestController extends Controller {
     private static List<WorkRequest> workRequests = new ArrayList<>();
-
+/**Ajouter une requête de travail
+ * @param request La nouvelle requête de travail
+ */
     public static void addWorkRequest(WorkRequest request) {
         workRequests.add(request);
     }
-
+/**Afficher les requêtes de travail
+ * @return une liste chaînée des travaux
+ */
     public static List<WorkRequest> getAllRequests() {
         return workRequests;
     }
-
+/**@deprecated Une méthode qui imprime les requêtes sur le console...
+ */
     public static void printAllRequests() {
         if (workRequests.isEmpty()) {
             System.out.println("Aucune requête de travail disponible.");

@@ -5,14 +5,18 @@
 package com.ift2255.MaVille;
 
 import java.util.Scanner;
-
+/**Classe qui gère la vue des intérvenants
+ */
 public class IntervenantView extends View {
     private IntervenantController intervenantController;
-
+/**Constructeur pour la classe IntervenantController
+ * @param intervenantController le controlleur d'Intervenant
+ */
     public IntervenantView(IntervenantController intervenantController) {
         this.intervenantController = intervenantController;
     }
-
+/**Montrer les options pour le menu
+ */
     public void displayOptions() {
         System.out.println("\nVoici les options disponibles :");
         System.out.println("1. Voir toutes les requêtes de travail");
@@ -58,6 +62,8 @@ public class IntervenantView extends View {
     
 
     // Affiche toutes les requêtes de travail
+    /**Afficher sur le console les requêtes de travail
+     */
     public void displayWorkRequests() {
         intervenantController.viewWorkRequests(); 
     }

@@ -34,4 +34,11 @@ abstract class Controller{
     public User getUser(){
         return this.user;
     }
+
+    /**Fonction pour pouvoir mettre en place un vue
+     * @param view Le nouveau view
+     */
+    public void setView(View view){
+	    this.view = view;
+    }
 }
