@@ -33,7 +33,6 @@ public class WorkRequestController extends Controller {
                 System.out.println("Date prévue de début : " + request.getExpectedStartDate());
                 System.out.println("Adresse : " + request.getWorkRequestAddress());
                 System.out.println("Statut : " + request.getStatus());
-                System.out.println("Résident affecté : " + request.getResident().getFirstName() + " " + request.getResident().getLastName());
                 System.out.println("-------------------------------------\n");
             }
         }
@@ -45,7 +44,7 @@ public class WorkRequestController extends Controller {
         } else {
             System.out.println("\nListe des requêtes de travail disponibles :");
             for (WorkRequest request : workRequests) {
-                if (request.getStatus() == "Pas encore commencé") {
+                if (request.getStatus() == WorkRequestStatusEnum.NOT_YET_STARTED) { // Modification ici
                     System.out.println("-------------------------------------");
                     System.out.println("ID : " + request.getRequestID());
                     System.out.println("Titre : " + request.getTitle());
@@ -54,25 +53,24 @@ public class WorkRequestController extends Controller {
                     System.out.println("Date prévue de début : " + request.getExpectedStartDate());
                     System.out.println("Adresse : " + request.getWorkRequestAddress());
                     System.out.println("Statut : " + request.getStatus());
-                    System.out.println("Résident affecté : " + request.getResident().getFirstName() + " " + request.getResident().getLastName());
                     System.out.println("-------------------------------------\n");
                 }
             }
         }
     }
 
-    public static int getNumberOfRequests(){
-        return workRequests.size();
-    }
-
     public static List<Integer> iterateAllRequestsIdWithNullStatus() { 
         List<Integer> requestIds = new ArrayList<>();
         for (WorkRequest request : workRequests) {
-            if (request.getStatus() == "Pas encore commencé") {
+            if (request.getStatus() == WorkRequestStatusEnum.NOT_YET_STARTED) { // Modification ici
                 requestIds.add(request.getRequestID()); 
             }
         }
         return requestIds;
+    }
+
+    public static int getNumberOfRequests(){
+        return workRequests.size();
     }
 
     public static WorkRequest getWorkRequestOnId(int requestId) { 

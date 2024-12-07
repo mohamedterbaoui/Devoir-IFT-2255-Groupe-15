@@ -48,6 +48,18 @@ public class AuthView extends View{
                 System.exit(0); // Quitte le programme
                 break;
         }
+        // Pour le résident 
+        if (authController.isResidentConnected()) { 
+            ResidentController residentController = authController.getResidentController();
+            ResidentView residentView = new ResidentView(residentController);
+            residentView.displayOptions();
+
+        // Pour l'intervenant
+        } else {
+            IntervenantController intervenantController = authController.getIntervenantController();
+            IntervenantView intervenantView = new IntervenantView(intervenantController);
+            intervenantView.displayOptions();
+        }
     }
 
     /**Fonction qui gère le logique pour qu'un résident puisse se connecter
@@ -82,13 +94,19 @@ public class AuthView extends View{
      * @return [courriel, motDePasse];
      */
     public String[] displayLoginPage(){
-	String input[] = new String[2];
-	System.out.println("Adresse courriel : ");
-    input[0] = scn.nextLine().trim(); // Suppression des espaces
-	System.out.println("Mot de Passe");
-    input[1] = scn.nextLine().trim(); // Suppression des espaces
-	return input;
-    }
+        String input[] = new String[2];
+        System.out.println("Adresse courriel (Si vous souhaitez revenir au menu principal, écriver 'annuler'): ");
+        input[0] = scn.nextLine().trim(); // Suppression des espaces
+        if (input[0].equals("annuler")) {
+            this.displayWelcomePage(); // Retourne au menu principal
+        }
+        System.out.println("Mot de Passe (Si vous souhaitez revenir au menu principal, écriver 'annuler')");
+        input[1] = scn.nextLine().trim(); // Suppression des espaces
+        if (input[1].equals("annuler")) {
+            this.displayWelcomePage(); // Retourne au menu principal
+        }
+        return input;
+        }
 
     /*Montre à l'utilisateur la page pour s'inscrire.
      * Cette methode va, par la suite, communiquer avec

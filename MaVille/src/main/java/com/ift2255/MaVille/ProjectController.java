@@ -21,8 +21,8 @@ public class ProjectController extends Controller {
         Project project = null;
     
         while (project == null) {
-            System.out.println("Choisissez le projet que vous voulez modifier le status (ou tapez '-1' pour annuler) :");
-            displayProjects();
+            System.out.println("Choisissez le projet que vous voulez modifier le statut (ou tapez '-1' pour annuler) :");
+            displayProjectsOfCurrentIntervenant(); // affiche seulement les projets de l'intervenant connecté
             int input = scanner.nextInt();
             scanner.nextLine(); // Consomme le caractère de nouvelle ligne
             if (input == -1) {
@@ -36,14 +36,51 @@ public class ProjectController extends Controller {
             }
         }
     
-        System.out.println("Entrez le nouveau statut du projet :\n ");
-        String newStatus = scanner.nextLine();
-        project.setStatus(newStatus);
+        // Affichage des statuts possibles
+        System.out.println("Statuts possibles :");
+        for (int i = 0; i < ProjectStatusEnum.values().length; i++) {
+            System.out.println((i + 1) + ". " + ProjectStatusEnum.values()[i]);
+        }
+    
+        int statusChoice;
+        do {
+            System.out.println("Choisissez un statut (entrez le numéro) :");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre :");
+                scanner.next();
+            }
+            statusChoice = scanner.nextInt();
+            scanner.nextLine(); // Consomme le caractère de nouvelle ligne
+        } while (statusChoice < 1 || statusChoice > ProjectStatusEnum.values().length);
+    
+        project.setStatus(ProjectStatusEnum.values()[statusChoice - 1]);
     
         return project;
     }
+    
+    public static void displayProjectsOfCurrentIntervenant() {
+        if (projectList.isEmpty()) {
+            System.out.println("Aucun projet trouvé.");
+            return;
+        }
+    
+        // Filtre pour afficher uniquement les projets de l'intervenant connecté
+        List<Project> filteredProjects = projectList.stream()
+                .filter(p -> p.getIntervenant().equals(IntervenantController.getCurrentIntervenant()))
+                .toList();
+    
+        if (filteredProjects.isEmpty()) {
+            System.out.println("Aucun projet trouvé pour cet intervenant.");
+            return;
+        }
+    
+        for (int i = 0; i < filteredProjects.size(); i++) {
+            Project project = filteredProjects.get(i);
+            System.out.println((i + 1) + ". " + project.getTitle() + " - Statut : " + project.getStatus());
+        }
+    }
 
-    public static void displayProjects() {
+    public static void displayProjects() { // Afiche toutes les projets
         if (projectList.isEmpty()) {
             System.out.println("Aucun projet trouvé.");
             return;

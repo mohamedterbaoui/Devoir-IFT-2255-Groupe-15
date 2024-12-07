@@ -12,7 +12,7 @@ public class WorkRequest {
     private String description;
     private String workType; // Initialisé dans le constructeur
     private Date expectedStartDate;
-    private String status;
+    private WorkRequestStatusEnum status;
     private Street workRequestAddress;  // Utilisation de la classe Street pour l'adresse
     private Intervenant intervenant;
 
@@ -22,7 +22,7 @@ public class WorkRequest {
         this.title = title;
         this.description = description;
         this.expectedStartDate = expectedStartDate;
-        this.status = "Pas encore commencé";  // Valeur par défaut pour le statut
+        this.status = WorkRequestStatusEnum.NOT_YET_STARTED; // Valeur par défaut
 
         if (workType == null) {
             this.workType = "Non spécifié";  // Utilise un type par défaut si null
@@ -57,7 +57,7 @@ public class WorkRequest {
         return resident;
     }
 
-    public String getStatus() {
+    public WorkRequestStatusEnum getStatus() { 
         return status;
     }
 
@@ -93,7 +93,7 @@ public class WorkRequest {
         this.resident = resident;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(WorkRequestStatusEnum status) {
         this.status = status;
     }
 

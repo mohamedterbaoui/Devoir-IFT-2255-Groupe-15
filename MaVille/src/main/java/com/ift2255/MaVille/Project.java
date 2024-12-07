@@ -14,7 +14,7 @@ public class Project {
     private String projectAddress;
     private Date startDate;
     private Date endDate;
-    private String status;
+    private ProjectStatusEnum status;
     private Intervenant intervenant;
     private LinkedList<Entrave> entraves;
     private LinkedList<Resident> affectedResidents;
@@ -30,7 +30,7 @@ public class Project {
         this.startDate = startDate;
         this.endDate = endDate;
         this.description = description;
-        this.status = "Pas encore commencé"; 
+        this.status = ProjectStatusEnum.NOT_YET_STARTED; // Valeur par défaut
         this.intervenant = intervenant; 
         this.heureDebut = heureDebut;
         this.heureFin = heureFin; 
@@ -102,7 +102,7 @@ public class Project {
         return startDate;
     }
 
-    public String getStatus() {
+    public ProjectStatusEnum getStatus() {
         return status;
     }
 
@@ -155,7 +155,7 @@ public class Project {
         this.startDate = startDate;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ProjectStatusEnum status) {
         this.status = status;
     }
 

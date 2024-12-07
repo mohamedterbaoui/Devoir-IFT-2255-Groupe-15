@@ -14,7 +14,7 @@ public class IntervenantView extends View {
         this.intervenantController = intervenantController;
     }
 
-    public void displayOptions() {  
+    public void displayOptions() {
         int choice = -1;
         boolean validChoice = false;
         System.gc(); //Garbage Collector
@@ -23,12 +23,13 @@ public class IntervenantView extends View {
                 System.out.println("\nVoici les options disponibles :");
                 System.out.println("1. Voir toutes les requêtes de travail");
                 System.out.println("2. Appliquer à une requête de travail");
-                System.out.println("3. Soumettre un projet");
-                System.out.println("4. Modifier le statut d'un projet");
-                System.out.println("5. Faire le suivi d'une candidature");
-                System.out.println("6. Se déconnecter");
+                System.out.println("3. Retirer sa candidature"); 
+                System.out.println("4. Soumettre un projet");
+                System.out.println("5. Modifier le statut d'un projet");
+                System.out.println("6. Faire le suivi d'une candidature");
+                System.out.println("7. Se déconnecter"); 
                 choice = Integer.parseInt(scanner.nextLine());
-                if (choice < 1 || choice > 6) {
+                if (choice < 1 || choice > 7) {
                     System.out.println("Veuillez choisir une option valide");
                 } else {
                     validChoice = true;
@@ -42,35 +43,36 @@ public class IntervenantView extends View {
         switch (choice) {
             case 1:
                 // Affiche toutes les requêtes de travail
-                displayWorkRequests();  
+                displayWorkRequests();
                 displayOptions();
                 break;
             case 2:
                 // Postule à une requête de travail
-                intervenantController.applyToWorkRequest(); // Ajout de l'appel à la méthode pour postuler
+                intervenantController.applyToWorkRequest(); 
                 displayOptions();
-                break;                
+                break;
             case 3:
-                // Soumettre un projet
-                IntervenantController.addProject();
+                intervenantController.withdrawApplication(); 
                 displayOptions();
                 break;
             case 4:
-                IntervenantController.updateProjectStatus();
+                IntervenantController.addProject();
                 displayOptions();
                 break;
             case 5:
-                // Faire le suivi d'une candidature
+                IntervenantController.updateProjectStatus();
                 displayOptions();
                 break;
             case 6:
+                IntervenantController.trackApplicationStatus();
+                displayOptions();
+                break;
+            case 7:
                 // Se déconnecte ou revient à l'écran d'accueil -- A IMPLÉMENTER, présentement ça ferme le programme
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
-                scanner.close();
-                System.exit(0); 
-                break; 
+                logoutIntervenant();
         }
-           
+    
     }
     
 
@@ -79,7 +81,12 @@ public class IntervenantView extends View {
         intervenantController.viewWorkRequests(); 
     }
 
-    // Autres méthodes pour les actions de l'intervenant
+    public void logoutIntervenant() {
+        this.intervenantController = null; 
+        AuthController authController = new AuthController();
+        Initialization.initialize(authController);
+        AuthView authView = new AuthView(authController); 
+    }
 }
 
 

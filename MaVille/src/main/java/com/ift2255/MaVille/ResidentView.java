@@ -63,10 +63,10 @@ public class ResidentView extends View {
             case 5:
                 // Se déconnecte ou revient à l'écran d'accueil -- A IMPLÉMENTER, présentement ça ferme le programme
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
-                System.exit(0); // Quitte le programme
-                break;
+                logoutResident();
             default:
                 System.out.println("Option invalide. Essayez à nouveau.");
+                displayOptions();
         }
         scanner.close();
     }
@@ -87,7 +87,12 @@ public class ResidentView extends View {
         residentController.viewAllEntraves();
     }
 
-    // Autres méthodes pour les actions du résident
+    public void logoutResident() {
+        this.residentController = null;
+        AuthController authController = new AuthController();
+        Initialization.initialize(authController);
+        AuthView authView = new AuthView(authController); 
+    }
 }
 
 

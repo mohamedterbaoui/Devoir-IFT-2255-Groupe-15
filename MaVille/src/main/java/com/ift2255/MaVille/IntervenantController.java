@@ -4,6 +4,7 @@
 
 package com.ift2255.MaVille;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,7 +19,8 @@ public class IntervenantController extends Controller {
         return currentIntervenant;
     }
 
-    public static void addProject() { // Soumettre un projet - RESTE à Envoyer une notification aux résidents du quartier
+    public static void addProject() { // Soumettre un projet - RESTE à Envoyer une notification aux résidents du
+                                      // quartier
         ProjectController.addProject();
 
     }
@@ -28,43 +30,29 @@ public class IntervenantController extends Controller {
     }
 
     public List<WorkRequest> getWorkRequestsTest() {
-        return WorkRequestController.getAllRequests(); 
+        return WorkRequestController.getAllRequests();
     }
 
-    public void applyToWorkRequest() { // Fonction pour postuler à une requête de travail     
+    public void applyToWorkRequest() { // Fonction pour postuler à une requête de travail
         boolean validChoice = false;
         do {
             try {
                 System.out.println("Veuillez entrer le ID de la requête à laquelle vous souhaitez appliquer\n si Vous désirez sortir de l'application, entrer '-1'");
-                WorkRequestController.printAllRequestsWithNullStatus(); // Affiche que si Statut == "Pas encore commencé"
+                WorkRequestController.printAllRequestsWithNullStatus(); 
                 Scanner scanner = new Scanner(System.in);
                 int choice = Integer.parseInt(scanner.nextLine());
                 if (choice == -1) { // Pour quitter
                     validChoice = true;
                     System.gc(); // Garbage Collector
-                }
-                else if (WorkRequestController.iterateAllRequestsIdWithNullStatus().contains(choice)) { // ID dans la liste
+                } else if (WorkRequestController.iterateAllRequestsIdWithNullStatus().contains(choice)) { 
                     validChoice = true; // Sort de la loop
                     WorkRequest currentRequest = WorkRequestController.getWorkRequestOnId(choice);
                     if (currentRequest != null) { // Vérifier si la requête existe (déjà vérifié, mais au cas où)
-                        currentRequest.setStatus(currentIntervenant.getFirstName() + " a appliqué à ce projet");
+                        currentRequest.setStatus(WorkRequestStatusEnum.IN_PROGRESS); 
+                        currentRequest.setIntervenant(currentIntervenant);
                         System.out.println("Status correctement modifié. Vous avez correctement appliqué à cette requête de travail");
-
-                        // Pour DEBUG
-                        System.out.println("Requête de travail modifiée avec son FirstName :");
-                        System.out.println("-------------------------------------");
-                        System.out.println("ID : " + currentRequest.getRequestID());
-                        System.out.println("Titre : " + currentRequest.getTitle());
-                        System.out.println("Description : " + currentRequest.getDescription());
-                        System.out.println("Type de travaux : " + currentRequest.getWorkType());
-                        System.out.println("Date prévue de début : " + currentRequest.getExpectedStartDate());
-                        System.out.println("Adresse : " + currentRequest.getWorkRequestAddress());
-                        System.out.println("Statut : " + currentRequest.getStatus());
-                        System.out.println("Résident affecté : " + currentRequest.getResident().getFirstName() + " " + currentRequest.getResident().getLastName());
-                        System.out.println("-------------------------------------\n");
-                    } 
-                }
-                else { // Si l'Id n'est pas dans la liste des requêtes.
+                    }
+                } else { // Si l'Id n'est pas dans la liste des requêtes.
                     System.out.println("Veuillez choisir une option valide");
                 }
             } catch (NumberFormatException e) {
@@ -74,11 +62,108 @@ public class IntervenantController extends Controller {
         } while (!validChoice);
     }
 
-    public static void updateProjectStatus() { // Fonction pour Modifier le statut d'un projet - RESTE À Envoyer une notification aux résidents du quartier
+    public static void updateProjectStatus() { // Fonction pour Modifier le statut d'un projet - RESTE À Envoyer une notification aux résidents du quartier                               
         ProjectController.updateProjectStatus();
     }
 
-    public void trackApplicationStatus(int requestID) { // Fonction pour faire le suivi de sa candidature
-        
+    public static void trackApplicationStatus() { // Fonction pour faire le suivi de sa candidature/* */
+        List<WorkRequest> appliedRequests = new ArrayList<>(); // Liste pour stocker les demandes auxquelles l'intervenant a appliqué
+        for (WorkRequest request : WorkRequestController.getAllRequests()) {
+            if (request.getIntervenant() != null && request.getIntervenant().equals(currentIntervenant)) {
+                appliedRequests.add(request);
+            }
+        }
+
+        if (appliedRequests.isEmpty()) {
+            System.out.println("Vous n'avez pas encore postulé à des requêtes de travail.");
+            return;
+        }
+
+        System.out.println("Requêtes de travail auxquelles vous avez postulé:");
+        for (int i = 0; i < appliedRequests.size(); i++) {
+            WorkRequest request = appliedRequests.get(i);
+            System.out.println((i + 1) + ". ID: " + request.getRequestID() + ", Titre: " + request.getTitle() + ", Adresse: " + request.getWorkRequestAddress());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("Veuillez entrer le numéro de la requête pour afficher les détails (ou 0 pour revenir au menu):");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre.");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+            if (choice == 0) {
+                System.out.println("Retour au menu principal. \n");
+                break;
+            }
+            else if (choice > 0 && choice <= appliedRequests.size()) {
+                WorkRequest selectedRequest = appliedRequests.get(choice - 1);
+                System.out.println("\nDétails de la requête:");
+                System.out.println("ID: " + selectedRequest.getRequestID());
+                System.out.println("Titre: " + selectedRequest.getTitle());
+                System.out.println("Description: " + selectedRequest.getDescription());
+                System.out.println("Type de travaux: " + selectedRequest.getWorkType());
+                System.out.println("Date prévue de début: " + selectedRequest.getExpectedStartDate());
+                System.out.println("Adresse: " + selectedRequest.getWorkRequestAddress());
+                System.out.println("Statut: " + selectedRequest.getStatus());
+                break; 
+            } else {
+                System.out.println("Choix invalide.");
+            }
+        } while (choice != 0);
+    }
+
+    public void withdrawApplication() {
+        List<WorkRequest> appliedRequests = new ArrayList<>();
+        for (WorkRequest request : WorkRequestController.getAllRequests()) {
+            if (request.getIntervenant() != null && request.getIntervenant().equals(currentIntervenant)) {
+                appliedRequests.add(request);
+            }
+        }
+
+        if (appliedRequests.isEmpty()) {
+            System.out.println("Vous n'avez pas encore postulé à des requêtes de travail.");
+            return;
+        }
+
+        System.out.println("Requêtes de travail auxquelles vous avez postulé :");
+        for (int i = 0; i < appliedRequests.size(); i++) {
+            WorkRequest request = appliedRequests.get(i);
+            System.out.println((i + 1) + ". ID : " + request.getRequestID() + ", Titre : " + request.getTitle() + ", Adresse : " + request.getWorkRequestAddress());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("Veuillez entrer le numéro de la requête pour retirer votre candidature (ou 0 pour revenir au menu) :");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre.");
+                scanner.next();
+            }
+            // Modification: Ajout de parseInt pour gérer les exceptions
+            choice = Integer.parseInt(scanner.nextLine()); 
+            if (choice == 0) {
+                System.out.println("Retour au menu principal. \n");
+                break;
+            } else if (choice > 0 && choice <= appliedRequests.size()) {
+                WorkRequest selectedRequest = appliedRequests.get(choice - 1);
+                System.out.println("\nÊtes-vous sûr de vouloir retirer votre candidature de la requête : " + selectedRequest.getTitle() + " ?");
+                System.out.println("1. Oui");
+                System.out.println("2. Non");
+                int confirmation = Integer.parseInt(scanner.nextLine()); 
+                if (confirmation == 1) {
+                    selectedRequest.setIntervenant(null);
+                    selectedRequest.setStatus(WorkRequestStatusEnum.NOT_YET_STARTED);
+                    System.out.println("Votre candidature a été retirée avec succès.");
+                } else {
+                    System.out.println("Retrait de candidature annulé.");
+                }
+                break;
+            } else {
+                System.out.println("Choix invalide.");
+            }
+        } while (choice != 0);
     }
 }
