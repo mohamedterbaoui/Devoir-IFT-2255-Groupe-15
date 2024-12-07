@@ -27,16 +27,19 @@ public class AuthView extends View{
     public void displayWelcomePage(){
         afficherLogo();
         System.out.println("Bienvenue à l'Application MaVille");
+	this.mainMenu();
+    }
+    public void mainMenu(){
         System.out.println("Vous-êtes: ");
-        System.out.println("1. Résident\n2. Intervenant\n3. Quitter");
+        System.out.println("1. Résident\n2. Intervenant\n3. S'inscrire\n4. Quitter");
         int choix = -1;
         boolean validChoice = false;
     
         while (!validChoice) {
             try {
                 choix = Integer.parseInt(scn.nextLine());
-                if (choix < 1 || choix > 3) {
-                    System.out.println("Veuillez choisir une option valide\n1. Résident\n2. Intervenant\n3. Quitter");
+                if (choix < 1 || choix > 4) {
+                    System.out.println("Veuillez choisir une option valide\n1. Résident\n2. Intervenant\n3. S'inscrire\n4. Quitter");
                 } else {
                     validChoice = true;
                 }
@@ -50,7 +53,9 @@ public class AuthView extends View{
                 break;
             case 2: this.displayLoginPageIntervenant();
                 break;
-            case 3: 
+	    case 3: this.displayRegistrationPage();
+		break;
+            case 4:
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
                 System.exit(0); // Quitte le programme
                 break;
@@ -108,9 +113,95 @@ public class AuthView extends View{
      * le controlleur pour créer un compte utilisateur
      */
     public void displayRegistrationPage(){
-    //fonction    
-       
+    	System.out.println("S'inscrire comme : ");
+	System.out.println("1. Resident\n2. Intervenant\n3. Menu principal");
+	try {
+		int choix = Integer.parseInt(scn.nextLine());
+		switch (choix) {
+			case 1 : displayRegistrationPageResident();
+				 break;
+			case 2 : displayRegistrationPageIntervenant();
+				 break;
+			case 3 : this.mainMenu();
+				 break;
+			default : System.out.println("Veuillez séléctionner une option valide"); 
+				break;
+		}
+    } catch (Exception e){
+	    System.out.println("Veuillez séléctionner une option valide");
     }
+    }
+
+    public String[] displayRegistrationPageGeneric(){
+	    System.out.println("Veuillez saisir les informations suivents");
+	    String firstName = this.verifierNonVide("Prénom :");
+	    String lastName = this.verifierNonVide("Nom de famille : ");
+	    String birthday = this.verifierNonVide("Date de naissaiance (yyyy-MM-dd):");
+	    String email = this.verifierNonVide("Adresse courriel :");
+	    String motDePasse = this.verifierMotDePasse();
+	    //Le numéro de téléphone est optionnel: c'est traité ailleurs
+	    System.out.println("Numéro de téléphone : ");
+	    String phone = scn.nextLine();
+	    //fin de numéro de téléphone
+	    String address = this.verifierNonVide("Adresse ");
+	    String[] responses = {firstName, lastName,birthday,email,motDePasse,phone,address};
+	    return responses;
+    }
+
+    public void displayRegistrationPageResident(){
+	    String[] responses = displayRegistrationPageGeneric();
+	    String city = this.verifierNonVide("Ville : ");
+
+	    String[] residentResponses = {responses[0],responses[1],responses[2],
+		    responses[3],responses[4],responses[5],responses[6], city};
+
+	    authController.signUpResident(residentResponses);
+	    this.mainMenu();
+    }
+
+    public void displayRegistrationPageIntervenant(){
+	    String[] responses = displayRegistrationPageGeneric();
+	    String type = verifierNonVide("Type d'intérvenant : ");
+	    String idVille = verifierNonVide("Matricule de la ville :");
+
+	    String[] intervenantResponses = {responses[0],responses[1],responses[2],
+		    responses[3],responses[4],responses[5],responses[6], type, idVille};
+
+	    authController.signUpIntervenant(intervenantResponses);
+	    this.mainMenu();
+    }
+
+    private String verifierMotDePasse(){
+	    System.out.println("Mot de passe : ");
+	    String motDePasse = scn.nextLine().trim();
+	    System.out.println("Confirmez votre mot de passe : ");
+	    String motDePasse2 = scn.nextLine().trim();
+
+	    if (motDePasse.equals(motDePasse2)){
+		    try {
+			    return Hash.hasher(motDePasse);
+		    } catch (Exception e) {
+			    e.printStackTrace();
+			    return "";
+		    }
+	    } else {
+		    return verifierMotDePasse();
+	    }
+    }
+
+    private String verifierNonVide(String prompt){
+	    System.out.println(prompt);
+	    String response = scn.nextLine();
+	    if (response.isEmpty()){
+		    System.out.println("La réponse ne peut pas être vide");
+		    return verifierNonVide(prompt);
+	    } else {
+		    return response;
+	    }
+    }
+
+
+  //  String phone, String userAddress, String city){
     /**
      * Affichage de logo de MaVille pour l'ouverture de l'application
      */
