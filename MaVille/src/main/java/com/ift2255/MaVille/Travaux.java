@@ -1,5 +1,5 @@
 package com.ift2255.MaVille;
-
+/**Cette classe gère la classe Travaux*/
 public class Travaux {
     private int id; // "_id"
     private String projectId; // "id"
@@ -19,6 +19,23 @@ public class Travaux {
     private double latitude; // "latitude"
 
     // Constructor
+    /**Constructeur de la classe Travaux
+     * @param id ID pour ces travaux
+     * @param projectId id du projet
+     * @param permitPermitId Le permis et son ID?
+     * @param contractNumber le numéro du contrat
+     * @param boroughId L'ID de l'arrondessement
+     * @param permitCategory Catégorie de permis
+     * @param durationStartDate ??? Date de début? 
+     * @param durationEndDate ??? Date de fin?
+     * @param reasonCategory Catégorie de raison des travaux
+     * @param occupancyName Aucune idée
+     * @param submitterCategory Type d'intérvenant qui a soumise les travaux
+     * @param organisationName l'entité qui effectue les travaux
+     * @param loadDate date de soumission?
+     * @param longitude Coordonée GPS de longitude
+     * @param latitude Cordonnée GPS de latitude
+     */
     public Travaux(int id, String projectId, String permitPermitId, String contractNumber, String boroughId,
                    String permitCategory, String currentStatus, String durationStartDate, String durationEndDate,
                    String reasonCategory, String occupancyName, String submitterCategory, String organizationName,

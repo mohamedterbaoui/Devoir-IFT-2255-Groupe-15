@@ -7,7 +7,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
-
+/** Une classe qui accès les API
+ */
 public class HttpClientApi {
     private static final String BASE_URL = "https://donnees.montreal.ca/api/3/action/datastore_search";
     private final HttpClient client;
@@ -15,7 +16,9 @@ public class HttpClientApi {
     public HttpClientApi() {
         this.client = HttpClient.newHttpClient();
     }
-
+/** Création d'un objet ApiReponse
+ * @param resourceId ID pour la cible
+ */
     public ApiResponse getData(String resourceId) {
         try {
             // Build URI with encoded query parameters

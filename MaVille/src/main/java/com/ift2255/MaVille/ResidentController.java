@@ -13,7 +13,8 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import java.util.Date;
-
+/**La classe qui gère les activités des résidents
+ */
 public class ResidentController extends Controller {
 
     private Resident currentResident;
@@ -27,6 +28,9 @@ public class ResidentController extends Controller {
     }
 
     // Affiche les requêtes de travail pour le résident
+    /**Affiche les demandes de travail
+     * @return Une liste chaînée avec les requêtes de travail
+     */
     public void viewWorkRequests() {
         LinkedList<WorkRequest> workRequests = currentResident.getWorkRequests();
         if (workRequests.isEmpty()) {
@@ -43,13 +47,21 @@ public class ResidentController extends Controller {
     }
 
     // Ajoute une requête de travail pour le résident connecté
+/**Faire une demande de travaux 
+* @param title Le titre de la demande
+* @param description la demande
+* @param workType le type de travail
+* @param expectedStartDate la date de début attendé
+* @param workRequestAddress l'adresse pour la demande
+*/
     public void addWorkRequest(String title, String description, String workType, Date expectedStartDate, Street workRequestAddress) {
         WorkRequest newWorkRequest = new WorkRequest(title, description, expectedStartDate, workType, workRequestAddress);
         newWorkRequest.setResident(currentResident); // Associe la requête au résident connecté
         currentResident.getWorkRequests().add(newWorkRequest); // Ajoute la requête à la liste du résident
         WorkRequestController.addWorkRequest(newWorkRequest); // Ajoute la requête à la liste globale
     }
-
+/**Afficher tous les projets à partir de l'API
+ */
     public void viewAllProjects(){
         ArrayList<Travaux> travauxList = new ArrayList<>();
 
@@ -97,17 +109,18 @@ public class ResidentController extends Controller {
 
                 // Display all Travaux objects
                 for (Travaux travaux : travauxList) {
-                    System.out.println(travaux);
+                    System.out.println(travaux.toString());
                 }
 
             } catch (Exception e) {
                 System.err.println("Error parsing JSON: " + e.getMessage());
             }
         } else {
-            System.out.println("Failed to retrieve data");
+            System.err.println("Failed to retrieve data");
         }
     }
-
+/**Afficher les entraves et les envoyer sur la vue
+ */
     public void viewAllEntraves(){
         ArrayList<Entrave> entraves = new ArrayList<>();
 
@@ -150,17 +163,20 @@ public class ResidentController extends Controller {
 
                 // Display all Entrave objects
                 for (Entrave entrave : entraves) {
-                    System.out.println(entrave);
+                    System.out.println(entrave.toString());
                 }
 
             } catch (Exception e) {
-                System.out.println("Error parsing JSON: " + e.getMessage());
+                System.err.println("Error parsing JSON: " + e.getMessage());
             }
         } else {
-            System.out.println("Failed to retrieve data: " + (responseEntrave != null ? responseEntrave.getMessage() : "No responseEntrave"));
+            System.err.println("Failed to retrieve data: " + (responseEntrave != null ? responseEntrave.getMessage() : "No responseEntrave"));
         }
     }
-
+/**Fonction pour parser le Json
+ * @param responseEntrave la réponse de l'API pour les éntraves
+ * @return Un array JSON
+ */
     public JsonArray jsonParsing(ApiResponse responseEntrave){
         JsonObject rootObject = JsonParser.parseString(responseEntrave.getBody()).getAsJsonObject();
         JsonObject result = rootObject.getAsJsonObject("result");

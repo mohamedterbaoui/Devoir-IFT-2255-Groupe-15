@@ -32,7 +32,7 @@ public class AuthController extends Controller {
         for (Resident resident : residents) {
             if (resident.getEmail().equals(email) && resident.getPassword().equals(password)) {
                 residentController = new ResidentController(resident); // Passer l'utilisateur dans le contrôleur
-                isResidentConnected = true;
+                isResidentConnected = true; //On n'utilise pas cet variable dans le code
                 return true;
             }
         }
