@@ -14,6 +14,7 @@ public class ProjectControllerTest {
 
     private SimpleDateFormat dateFormat;
     private AuthController authController;
+    private Intervenant currentIntervenant;
 
     @BeforeEach
     void setUp() throws ParseException {
@@ -23,6 +24,7 @@ public class ProjectControllerTest {
         // Création de l'intervenant, comme dans IntervenantControllerTest
         Intervenant intervenant1 = new Intervenant("Entreprise A", "Public", dateFormat.parse("1981-08-15"), "entrepriseA@mail.com", "password123", "1234567890", "321 Rue D", "Entreprise publique", 101);
         authController.intervenants.add(intervenant1);
+        IntervenantController.setCurrentIntervenant(intervenant1);
     }
 
     @Test
@@ -88,18 +90,29 @@ public class ProjectControllerTest {
 
     @Test
     void testUpdateProjectStatus() throws ParseException {
-        // Création d'un projet
-        Project newProject = new Project("Mon Projet", "123 Rue Test", dateFormat.parse("2024-01-01"), dateFormat.parse("2024-12-31"), "Description du projet", authController.intervenants.get(0), "10:00", "17:00", ProjectType.values()[0]);
-        int projectId = ProjectController.getProjectList().size() +1; //obtenir le prochain ID
-        ProjectController.getProjectList().add(newProject);
-
-        // Simule l'entrée utilisateur pour updateProjectStatus()
+        // Simule les entrées de l'utilisateur pour addProject()
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        String input = projectId + "\nNouveau statut\n"; // Utiliser le bon ID
-        InputStream inContent = new ByteArrayInputStream(input.getBytes());
-        System.setIn(inContent);
+        String inputAddProject = "Mon Projet\n123 Rue Test\n2024-01-01\n2024-12-31\nDescription du projet\n10:00\n17:00\n1\n"; // Entrée pour addProject()
+        InputStream inContentAddProject = new ByteArrayInputStream(inputAddProject.getBytes());
+        System.setIn(inContentAddProject);
+
+        // Ajout d'un nouveau projet en utilisant addProject()
+        Project newProject = ProjectController.addProject();
+
+        System.setOut(System.out);
+        System.setIn(System.in);
+
+        // ... existing code ...
+
+        // Simule l'entrée utilisateur pour updateProjectStatus()
+        ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent2));
+
+        String inputUpdateStatus = "1\n2\n"; // Entrée pour updateProjectStatus()
+        InputStream inContentUpdateStatus = new ByteArrayInputStream(inputUpdateStatus.getBytes());
+        System.setIn(inContentUpdateStatus);
 
         // Mise à jour du statut du projet
         Project updatedProject = ProjectController.updateProjectStatus();
@@ -109,6 +122,6 @@ public class ProjectControllerTest {
 
         // Vérification que le statut a été mis à jour
         assertNotNull(updatedProject);
-        assertEquals("Nouveau statut", updatedProject.getStatus());
+        assertEquals(ProjectStatusEnum.IN_PROGRESS, updatedProject.getStatus());
     }
 }

@@ -15,14 +15,16 @@ public class IntervenantController extends Controller {
         currentIntervenant = intervenant;
     }
 
+    public static void setCurrentIntervenant(Intervenant intervenant) {
+        currentIntervenant = intervenant;
+    }
+
     public static Intervenant getCurrentIntervenant() {
         return currentIntervenant;
     }
 
-    public static void addProject() { // Soumettre un projet - RESTE à Envoyer une notification aux résidents du
-                                      // quartier
+    public static void addProject() { // Soumettre un projet - RESTE à Envoyer une notification aux résidents du quartier
         ProjectController.addProject();
-
     }
 
     public void viewWorkRequests() { // Afficher toutes les requêtes de travail
