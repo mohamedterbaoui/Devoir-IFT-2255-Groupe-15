@@ -4,12 +4,17 @@
 package com.ift2255.MaVille;
 
 import java.util.LinkedList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
 /** Controlleur pour le processus d'authentication*/
 public class AuthController extends Controller {
 
     LinkedList<Resident> residents = new LinkedList<>();
     LinkedList<Intervenant> intervenants = new LinkedList<>();
 
+    private SimpleDateFormat dateFormatter= new SimpleDateFormat("yyyy-MM-dd");
+    
     private ResidentController residentController;
     private IntervenantController intervenantController;
 
@@ -41,6 +46,7 @@ public class AuthController extends Controller {
      */
     public boolean loginIntervenant(String email, String password) {
         for (Intervenant intervenant : intervenants) {
+
             if (intervenant.getEmail().equals(email) && intervenant.getPassword().equals(password)) {
                 intervenantController = new IntervenantController(intervenant); // Passer l'utilisateur dans le contrôleur
                 isIntervenantConnected = true;
@@ -55,9 +61,34 @@ public class AuthController extends Controller {
      */
     public void signUpResident(Resident resident){
         residents.add(resident);
+	//On va utiliser quelque chose comme ça pour la date
+	//birthDate = dateFormatter.parse(birthDateString);
         //Il serait probablement mieux d'accepter un tableau d'entrées puis créer l'utilisateur ici
         //au lieu de le faire dans la vue
     }
+
+    public void signUpResident(String[] donnees){
+	    
+	    try{
+	        String firstName = donnees[0];
+	    	String lastName  = donnees[1];
+	    	String SbirthDate= donnees[2];
+	    	String email     = donnees[3];
+	    	String motDePasse= donnees[4];
+	   	String phone     = donnees[5];
+	    	String address   = donnees[6];
+	    	String city      = donnees[7];
+
+	    	Date birthDate = dateFormatter.parse(SbirthDate);
+
+
+	    Resident newResident = new Resident(firstName, lastName, birthDate, email, motDePasse, phone, address, city);
+	    residents.add(newResident);
+	    } catch (ParseException e){
+		    System.err.println("La date de naissaiance n'était pas bien formattée");
+	    }
+
+    } 
     /**Méthode pour qu'un intérvenant puisse s'inscrire
      * @param intervenant l'intérvenant qui est ajouté à la liste
     */
@@ -65,6 +96,31 @@ public class AuthController extends Controller {
         intervenants.add(intervenant);
         //Je dois aussi ajouter la logique pour Gson pour stocker les données
     }
+
+    public void signUpIntervenant(String[] donnees){
+	try{
+	    String firstName = donnees[0];
+	    String lastName  = donnees[1];
+	    String SbirthDate= donnees[2];
+	    String email     = donnees[3];
+	    String motDePasse= donnees[4];
+	    String phone     = donnees[5];
+	    String address   = donnees[6];
+	    String type      = donnees[7];
+	    String matriculeS= donnees[8];
+
+	    Date birthDate = dateFormatter.parse(SbirthDate);
+	    int matricule = Integer.parseInt(matriculeS);
+
+	    Intervenant newIntervenant = new Intervenant(firstName, lastName, birthDate, email, motDePasse, phone, address, type, matricule);
+	    intervenants.add(newIntervenant);
+	    
+	} catch (ParseException e) {
+		System.err.println("La date de naissance n'était pas bien formatté");
+	}
+    }
+
+		
 
     public void logout(){
 

@@ -3,9 +3,14 @@
 //Class pour le type User
 package com.ift2255.MaVille;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+
 /**Classe générique qui gère les utilisateurs
  */
 public class User {
+    /**Le formatter pour les dates*/
+    SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd");
+
 /**Prénom de l'utilisateur
  */
     protected String firstName;
