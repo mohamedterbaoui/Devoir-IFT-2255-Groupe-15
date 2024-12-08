@@ -30,5 +30,7 @@ public class WorkRequestControllerTest {
 
         assertEquals(intervenant1.getName(), request.getIntervenant().getName());
         assertEquals(intervenant1.getType(), request.getIntervenant().getType());
+
+	WorkRequestController.remove();
     }
 }

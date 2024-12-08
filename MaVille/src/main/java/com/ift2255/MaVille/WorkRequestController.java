@@ -19,6 +19,10 @@ public class WorkRequestController extends Controller {
         return workRequests;
     }
 
+    public static void remove(){
+	    workRequests.remove(workRequests.size()-1);
+    }
+
     public static void printAllRequests() {
         if (workRequests.isEmpty()) {
             System.out.println("Aucune requête de travail disponible.");
@@ -81,6 +85,8 @@ public class WorkRequestController extends Controller {
         }
         return null; // Retourne null si aucune requête n'est trouvée
     }
+
 }
+
 
 
