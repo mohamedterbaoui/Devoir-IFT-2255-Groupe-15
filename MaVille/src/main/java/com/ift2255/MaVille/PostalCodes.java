@@ -127,6 +127,10 @@ public enum PostalCodes {
 	public Quartiers getQuartier(){
 		return this.quartier;
 	}
+
+	public static void main(String[] args){
+		System.out.println(PostalCodes.valueOf(args[0]).getQuartier().name());
+	}
 }
 
 
