@@ -9,8 +9,11 @@ import java.util.Date;
  */
 public class Notification {
     int notificationId;
-    String message;
-    Date sendingDate;
+    private String title;
+    private String message;
+    private Date sendingDate;
+    private boolean read;
+
 /**Constructeur pour les notifications
  * @param id l'id pour les notifications
  * @param message la message de notification
@@ -20,7 +23,10 @@ public class Notification {
         this.notificationId = id;
         this.message = message;
         this.sendingDate = date;
+	this.read = false;
     }
+
+    
 /**Affiche la message
  * @return la message de notification
  */
@@ -56,5 +62,34 @@ public class Notification {
     public void setSendingDate(Date sendingDate) {
         this.sendingDate = sendingDate;
     }
+
+    public boolean getRead(){
+	    return read;
+    }
+
+    /**Changer le statut de la message pour indiqué que c'est lu
+     */
+    public void setRead(){
+	    this.read = true;
+    }
+    /**Changer le statut de la message pour indiquer s'il est lu ou non
+     * @param read le nouveau statut de lecture
+     */
+    public void setRead(boolean read){
+	    this.read = read;
+    }
+
+    /**Fonction pour créer unString qui comprend le contenu de cette notification
+     * @return le contenu en forme de String
+     */
+
+    public String toString(){
+	    StringBuilder sb = new StringBuilder();
+	    sb.append(this.title);
+	    sb.append("\n");
+	    sb.append(this.sendingDate.toString());
+	    sb.append("\n \n");
+	    sb.append(this.message);
+	    return sb.toString();
     
 }
