@@ -118,7 +118,7 @@ public class Resident extends User{
     }
 
     public void getNewNotifications(){
-	    System.out.println(this.notifications.getNewNotificatsion());
+	    System.out.println(this.notifications.getNewNotifications());
     }
 
     public void editPreferences(){}

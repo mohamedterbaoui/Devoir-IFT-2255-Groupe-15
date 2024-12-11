@@ -1,6 +1,7 @@
 //Notifications.java
 //IFT2255 - Équipe 15
 //Controlleur pour les notifications
+package com.ift2255.MaVille;
 
 import java.util.LinkedList;
 
@@ -8,15 +9,8 @@ import java.util.LinkedList;
  * un résident*/
 
 public class Notifications {
-	private Resident resident;
 	private LinkedList<Notification> notifications;
-/**Constructeur pour la classe Notifications
- * @param resident le résident associé à ces notifications
- */
-	public Notifications(Resident resident){ 
-		this.resident = resident;
-		this.notifications = new LinkedList<>();
-	}
+	
 	/**Constructeur sans déclaration de résident
 	 */
 	public Notifications(){

@@ -45,6 +45,13 @@ public class Notification {
     public Date getSendingDate() {
         return sendingDate;
     }
+/**Afficher le titre de la notification
+ * @return le titre
+ */
+    public String getTitle(){
+	    return this.title;
+    }
+
 /**Changer la message pour le notification
  * @param message la nouvelle message
     public void setMessage(String message) {
@@ -91,5 +98,5 @@ public class Notification {
 	    sb.append("\n \n");
 	    sb.append(this.message);
 	    return sb.toString();
-    
+    } 
 }
