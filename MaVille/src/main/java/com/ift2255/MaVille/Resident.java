@@ -12,6 +12,7 @@ public class Resident extends User{
     private LinkedList<String> preferredProjectTimes;
     private LinkedList<Project> subscriptions;
     private LinkedList<WorkRequest> workRequests;
+    private Notifications notifications;
 /**Constructeur de la classe resident
  * @param firstName prénom du résident
  * @param lastName nom du résident
@@ -26,6 +27,7 @@ public class Resident extends User{
         super(firstName, lastName, birthDate, email, password, phone, userAddress);
         this.city = city;
         this.workRequests = new LinkedList<>(); // Initialisation de la liste
+	this.notifications = new Notifications();
     }
 /**ajouter un subscripton à un projet
  * @param projet le projet auquel le resident veut s'abonner
@@ -104,8 +106,20 @@ public class Resident extends User{
     public void setWorkRequests(LinkedList<WorkRequest> workRequests) {
         this.workRequests = workRequests;
     }
+    /**Ajoute un notification pour cette résident
+     * @param notification La nouvelle notification
+     */ 
+    public void addNotification(Notification notification){
+	    this.notifications.addNotification(notification);
+    }
+    public void getNotifications(){
+    	//On devrait pouvoir faire view.display()... mais pour le moment, on peut pas
+	System.out.println(this.notifications);
+    }
 
-    public void getNotifications(){}
+    public void getNewNotifications(){
+	    System.out.println(this.notifications.getNewNotificatsion());
+    }
 
     public void editPreferences(){}
     
