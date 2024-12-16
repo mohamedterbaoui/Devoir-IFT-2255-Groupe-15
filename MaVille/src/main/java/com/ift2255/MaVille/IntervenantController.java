@@ -15,27 +15,63 @@ public class IntervenantController extends Controller {
         currentIntervenant = intervenant;
     }
 
+    /**
+     * Sets the current Intervenant in the IntervenantController.
+     *
+     * @param intervenant the Intervenant to be set as current
+     */
     public static void setCurrentIntervenant(Intervenant intervenant) {
         currentIntervenant = intervenant;
     }
 
+    /**
+     * Returns the current Intervenant in the IntervenantController.
+     *
+     * @return the current Intervenant
+     */
     public static Intervenant getCurrentIntervenant() {
         return currentIntervenant;
     }
 
+    /**
+     * Submits a new project.
+     * 
+     * Invokes the method to add a project via the ProjectController.
+     */
     public static void addProject() { // Soumettre un projet - RESTE à Envoyer une notification aux résidents du quartier
         ProjectController.addProject();
     }
 
+    /**
+     * Affiche toutes les requêtes de travail.
+     * 
+     * Appele la méthode printAllRequests() du contrôleur de requête de travail pour
+     * afficher la liste des requêtes de travail.
+     */
     public void viewWorkRequests() { // Afficher toutes les requêtes de travail
         WorkRequestController.printAllRequests();
     }
 
+    /**
+     * Retrieves all current work requests.
+     *
+     * @return a list of all work requests
+     */
     public List<WorkRequest> getWorkRequestsTest() {
         return WorkRequestController.getAllRequests();
     }
 
-    public void applyToWorkRequest() { // Fonction pour postuler à une requête de travail
+    /**
+     * Applies to a work request.
+     * 
+     * This method is for an Intervenant to apply to a work request. The method
+     * will show all current work requests and ask the Intervenant to enter the
+     * ID of the work request they want to apply to. If the Intervenant enters
+     * '-1', the method will exit. If the Intervenant enters a valid ID, the
+     * method will update the status of the work request to IN_PROGRESS and
+     * assign the work request to the current Intervenant.
+     */
+    public static void applyToWorkRequest() { // Fonction pour postuler à une requête de travail
         boolean validChoice = false;
         do {
             try {
@@ -64,10 +100,25 @@ public class IntervenantController extends Controller {
         } while (!validChoice);
     }
 
+    /**
+     * Modifie le statut d'un projet et envoie des notifications aux résidents affectés.
+     * L'utilisateur est invité à choisir un projet parmi la liste des projets de l'intervenant connecté,
+     * puis à choisir un statut parmi la liste des statuts possibles.
+     * Si l'entrée est invalide, l'utilisateur est invité à réessayer.
+     * @return le projet modifié, ou null si l'utilisateur a annulé
+     */
     public static void updateProjectStatus() { // Fonction pour Modifier le statut d'un projet - RESTE À Envoyer une notification aux résidents du quartier                               
         ProjectController.updateProjectStatus();
     }
 
+    /**
+     * Fait le suivi de sa candidature.
+     * 
+     * Affiche les requêtes de travail auxquelles l'intervenant a postulé, et invite l'utilisateur à entrer le numéro de la requête pour afficher les détails.
+     * Si l'entrée est invalide, l'utilisateur est invité à réessayer.
+     * 
+     * Si l'intervenant a annulé, la fonction renvoie null.
+     */
     public static void trackApplicationStatus() { // Fonction pour faire le suivi de sa candidature/* */
         List<WorkRequest> appliedRequests = new ArrayList<>(); // Liste pour stocker les demandes auxquelles l'intervenant a appliqué
         for (WorkRequest request : WorkRequestController.getAllRequests()) {
@@ -117,7 +168,21 @@ public class IntervenantController extends Controller {
         } while (choice != 0);
     }
 
-    public void withdrawApplication() {
+    /**
+     * Retire la candidature d'un intervenant à une requête de travail.
+     * 
+     * Cette méthode affiche les requêtes de travail auxquelles l'intervenant
+     * actuel a postulé. L'utilisateur est invité à entrer le numéro de la
+     * requête pour laquelle il souhaite retirer sa candidature. 
+     * 
+     * Si l'utilisateur confirme le retrait, la candidature est retirée et
+     * le statut de la requête est réinitialisé à NOT_YET_STARTED. 
+     * Si l'utilisateur annule, le retrait de candidature est annulé.
+     * 
+     * Si aucune requête n'est trouvée, un message informant qu'il n'y a
+     * pas de candidature est affiché.
+     */
+    public static void withdrawApplication() {
         List<WorkRequest> appliedRequests = new ArrayList<>();
         for (WorkRequest request : WorkRequestController.getAllRequests()) {
             if (request.getIntervenant() != null && request.getIntervenant().equals(currentIntervenant)) {

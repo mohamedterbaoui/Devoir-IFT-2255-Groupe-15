@@ -11,6 +11,10 @@ public enum ProjectStatusEnum {
         this.label = label;
     }
 
+    /**
+     * Returns the label of the project status.
+     * @return the label representing the project status.
+     */
     @Override // Ajout de l'annotation @Override pour plus de clarté
     public String toString() {
         return label;

@@ -12,11 +12,22 @@ import java.util.Scanner;
 public class ProjectController extends Controller {
     private static List<Project> projectList = new ArrayList<>();
 
+    /**
+     * Renvoie la liste des projets.
+     * @return la liste des projets
+     */
     public static List<Project> getProjectList() {
         return projectList;
     }
 
-    public static Project updateProjectStatus() {
+    /**
+     * Modifie le statut d'un projet et envoie des notifications aux résidents affectés.
+     * L'utilisateur est invité à choisir un projet parmi la liste des projets de l'intervenant connecté,
+     * puis à choisir un statut parmi la liste des statuts possibles.
+     * Si l'entrée est invalide, l'utilisateur est invité à réessayer.
+     * @return le projet modifié, ou null si l'utilisateur a annulé
+     */
+    public static Project updateProjectStatus() { // Reste à ajouter notif
         Scanner scanner = new Scanner(System.in);
         Project project = null;
     
@@ -54,10 +65,19 @@ public class ProjectController extends Controller {
         } while (statusChoice < 1 || statusChoice > ProjectStatusEnum.values().length);
     
         project.setStatus(ProjectStatusEnum.values()[statusChoice - 1]);
+
+        // Ajout de l'envoi des notifications aux résidents affectés
     
         return project;
     }
     
+    /**
+     * Affiche les projets de l'intervenant connecté.
+     * 
+     * Si la liste des projets est vide, affiche un message d'erreur.
+     * Si l'intervenant n'a pas de projet, affiche un message d'erreur.
+     * Sinon, affiche la liste des projets de l'intervenant avec leur statut.
+     */
     public static void displayProjectsOfCurrentIntervenant() {
         if (projectList.isEmpty()) {
             System.out.println("Aucun projet trouvé.");
@@ -80,6 +100,12 @@ public class ProjectController extends Controller {
         }
     }
 
+    /**
+     * Affiche la liste de tous les projets.
+     * 
+     * Si la liste des projets est vide, affiche un message d'erreur.
+     * Sinon, affiche la liste des projets avec leur ID.
+     */
     public static void displayProjects() { // Afiche toutes les projets
         if (projectList.isEmpty()) {
             System.out.println("Aucun projet trouvé.");
@@ -90,6 +116,15 @@ public class ProjectController extends Controller {
         }
     }
 
+    /**
+     * Cherche un projet par son ID.
+     * 
+     * Si l'ID est trouvé, renvoie le projet correspondant.
+     * Sinon, renvoie null.
+     * 
+     * @param input l'ID du projet à chercher
+     * @return le projet correspondant, ou null si l'ID n'est pas trouvé
+     */
     private static Project findProjectById(int input) {
         try {
             for (Project project : projectList) {
@@ -104,15 +139,17 @@ public class ProjectController extends Controller {
         return null;
     }
 
-    public void editProjectDetails(int projectId, String description, Date endDate) {
-        // fonction
-    }
-
-    public void viewProjectPreferences() {
-        // fonction
-    }
-
-    public static Project addProject() {
+    /**
+     * Ajoute un nouveau projet.
+     * 
+     * Demande à l'utilisateur de saisir le titre, l'adresse, la date de début, la date de fin, la description, l'heure de début, l'heure de fin et le type de projet.
+     * Si l'utilisateur entre "annuler" à n'importe quelle étape, la fonction renvoie null.
+     * 
+     * Ajoute le projet à la liste des projets et renvoie le projet créé.
+     * 
+     * @return le projet créé, ou null si l'utilisateur a annulé la création du projet
+     */
+    public static Project addProject() { // Reste à ajouter notif
         Scanner scanner = new Scanner(System.in);
         String title = null;
         while (title == null) {
@@ -229,9 +266,18 @@ public class ProjectController extends Controller {
         Project newProject = new Project(title, projectAddress, startDate, endDate, description, IntervenantController.getCurrentIntervenant(), heureDebut, heureFin, projectType);
         projectList.add(newProject);
         System.out.println("Le projet a bien été ajouté.");
+
+        // Ajout de l'envoi des notifications aux résidents affectés
+        
+
         return newProject;
     }
 
+    /**
+     * Vérifie si une chaîne de caractères est une heure valide (format HH:mm, de 00:00 à 23:59).
+     * @param time la chaîne de caractères à vérifier
+     * @return true si la chaîne est une heure valide, false sinon
+     */
     private static boolean isValidTime(String time) {
         try {
             String[] parts = time.split(":");

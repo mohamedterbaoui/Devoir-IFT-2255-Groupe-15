@@ -7,6 +7,7 @@ import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class ProjectControllerTest {
 
@@ -103,8 +104,6 @@ public class ProjectControllerTest {
 
         System.setOut(System.out);
         System.setIn(System.in);
-
-        // ... existing code ...
 
         // Simule l'entrée utilisateur pour updateProjectStatus()
         ByteArrayOutputStream outContent2 = new ByteArrayOutputStream();

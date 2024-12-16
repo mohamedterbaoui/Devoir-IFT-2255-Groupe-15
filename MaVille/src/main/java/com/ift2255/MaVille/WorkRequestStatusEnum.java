@@ -17,6 +17,11 @@ public enum WorkRequestStatusEnum {
         this("En attente");
     }
 
+    /**
+     * Returns the string representation of the work request status.
+     *
+     * @return the label that describes the current status of the work request.
+     */
     public String toString() {
         return label;
     }

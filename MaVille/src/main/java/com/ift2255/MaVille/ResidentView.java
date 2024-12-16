@@ -12,6 +12,10 @@ public class ResidentView extends View {
         this.residentController = residentController;
     }
 
+    /**
+     * Affiche le menu principal pour les résidents.
+     * Le résident peut choisir de voir ses requêtes de travail, d'ajouter une requête de travail, de consulter les travaux en cours ou à venir, de consulter les entraves ou de se déconnecter.
+     */
     public void displayOptions() {
         System.out.println("\nVoici les options disponibles :");
         System.out.println("1. Voir mes requêtes de travail");
@@ -77,16 +81,33 @@ public class ResidentView extends View {
         residentController.viewWorkRequests(); 
     }
 
+    /**
+     * Affiche la liste des travaux en cours ou à venir.
+     * 
+     * Appele la méthode viewAllProjects() du contrôleur de résident pour obtenir la liste des travaux.
+     * Affiche ensuite cette liste.
+     */
     public void viewProjectsfromApi(){
         System.out.println("\nVoici la liste des travaux en cours ou à venir:");
         residentController.viewAllProjects();
     }
 
+    /**
+     * Affiche la liste des entraves actuelles.
+     * 
+     * Cette méthode appelle la fonction viewAllEntraves() du contrôleur de résident
+     * pour récupérer et afficher la liste des entraves.
+     */
     public void viewEntravesfromApi(){
         System.out.println("\nVoici la liste des Entraves:");
         residentController.viewAllEntraves();
     }
 
+    /**
+     * Déconnecte le résident en réinitialisant le ResidentController,
+     * en initialisant un nouveau AuthController et en affichant la page
+     * d'authentification.
+     */
     public void logoutResident() {
         this.residentController = null;
         AuthController authController = new AuthController();

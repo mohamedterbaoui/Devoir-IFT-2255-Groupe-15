@@ -11,14 +11,29 @@ import java.util.List;
 public class WorkRequestController extends Controller {
     private static List<WorkRequest> workRequests = new ArrayList<>();
 
+    /**
+     * Ajoute une requête de travail à la liste des requêtes de travail actuelles.
+     *
+     * @param request la requête de travail à ajouter
+     */
     public static void addWorkRequest(WorkRequest request) {
         workRequests.add(request);
     }
 
+    /**
+     * Renvoie la liste de toutes les requêtes de travail actuelles.
+     *
+     * @return une liste de WorkRequest
+     */
     public static List<WorkRequest> getAllRequests() {
         return workRequests;
     }
 
+    /**
+     * Affiche toutes les requêtes de travail actuelles. Si la liste est vide,
+     * affiche un message indiquant qu'il n'y a pas de requête de travail
+     * disponible.
+     */
     public static void printAllRequests() {
         if (workRequests.isEmpty()) {
             System.out.println("Aucune requête de travail disponible.");
@@ -38,6 +53,10 @@ public class WorkRequestController extends Controller {
         }
     }
 
+    /**
+     * Affiche toutes les requêtes de travail actuelles dont le statut est
+     * {@link WorkRequestStatusEnum#NOT_YET_STARTED}.
+     */
     public static void printAllRequestsWithNullStatus() {
         if (workRequests.isEmpty()) {
             System.out.println("Aucune requête de travail disponible.");
@@ -59,6 +78,12 @@ public class WorkRequestController extends Controller {
         }
     }
 
+    /**
+     * Renvoie la liste des ID des requêtes de travail qui ont un statut
+     * {@link WorkRequestStatusEnum#NOT_YET_STARTED}.
+     *
+     * @return une liste d'entiers
+     */
     public static List<Integer> iterateAllRequestsIdWithNullStatus() { 
         List<Integer> requestIds = new ArrayList<>();
         for (WorkRequest request : workRequests) {
@@ -69,10 +94,22 @@ public class WorkRequestController extends Controller {
         return requestIds;
     }
 
+    /**
+     * Returns the total number of work requests.
+     *
+     * @return the total number of work requests as an integer
+     */
     public static int getNumberOfRequests(){
         return workRequests.size();
     }
 
+    /**
+     * Returns the WorkRequest associated with the given ID if it exists, otherwise
+     * returns null.
+     *
+     * @param requestId the ID of the WorkRequest to retrieve
+     * @return the WorkRequest associated with the given ID, or null if not found
+     */
     public static WorkRequest getWorkRequestOnId(int requestId) { 
         for (WorkRequest request : workRequests) {
             if (request.getRequestID() == requestId) { 

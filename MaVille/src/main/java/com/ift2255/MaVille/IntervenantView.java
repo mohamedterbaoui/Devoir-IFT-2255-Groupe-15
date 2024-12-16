@@ -14,6 +14,24 @@ public class IntervenantView extends View {
         this.intervenantController = intervenantController;
     }
 
+    /**
+     * Affiche les options disponibles pour l'intervenant.
+     * <p>
+     * Les options sont :
+     * <ul>
+     * <li>1. Voir toutes les requêtes de travail</li>
+     * <li>2. Appliquer à une requête de travail</li>
+     * <li>3. Retirer sa candidature</li>
+     * <li>4. Soumettre un projet</li>
+     * <li>5. Modifier le statut d'un projet</li>
+     * <li>6. Faire le suivi d'une candidature</li>
+     * <li>7. Se déconnecter</li>
+     * </ul>
+     * <p>
+     * Une fois l'utilisateur a choisi une option, la fonction traite le choix correspondant.
+     * Si l'utilisateur entre une option invalide, la fonction affiche un message d'erreur
+     * et redemande une option.
+     */
     public void displayOptions() {
         int choice = -1;
         boolean validChoice = false;
@@ -76,11 +94,22 @@ public class IntervenantView extends View {
     }
     
 
-    // Affiche toutes les requêtes de travail
+   
+    /**
+     * Affiche toutes les requêtes de travail.
+     * 
+     * Appele la méthode viewWorkRequests() du contrôleur d'intervenant pour
+     * afficher la liste des requêtes de travail.
+     */
     public void displayWorkRequests() {
         intervenantController.viewWorkRequests(); 
     }
 
+    /**
+     * Déconnecte l'intervenant en réinitialisant le IntervenantController,
+     * en initialisant un nouveau AuthController et en affichant la page
+     * d'authentification.
+     */
     public void logoutIntervenant() {
         this.intervenantController = null; 
         AuthController authController = new AuthController();
