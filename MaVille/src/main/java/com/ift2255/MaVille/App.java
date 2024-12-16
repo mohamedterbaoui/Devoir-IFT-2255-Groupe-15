@@ -9,6 +9,8 @@ package com.ift2255.MaVille;
 
 public class App {
     public static void main(String[] args) {
+        
+
         AuthController authController = new AuthController();
 
         Initialization.initialize(authController);
