@@ -29,6 +29,10 @@ public class WorkRequestController extends Controller {
         return workRequests;
     }
 
+    public static void remove(){
+	    workRequests.remove(workRequests.size()-1);
+    }
+
     /**
      * Affiche toutes les requêtes de travail actuelles. Si la liste est vide,
      * affiche un message indiquant qu'il n'y a pas de requête de travail
@@ -118,6 +122,8 @@ public class WorkRequestController extends Controller {
         }
         return null; // Retourne null si aucune requête n'est trouvée
     }
+
 }
+
 
 
