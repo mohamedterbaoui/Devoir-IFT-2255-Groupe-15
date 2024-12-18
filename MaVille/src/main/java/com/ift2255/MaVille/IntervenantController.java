@@ -85,7 +85,7 @@ public class IntervenantController extends Controller {
                 } else if (WorkRequestController.iterateAllRequestsIdWithNullStatus().contains(choice)) { 
                     validChoice = true; // Sort de la loop
                     WorkRequest currentRequest = WorkRequestController.getWorkRequestOnId(choice);
-                    if (currentRequest != null) { // Vérifier si la requête existe (déjà vérifié, mais au cas où)
+                    if (currentRequest != null) { // Vérifie si la requête existe (déjà vérifié, mais au cas où)
                         currentRequest.setStatus(WorkRequestStatusEnum.IN_PROGRESS); 
                         currentRequest.setIntervenant(currentIntervenant);
                         System.out.println("Status correctement modifié. Vous avez correctement appliqué à cette requête de travail");
@@ -120,7 +120,7 @@ public class IntervenantController extends Controller {
      * Si l'intervenant a annulé, la fonction renvoie null.
      */
     public static void trackApplicationStatus() { // Fonction pour faire le suivi de sa candidature/* */
-        List<WorkRequest> appliedRequests = new ArrayList<>(); // Liste pour stocker les demandes auxquelles l'intervenant a appliqué
+        List<WorkRequest> appliedRequests = new ArrayList<>(); 
         for (WorkRequest request : WorkRequestController.getAllRequests()) {
             if (request.getIntervenant() != null && request.getIntervenant().equals(currentIntervenant)) {
                 appliedRequests.add(request);

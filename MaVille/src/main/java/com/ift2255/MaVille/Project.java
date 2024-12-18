@@ -4,6 +4,7 @@
 
 package com.ift2255.MaVille;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Date;
 
 public class Project {
@@ -38,12 +39,11 @@ public class Project {
         this.completed = false; // Not completed par défaut
     }
 
-/**
- * Checks if the project is completed.
- *
- * @return true if the project is completed, false otherwise
- */
-
+    /**
+     * Checks if the project is completed.
+     *
+     * @return true if the project is completed, false otherwise
+     */
     public Boolean isCompleted(){
         return this.completed;
     }
@@ -285,4 +285,19 @@ public class Project {
         this.title = title;
     }
     
+    /**
+     * Lie les résidents affectés à ce projet en fonction de leur adresse.
+     * Cette méthode itère sur une liste de résidents fournie et ajoute ceux qui vivent à l'adresse du projet
+     * à la liste des résidents affectés du projet.
+     *
+     * @param residents La liste des résidents à vérifier.
+     */
+    public void linkAffectedResidents(List<Resident> residents) {
+        this.affectedResidents = new LinkedList<>();
+        for (Resident resident : residents) {
+            if (resident.livesAtAddress(this.projectAddress)) {
+                this.affectedResidents.add(resident);
+            }
+        }
+    }
 }

@@ -6,11 +6,13 @@ package com.ift2255.MaVille;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class ProjectController extends Controller {
     private static List<Project> projectList = new ArrayList<>();
+    private static int notificationId = 0;
 
     /**
      * Renvoie la liste des projets.
@@ -35,7 +37,7 @@ public class ProjectController extends Controller {
             System.out.println("Choisissez le projet que vous voulez modifier le statut (ou tapez '-1' pour annuler) :");
             displayProjectsOfCurrentIntervenant(); // affiche seulement les projets de l'intervenant connecté
             int input = scanner.nextInt();
-            scanner.nextLine(); // Consomme le caractère de nouvelle ligne
+            scanner.nextLine(); // garbage collector
             if (input == -1) {
                 return null;
             }
@@ -61,12 +63,30 @@ public class ProjectController extends Controller {
                 scanner.next();
             }
             statusChoice = scanner.nextInt();
-            scanner.nextLine(); // Consomme le caractère de nouvelle ligne
+            scanner.nextLine(); // garbage collector
         } while (statusChoice < 1 || statusChoice > ProjectStatusEnum.values().length);
     
         project.setStatus(ProjectStatusEnum.values()[statusChoice - 1]);
 
-        // Ajout de l'envoi des notifications aux résidents affectés
+        // Date d'envoi de la notification
+        Date notificationDate = null;
+        while (notificationDate == null) {
+            System.out.println("Entrez la date d'envoi de la notification (format: yyyy-MM-dd) :");
+            String input = scanner.nextLine();
+            try {
+                notificationDate = java.sql.Date.valueOf(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Format de date invalide. Veuillez réessayer.");
+            }
+        }
+        
+        // Envoi des notifications aux résidents affectés
+        List<Resident> affectedResidents = getAffectedResidents(project.getProjectId());
+
+        for (Resident resident : affectedResidents) {
+            Notification notification = new Notification(notificationId++, "Le statut du projet a été mis à jour.", notificationDate);
+            resident.addNotification(notification); 
+        }
     
         return project;
     }
@@ -84,7 +104,6 @@ public class ProjectController extends Controller {
             return;
         }
     
-        // Filtre pour afficher uniquement les projets de l'intervenant connecté
         List<Project> filteredProjects = projectList.stream()
                 .filter(p -> p.getIntervenant().equals(IntervenantController.getCurrentIntervenant()))
                 .toList();
@@ -156,7 +175,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez le titre du nouveau projet (ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null; 
             }
             title = input;
         }
@@ -165,7 +184,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez l'adresse du nouveau projet (exemple: 123, Rue abc, ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null; 
             }
             projectAddress = input;
         }
@@ -175,7 +194,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez la date de début du projet (format: yyyy-MM-dd, ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null;
             }
             try {
                 startDate = java.sql.Date.valueOf(input);
@@ -189,7 +208,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez la date de fin du projet (format: yyyy-MM-dd, ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null; 
             }
             try {
                 endDate = java.sql.Date.valueOf(input);
@@ -203,7 +222,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez la description du projet (ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null; 
             }
             description = input;
         }
@@ -213,7 +232,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez l'heure de début du projet (format HH:mm, ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null; 
             }
             if (isValidTime(input)) {
                 heureDebut = input;
@@ -227,7 +246,7 @@ public class ProjectController extends Controller {
             System.out.println("Entrez l'heure de fin du projet (format HH:mm, ou tapez 'annuler' pour annuler) :");
             String input = scanner.nextLine();
             if (input.equalsIgnoreCase("annuler")) {
-                return null; // Annulation de la création du projet
+                return null; 
             }
             if (isValidTime(input)) {
                 heureFin = input;
@@ -240,8 +259,6 @@ public class ProjectController extends Controller {
         while (projectType == null) {
             System.out.println("Entrez le type de projet (ou tapez 'annuler' pour annuler) :");
             try {
-                
-                // Afficher la liste des types de projet avec leur numéro
                 System.out.println("Types de projet disponibles :");
                 for (int i = 0; i < ProjectType.values().length; i++) {
                     System.out.println((i + 1) + ". " + ProjectType.values()[i]);
@@ -249,7 +266,7 @@ public class ProjectController extends Controller {
 
                 String input = scanner.nextLine();
                 if (input.equalsIgnoreCase("annuler")) {
-                    return null; // Annulation de la création du projet
+                    return null; 
                 }
 
                 int choix = Integer.parseInt(input);
@@ -267,9 +284,28 @@ public class ProjectController extends Controller {
         projectList.add(newProject);
         System.out.println("Le projet a bien été ajouté.");
 
-        // Ajout de l'envoi des notifications aux résidents affectés
-        
+        // Lier les résidents affectés
+        newProject.linkAffectedResidents(ResidentController.getAllResidents()); 
 
+        // Date d'envoi de la notification
+        Date notificationDate = null;
+        while (notificationDate == null) {
+            System.out.println("Entrez la date d'envoi de la notification (format: yyyy-MM-dd) :");
+            String input = scanner.nextLine();
+            try {
+                notificationDate = java.sql.Date.valueOf(input);
+            } catch (IllegalArgumentException e) {
+                System.out.println("Format de date invalide. Veuillez réessayer.");
+            }
+        }
+        
+        // Envoi des notifications aux résidents affectés
+        List<Resident> affectedResidents = getAffectedResidents(newProject.getProjectId());
+        
+        for (Resident resident : affectedResidents) {
+            Notification notification = new Notification(notificationId++, "Le statut du projet a été mis à jour.", notificationDate);
+            resident.addNotification(notification); // Ajoute la notification au résident
+        }
         return newProject;
     }
 
@@ -290,5 +326,16 @@ public class ProjectController extends Controller {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    public static List<Resident> getAffectedResidents(int projectId) {
+        List<Resident> affectedResidents = new ArrayList<>();
+        
+        Project project = findProjectById(projectId);
+        if (project != null) {
+            affectedResidents = project.getAffectedResidents(); 
+        }
+        
+        return affectedResidents;
     }
 }

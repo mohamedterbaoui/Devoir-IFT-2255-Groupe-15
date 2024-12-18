@@ -123,4 +123,9 @@ public class Resident extends User{
 
     public void editPreferences(){}
     
+    public boolean livesAtAddress(String address) {
+        // À implémenter. Il faut faire en sorte qu'un résident ait une adresse avec quelque chose qu'on peut comparer (comme un code postal par exemple)
+        // Pour pouvoir envoyer les notifications aux bonnes personnes
+        return false;
+    }
 }

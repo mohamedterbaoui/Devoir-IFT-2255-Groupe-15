@@ -23,8 +23,8 @@ public class Intervenant extends User{
     }
 
     public void applyToWorkRequest() { // Fonction qui appelle applyToWorkRequest() de IntervenantController
-        IntervenantController intervenantController = new IntervenantController(this); // Créez une instance avec l'intervenant actuel
-        intervenantController.applyToWorkRequest(); // Appelez la méthode d'instance
+        IntervenantController intervenantController = new IntervenantController(this); 
+        intervenantController.applyToWorkRequest(); 
     }
 
     public String getName() {
