@@ -13,6 +13,8 @@ public class Resident extends User{
     private LinkedList<Project> subscriptions;
     private LinkedList<WorkRequest> workRequests;
     private Notifications notifications;
+    private String postalCode;
+    private Quartiers quartier;
 /**Constructeur de la classe resident
  * @param firstName prénom du résident
  * @param lastName nom du résident
@@ -21,16 +23,19 @@ public class Resident extends User{
  * @param password SHA-256 hash du mot de passe
  * @param phone Numéro de téléphone pour le résident
  * @param userAddress adresse du résident
+ * @param postalCode code postal du résident
  * @param city Ville où habite le résident
  */
-    public Resident(String firstName, String lastName,Date birthDate, String email, String password, String phone, String userAddress, String city){
+    public Resident(String firstName, String lastName,Date birthDate, String email, String password, String phone, String userAddress, String postalCode, String city){
         super(firstName, lastName, birthDate, email, password, phone, userAddress);
+	this.postalCode = postalCode;
         this.city = city;
         this.workRequests = new LinkedList<>(); // Initialisation de la liste
 	this.notifications = new Notifications();
+	this.quartier = PostalCodes.valueOf(this.postalCode.split(" ")[0].toUpperCase()).getQuartier();
     }
-/**ajouter un subscripton à un projet
- * @param projet le projet auquel le resident veut s'abonner
+/**Ajouter un subscripton à un projet
+ * @param project le projet auquel le resident veut s'abonner
  */
     public void subscribeToProject(Project project){
         subscriptions.add(project);
@@ -80,6 +85,11 @@ public class Resident extends User{
     public LinkedList<WorkRequest> getWorkRequests() {
         return workRequests;
     }
+
+    public Quartiers getQuartier(){
+	    return this.quartier;
+    }
+
 
     //setters
     /**changer la ville d'un résident

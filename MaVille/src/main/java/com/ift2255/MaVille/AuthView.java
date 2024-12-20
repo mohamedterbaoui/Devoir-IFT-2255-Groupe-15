@@ -150,10 +150,10 @@ public class AuthView extends View{
 
     public void displayRegistrationPageResident(){
 	    String[] responses = displayRegistrationPageGeneric();
+	    String codePostal = this.verifierNonVide("Code Postal : ");
 	    String city = this.verifierNonVide("Ville : ");
-
 	    String[] residentResponses = {responses[0],responses[1],responses[2],
-		    responses[3],responses[4],responses[5],responses[6], city};
+		    responses[3],responses[4],responses[5],responses[6], codePostal, city};
 
 	    authController.signUpResident(residentResponses);
 	    this.mainMenu();

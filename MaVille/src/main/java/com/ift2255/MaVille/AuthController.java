@@ -77,12 +77,13 @@ public class AuthController extends Controller {
 	    	String motDePasse= donnees[4];
 	   	String phone     = donnees[5];
 	    	String address   = donnees[6];
-	    	String city      = donnees[7];
+		String postalCode= donnees[7];
+	    	String city      = donnees[8];
 
 	    	Date birthDate = dateFormatter.parse(SbirthDate);
 
 
-	    Resident newResident = new Resident(firstName, lastName, birthDate, email, motDePasse, phone, address, city);
+	    Resident newResident = new Resident(firstName, lastName, birthDate, email, motDePasse, phone, address, postalCode, city);
 	    residents.add(newResident);
 	    } catch (ParseException e){
 		    System.err.println("La date de naissaiance n'était pas bien formattée");

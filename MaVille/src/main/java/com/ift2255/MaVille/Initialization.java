@@ -11,9 +11,9 @@ public class Initialization {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
             // Résidents
-            Resident resident1 = new Resident("Alice", "Dupont", dateFormat.parse("1998-10-23"), "alice@mail.com", Hash.hasher("password123"), "1234567890", "123 Rue A", "Montréal");
-            Resident resident2 = new Resident("Bob", "Martin", dateFormat.parse("2000-12-18"), "bob@mail.com", Hash.hasher("securepass"), "1234567890", "456 Rue B", "Montréal");
-            Resident resident3 = new Resident("Caroline", "Lavoie", dateFormat.parse("1956-05-03"), "caroline@mail.com", Hash.hasher("pass789"), "1234567890", "789 Rue C", "Montréal");
+            Resident resident1 = new Resident("Alice", "Dupont", dateFormat.parse("1998-10-23"), "alice@mail.com", Hash.hasher("password123"), "1234567890", "123 Rue A", "H4p 1z6","Montréal");
+            Resident resident2 = new Resident("Bob", "Martin", dateFormat.parse("2000-12-18"), "bob@mail.com", Hash.hasher("securepass"), "1234567890", "456 Rue B", "h4p 1z6","Montréal");
+            Resident resident3 = new Resident("Caroline", "Lavoie", dateFormat.parse("1956-05-03"), "caroline@mail.com", Hash.hasher("pass789"), "1234567890", "789 Rue C", "h4p 1z6","Montréal");
 
             authController.residents.add(resident1);
             authController.residents.add(resident2);
