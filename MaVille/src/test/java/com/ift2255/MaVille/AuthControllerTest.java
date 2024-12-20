@@ -9,7 +9,15 @@ import org.junit.jupiter.api.Test;
  */
 public class AuthControllerTest {
     AuthController auth = new AuthController();
-    Resident resident = new Resident("Seven", "Nine", null, "SevenOfNine@borg.com", "unimatrix1", "123456789", "137 av du President Kennedy", "Montreal");
+    Resident resident = new Resident("Seven",
+            "Nine",
+            null,
+            "SevenOfNine@borg.com",
+            "unimatrix1",
+            "123456789",
+            "137 av du President Kennedy",
+            "h2x 3p6",
+            "Montréal");
     
     @Test
     public void signupTest(){
@@ -27,4 +35,5 @@ public class AuthControllerTest {
     assertTrue(currentResident.getFirstName().equals("Seven"));
     assertTrue(currentResident.getLastName().equals("Nine"));
     }
+
 }

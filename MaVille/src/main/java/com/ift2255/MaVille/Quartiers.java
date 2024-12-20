@@ -1,6 +1,7 @@
 //Quartiers.java
 //IFT2255 - Équipe 15
 //Enum pour les quartiers
+package com.ift2255.MaVille;
 
 public enum Quartiers{
 	RiviereDesPrairiesPointeAuxTrembles, //h1a,h1c,h1e,h1b
