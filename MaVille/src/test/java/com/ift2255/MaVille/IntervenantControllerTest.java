@@ -27,7 +27,7 @@ public class IntervenantControllerTest {
 
             Intervenant intervenant = new Intervenant("Entreprise A", "Public", dateFormat.parse("1981-08-15"),
                     "entrepriseA@mail.com", "password123", "1234567890", "321 Rue D", "Entreprise publique", 101);
-            authController.intervenants.add(intervenant);
+            authController.getIntervenants().add(intervenant);
             intervenantController = new IntervenantController(intervenant);
         } catch (ParseException e) {
             e.printStackTrace();

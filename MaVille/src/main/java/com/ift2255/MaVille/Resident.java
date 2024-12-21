@@ -124,7 +124,7 @@ public class Resident extends User{
     }
     public void getNotifications(){
     	//On devrait pouvoir faire view.display()... mais pour le moment, on peut pas
-	System.out.println(this.notifications);
+	    System.out.println(this.notifications);
     }
 
     public void getNewNotifications(){

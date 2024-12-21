@@ -2,12 +2,21 @@
 //IFT2255 - Équipe 15
 //Classe qui gère la lecture et l'écriture des fichiers
 
+package com.ift2255.MaVille;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**Classe java qui a des méthodes pour gérer accès aux fichiers
  */
@@ -41,7 +50,27 @@ public class FileOps {
 	}
 	
 
-			
+    public static final String PROJECTS_FILE = "projects.dat";
+    public static final String WORK_REQUESTS_FILE = "workrequests.dat";
+
+    public static <T extends Serializable> void saveToFile(List<T> objects, String filename) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
+            oos.writeObject(objects);
+        } catch (IOException e) {
+            System.err.println("Error saving to file: " + e.getMessage());
+        }
+    }
+
+    public static <T extends Serializable> List<T> loadFromFile(String filename) {
+        List<T> objects = new ArrayList<>();
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {
+            objects = (List<T>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Error loading from file: " + e.getMessage());
+            // Handle the case where the file doesn't exist – return an empty list
+        }
+        return objects;
+    }		
 		
 				
 

@@ -4,14 +4,16 @@
 package com.ift2255.MaVille;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 /** Controlleur pour le processus d'authentication*/
 public class AuthController extends Controller {
 
     LinkedList<Resident> residents = new LinkedList<>();
-    LinkedList<Intervenant> intervenants = new LinkedList<>();
+    private static LinkedList<Intervenant> intervenants = new LinkedList<>();
 
     private SimpleDateFormat dateFormatter= new SimpleDateFormat("yyyy-MM-dd");
     
@@ -159,5 +161,13 @@ public class AuthController extends Controller {
      */
     public boolean isIntervenantConnected() {
         return isIntervenantConnected;
+    }
+
+    public static LinkedList<Intervenant> getAllIntervenants() {
+        return intervenants; 
+    }
+
+    public LinkedList<Intervenant> getIntervenants() {
+        return intervenants;
     }
 }

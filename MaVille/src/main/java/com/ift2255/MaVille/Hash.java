@@ -24,10 +24,6 @@ class Hash{
 		    	hexString.append(Integer.toHexString(0xFF & digest[i]));
 	    	}
 
-	    for (int i = 0; i<digest.length;i++) {
-		    hexString.append(String.format("%02x", 0xFF & digest[i]));
-	    }
-	        
 
 	    } catch (Exception e){
 		    e.printStackTrace();
@@ -42,7 +38,5 @@ class Hash{
 	} catch (Exception e){
 	}
 	}
-
-
 }
 

@@ -2,6 +2,7 @@
 //IFT2255 - Équipe 15
 //Enum pour les codes postaux
 package com.ift2255.MaVille;
+
 public enum PostalCodes {
 	 H1A(Quartiers.RiviereDesPrairiesPointeAuxTrembles),
 	 H1C(Quartiers.RiviereDesPrairiesPointeAuxTrembles),

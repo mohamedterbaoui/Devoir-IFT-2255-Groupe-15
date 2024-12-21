@@ -6,58 +6,70 @@
  */
 package com.ift2255.MaVille;
 import java.util.LinkedList;
+import java.util.List;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
-public class Project {
+public class Project implements Serializable  {
     private int projectId;
     private String title;
     private String description;
-    private String projectAddress;
+    private Quartiers projectAddress;
     private Date startDate;
     private Date endDate;
-    private String status;
+    private ProjectStatusEnum status;
     private Intervenant intervenant;
     private LinkedList<Entrave> entraves;
     private LinkedList<Resident> affectedResidents;
-    private String projectSchedule;
+    private String heureDebut;
+    private String heureFin;
     private ProjectType projectType;
     private Boolean completed;
+
 /**Le constructeur pour la classe
  * @param projectId l'ID du projet
  * @param title le titre du projet
  * @param projetAddress l'adresse du projet
  * @param startDate la date de début
- * @param la date de fin
+ * @param endDate la date de fin
+ * @param description le déscription du projet
+ * @param intervenant l'intérvenant assigné
+ * @param heureDebut l'heure de début
+ * @param heureFin L'heure de fin
+ * @param projectType le type du projet
  */
-    public Project(int projectId, String title, String projectAddress, Date startDate, Date endDate){
-        this.projectId = projectId;
+
+    public Project(int id, String title, Quartiers projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
+        if (id == 0) {
+            Random random = new Random();
+            this.projectId = random.nextInt(10000) + 1; // Génère un nombre aléatoire entre 1 et 1000
+        }
+        else {
+            this.projectId = id;
+        }
         this.title = title;
         this.projectAddress = projectAddress;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.completed = false;
+        this.description = description;
+        this.status = ProjectStatusEnum.NOT_YET_STARTED; // Valeur par défaut
+        this.intervenant = intervenant; 
+        this.heureDebut = heureDebut;
+        this.heureFin = heureFin; 
+        this.projectType = projectType; 
+        this.completed = false; // Not completed par défaut
     }
-    public void addEntrave(){
 
-    }
-
-    public String getProjectDetails(){
-        //fonction
-        return("NON!!!!!!!!");
-    }
-/**Retourne un boolean si je projet est complété
- * @return Vrai si elle est complété
- */
+    /**
+     * Checks if the project is completed.
+     *
+     * @return true if the project is completed, false otherwise
+     */
     public Boolean isCompleted(){
         return this.completed;
     }
-
-    public void removeEntrave(Entrave entrave){
-
-    }
-
-    
-    
+  
     //getters
 /**Affiche les residents affecté
  * @return les résidents affectés
@@ -65,144 +77,236 @@ public class Project {
     public LinkedList<Resident> getAffectedResidents() {
         return affectedResidents;
     }
-/**Affiche le déscription
- * @return le déscription 
- */
+
+    /**
+     * Returns the description of the project.
+     *
+     * @return the description of the project
+     */
     public String getDescription() {
         return description;
     }
-/**Afficher la date de fin
- * @ returns la date de fin
- */
+
+    /**
+     * Returns the end date of the project.
+     *
+     * @return the end date of the project
+     */
     public Date getEndDate() {
         return endDate;
     }
-/**Affiche la liste des entraves
- * @return les éntraves
- */
+
+    /**
+     * Returns the list of Entraves associated with this project.
+     *
+     * @return the list of Entraves
+     */
     public LinkedList<Entrave> getEntraves() {
         return entraves;
     }
-/**Afficher l'intérvenant
- * @ return l'intérvenant
- */
+
+
+    /**
+     * Returns the Intervenant associated with this project.
+     *
+     * @return the Intervenant associated with this project
+     */
     public Intervenant getIntervenant() {
         return intervenant;
     }
-/**Affiche l'adresse du projet
- * @return l'adresse du projet
- */
-    public String getProjectAddress() {
+    /**
+     * Returns the address of the project.
+     *
+     * @return the address of the project
+     */
+
+    /**
+     * Returns the address of the project.
+     *
+     * @return the address of the project
+     */
+    public Quartiers getProjectAddress() {
         return projectAddress;
     }
-/**Affice l'ID du projet
- * @return l'ID du projet
- */
+
+    /**
+     * Returns the ID of the project.
+     *
+     * @return the ID of the project
+     */
     public int getProjectId() {
         return projectId;
     }
-/**Affiche l'horaire du projet
- * @return Affice l'ID du projet
- */
-    public String getProjectSchedule() {
-        return projectSchedule;
+
+    /**
+     * Returns the start time of the project.
+     *
+     * @return the start time of the project
+     */
+    public String getHeureDebut() {
+        return heureDebut;
     }
-/** Affiche le type du projet
- * @return le type du projet
- */
+
+    /**
+     * Returns the end time of the project.
+     *
+     * @return the end time of the project
+     */
+    public String getHeureFin() {
+        return heureFin;
+    }
+
+    /**
+     * Returns the type of the project.
+     *
+     * @return the type of the project
+     */
     public ProjectType getProjectType() {
         return projectType;
     }
-/** Affiche la date de début
- * @return la date de début
- */
+
+    /**
+     * Returns the start date of the project.
+     *
+     * @return the start date of the project
+     */
     public Date getStartDate() {
         return startDate;
     }
-/**Affiche le statut du projet
- * @return le statut du projet
- */
-    public String getStatus() {
+
+    /**
+     * Returns the current status of the project.
+     *
+     * @return the current status of the project as a ProjectStatusEnum
+     */
+    public ProjectStatusEnum getStatus() {
         return status;
     }
-/**Affiche le titre du projet
- * @return le titre du projet
- */
+
+    /**
+     * Returns the title of the project.
+     *
+     * @return the title of the project
+     */
     public String getTitle() {
         return title;
     }
     //setters
-/**Changer les résidents affectés
- * @param affectedResidents les résidents touché par ce projet
- */
+
+    /**
+     * Sets the list of residents affected by the project.
+     *
+     * @param affectedResidents the list of affected residents
+     */
     public void setAffectedResidents(LinkedList<Resident> affectedResidents) {
         this.affectedResidents = affectedResidents;
     }
-/**Changer le description du projet
- * @param description le nouveau description
- */
+
+    /**
+     * Sets the description of the project.
+     *
+     * @param description the description of the project
+     */
     public void setDescription(String description) {
         this.description = description;
     }
-/**Changer la date de fin
- * @param  endDate
- */
+
+    /**
+     * Sets the end date of the project.
+     *
+     * @param endDate the end date of the project
+     */
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-/**Changer les éntraves
- * @param entraves échanger les éntraves
- */
+
+    /**
+     * Sets the list of entraves associated with the project.
+     *
+     * @param entraves the list of entraves associated with the project
+     */
     public void setEntraves(LinkedList<Entrave> entraves) {
         this.entraves = entraves;
     }
-/**Changer l'intérvenant
- * @param intervenant le nouveau intérvenant
- */
+
+    /**
+     * Sets the Intervenant associated with this project.
+     *
+     * @param intervenant the Intervenant associated with this project
+     */
     public void setIntervenant(Intervenant intervenant) {
         this.intervenant = intervenant;
     }
-/**Changer l'adresse du projet
- * @param projectAddress le nouveau adresse
- */
-    public void setProjectAddress(String projectAddress) {
+
+    /**
+     * Sets the address of the project.
+     *
+     * @param projectAddress the address to set for the project
+     */
+    public void setProjectAddress(Quartiers projectAddress) {
         this.projectAddress = projectAddress;
     }
-/**Changer l'ID du projet
- * @param projectId le nouveau ID du projet
- */
+
+    /**
+     * Sets the ID of the project.
+     *
+     * @param projectId the ID to set for the project
+     */
     public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
-/**Changer l'horaire du projet
- * @param projectSchedule la nouvelle horaire
- */
-    public void setProjectSchedule(String projectSchedule) {
-        this.projectSchedule = projectSchedule;
+
+    /**
+     * Sets the start time of the project.
+     *
+     * @param heureDebut the start time to set for the project
+     */
+    public void setHeureDebut(String heureDebut) {
+        this.heureDebut = heureDebut;
     }
-/**Changer le type du projet
- * @param projectType le nouveau type du projet
- */
+
+    /**
+     * Sets the end time of the project.
+     *
+     * @param heureFin the end time to set for the project
+     */
+    public void setHeureFin(String heureFin) {
+        this.heureFin = heureFin;
+    }
+
+    /**
+     * Sets the type of the project.
+     *
+     * @param projectType the type to set for the project
+     */
     public void setProjectType(ProjectType projectType) {
         this.projectType = projectType;
     }
-/**Changer la date de debut du projet
- * @param startDate la nouvelle date de début
- */
+
+    /**
+     * Sets the start date of the project.
+     *
+     * @param startDate the start date to set for the project
+     */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
-/**Changer le statut du projet
- * @param status le nouveau statut
- */
-    public void setStatus(String status) {
+
+    /**
+     * Sets the current status of the project.
+     *
+     * @param status the status to set for the project, represented as a ProjectStatusEnum
+     */
+    public void setStatus(ProjectStatusEnum status) {
         this.status = status;
     }
-/**Changer le titre du projet
- * @param title le nouveau titre
- */
+
+    /**
+     * Sets the title of the project.
+     *
+     * @param title the title to set for the project
+     */
     public void setTitle(String title) {
         this.title = title;
     }
-    
 }

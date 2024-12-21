@@ -3,9 +3,17 @@
 //Classe d'initialisation
 package com.ift2255.MaVille;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Initialization {
+    /*
     public static void initialize(AuthController authController) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -43,7 +51,113 @@ public class Initialization {
             e.printStackTrace();
         }
     }
+     */
+    private static final String PROJECTS_FILE = "projects.txt";
+    private static final String WORK_REQUESTS_FILE = "workRequests.txt";
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    private static List<Intervenant> intervenants = new LinkedList<>();
+
+
+    public static void initialize(AuthController authController) {
+        loadProjects();
+        loadWorkRequests();  
+        initializeIntervenants();
+    }
+
+    private static void loadProjects() {
+        try (BufferedReader br = new BufferedReader(new FileReader(PROJECTS_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Assuming a comma-separated format: id,title,projectAddress,startDate,endDate,description,intervenantCityId,heureDebut,heureFin,projectType
+                String[] parts = line.split(",");
+                if (parts.length >= 10) {
+                    int id = Integer.parseInt(parts[0]);
+                    String title = parts[1];
+                    Quartiers projectAddress = Quartiers.valueOf(parts[2].toUpperCase());
+                    Date startDate = dateFormat.parse(parts[3]);
+                    Date endDate = dateFormat.parse(parts[4]);
+                    String description = parts[5];
+                    int intervenantCityId = Integer.parseInt(parts[6]); 
+                    String heureDebut = parts[7];
+                    String heureFin = parts[8];
+                    ProjectType projectType = ProjectType.valueOf(parts[9]);
+
+                    // Supposons que vous ayez une méthode pour obtenir tous les intervenants
+                    List<Intervenant> intervenants = AuthController.getAllIntervenants(); 
+
+                    Intervenant intervenant = null;
+                    for (Intervenant i : intervenants) {
+                        if (i.getCityId() == intervenantCityId) { // Assurez-vous que getId() retourne l'ID correct
+                            intervenant = i;
+                            break;
+                        }
+                    }
+
+                    if (intervenant != null) {
+                        Project project = new Project(id, title, projectAddress, startDate, endDate, description, intervenant, heureDebut, heureFin, projectType);
+                        ProjectController.addProject(project);
+                    } else {
+                        System.err.println("Intervenant avec l'ID " + intervenantCityId + " non trouvé.");
+                    }
+                } else {
+                    System.err.println("Ligne invalide dans projects.txt : " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la lecture du fichier projects.txt : " + e.getMessage());
+        } catch (ParseException e) {
+            System.err.println("Erreur lors de l'analyse de la date dans projects.txt : " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Erreur de format de nombre dans projects.txt : " + e.getMessage());
+        }
+    }
+
+    private static void loadWorkRequests() {
+        try (BufferedReader br = new BufferedReader(new FileReader(WORK_REQUESTS_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Assuming a comma-separated format: id,title,description,expectedStartDate,workType,streetId,streetName
+                String[] parts = line.split(",");
+                if (parts.length >= 7) {
+                    int id = Integer.parseInt(parts[0]);
+                    String title = parts[1];
+                    String description = parts[2];
+                    Date expectedStartDate = dateFormat.parse(parts[3]);
+                    String workType = parts[4];
+                    int streetId = Integer.parseInt(parts[5]);
+                    String streetName = parts[6];
+
+                    Street workRequestAddress = new Street(streetId, streetName);
+                    WorkRequest workRequest = new WorkRequest(id, title, description, expectedStartDate, workType, workRequestAddress);
+                    WorkRequestController.addWorkRequest(workRequest);
+                } else {
+                    System.err.println("Ligne invalide dans workRequests.txt : " + line);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la lecture du fichier workRequests.txt : " + e.getMessage());
+        } catch (ParseException e) {
+            System.err.println("Erreur lors de l'analyse de la date dans workRequests.txt : " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Erreur de format de nombre dans workRequests.txt : " + e.getMessage());
+        }
+    }
+
+    public static void initializeIntervenants() {
+        List<Intervenant> loadedIntervenants = FileOps.<Intervenant>loadFromFile("intervenants.dat");
+        if (loadedIntervenants != null) {
+            for (Intervenant intervenant : loadedIntervenants) {
+                if (intervenants == null) {
+                    intervenants = new LinkedList<>();
+                }
+                intervenants.add(intervenant);
+            }
+        }
+    }
+
+    public static void saveData() {
+        FileOps.saveToFile(ProjectController.getProjectList(), FileOps.PROJECTS_FILE);
+        FileOps.saveToFile(WorkRequestController.getAllRequests(), FileOps.WORK_REQUESTS_FILE);
+        FileOps.saveToFile(AuthController.getAllIntervenants(), "intervenants.dat"); 
+    }
 }
-
-
-
