@@ -5,7 +5,9 @@ package com.ift2255.MaVille;
 
 import java.util.LinkedList;
 import java.util.Date;
-public class Intervenant extends User{
+import java.io.Serializable;
+
+public class Intervenant extends User implements Serializable {
     private String typeIntervenant;
     private int cityId;
     private LinkedList<WorkRequest> workRequests;

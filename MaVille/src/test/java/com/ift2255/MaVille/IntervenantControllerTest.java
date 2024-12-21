@@ -18,7 +18,7 @@ public class IntervenantControllerTest {
         authController = new AuthController();
         try {
             Resident resident1 = new Resident("Alice", "Dupont", dateFormat.parse("1998-10-23"), "alice@mail.com",
-                    "password123", "1234567890", "123 Rue A", "Montréal");
+                    "password123", "1234567890", "123 Rue A", "h4p 1z6","Montréal");
             authController.residents.add(resident1);
             ResidentController residentController1 = new ResidentController(resident1);
             resident1.addWorkRequest(residentController1, "Réparation route",
@@ -27,7 +27,7 @@ public class IntervenantControllerTest {
 
             Intervenant intervenant = new Intervenant("Entreprise A", "Public", dateFormat.parse("1981-08-15"),
                     "entrepriseA@mail.com", "password123", "1234567890", "321 Rue D", "Entreprise publique", 101);
-            authController.intervenants.add(intervenant);
+            authController.getIntervenants().add(intervenant);
             intervenantController = new IntervenantController(intervenant);
         } catch (ParseException e) {
             e.printStackTrace();

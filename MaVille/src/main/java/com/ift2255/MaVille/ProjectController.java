@@ -68,25 +68,8 @@ public class ProjectController extends Controller {
     
         project.setStatus(ProjectStatusEnum.values()[statusChoice - 1]);
 
-        // Date d'envoi de la notification
-        Date notificationDate = null;
-        while (notificationDate == null) {
-            System.out.println("Entrez la date d'envoi de la notification (format: yyyy-MM-dd) :");
-            String input = scanner.nextLine();
-            try {
-                notificationDate = java.sql.Date.valueOf(input);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Format de date invalide. Veuillez réessayer.");
-            }
-        }
-        
-        // Envoi des notifications aux résidents affectés
-        List<Resident> affectedResidents = getAffectedResidents(project.getProjectId());
-
-        for (Resident resident : affectedResidents) {
-            Notification notification = new Notification(notificationId++, "Le statut du projet a été mis à jour.", notificationDate);
-            resident.addNotification(notification); 
-        }
+        // Lier les résidents affectés et envoyer des notifications
+        linkResidentsToProject(project);
     
         return project;
     }
@@ -125,13 +108,19 @@ public class ProjectController extends Controller {
      * Si la liste des projets est vide, affiche un message d'erreur.
      * Sinon, affiche la liste des projets avec leur ID.
      */
-    public static void displayProjects() { // Afiche toutes les projets
+    public static void displayProjects() {
         if (projectList.isEmpty()) {
             System.out.println("Aucun projet trouvé.");
             return;
         }
-        for (int i = 0; i < projectList.size(); i++) {
-            System.out.println((i + 1) + ". " + projectList.get(i).getTitle());
+
+        for (Project project : projectList) {
+            Intervenant intervenant = project.getIntervenant();
+            if (intervenant != null) {
+                System.out.println("Projet: " + project.getTitle() + " - Intervenant City ID: " + intervenant.getCityId());
+            } else {
+                System.out.println("Projet: " + project.getTitle() + " - Aucun intervenant assigné");
+            }
         }
     }
 
@@ -183,16 +172,30 @@ public class ProjectController extends Controller {
             }
             title = input;
         }
-        String projectAddress = null;
+        Quartiers projectAddress = null;
         while (projectAddress == null) {
-            System.out.println("Entrez l'adresse du nouveau projet (exemple: 123, Rue abc, ou tapez 'annuler' pour annuler) :");
-            String input = scanner.nextLine();
-            if (input.equalsIgnoreCase("annuler")) {
-                return null; 
-            }
-            projectAddress = input;
-        }
+            System.out.println("Choisissez le quartier du nouveau projet (ou tapez 'annuler' pour annuler) :");
+            try {
+                System.out.println("Quartiers disponibles :");
+                for (int i = 0; i < Quartiers.values().length; i++) {
+                    System.out.println((i + 1) + ". " + Quartiers.values()[i]);
+                }
 
+                String input = scanner.nextLine();
+                if (input.equalsIgnoreCase("annuler")) {
+                    return null; 
+                }
+
+                int choix = Integer.parseInt(input);
+                if (choix > 0 && choix <= Quartiers.values().length) {
+                    projectAddress = Quartiers.values()[choix - 1];
+                } else {
+                    System.out.println("Choix invalide. Veuillez entrer un nombre entre 1 et " + Quartiers.values().length);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre.");
+            }
+        }
         Date startDate = null;
         while (startDate == null) {
             System.out.println("Entrez la date de début du projet (format: yyyy-MM-dd, ou tapez 'annuler' pour annuler) :");
@@ -284,15 +287,13 @@ public class ProjectController extends Controller {
             }
         }
 
-        Project newProject = new Project(title, projectAddress, startDate, endDate, description, IntervenantController.getCurrentIntervenant(), heureDebut, heureFin, projectType);
+        int id = 0; // Défini à 0, ça va le random dans le constructeur
+        Project newProject = new Project(id, title, projectAddress, startDate, endDate, description, IntervenantController.getCurrentIntervenant(), heureDebut, heureFin, projectType);
         if (projectList == null) {
             projectList = new ArrayList<>();
         }
         projectList.add(newProject);
         System.out.println("Le projet a bien été ajouté.");
-
-        // Lier les résidents affectés
-        newProject.linkAffectedResidents(ResidentController.getAllResidents()); 
 
         // Date d'envoi de la notification
         Date notificationDate = null;
@@ -305,14 +306,7 @@ public class ProjectController extends Controller {
                 System.out.println("Format de date invalide. Veuillez réessayer.");
             }
         }
-        
-        // Envoi des notifications aux résidents affectés
-        List<Resident> affectedResidents = getAffectedResidents(newProject.getProjectId());
-        
-        for (Resident resident : affectedResidents) {
-            Notification notification = new Notification(notificationId++, "Le statut du projet a été mis à jour.", notificationDate);
-            resident.addNotification(notification); // Ajoute la notification au résident
-        }
+
         return newProject;
     }
 
@@ -335,14 +329,28 @@ public class ProjectController extends Controller {
         }
     }
 
-    public static List<Resident> getAffectedResidents(int projectId) {
-        List<Resident> affectedResidents = new ArrayList<>();
-        
-        Project project = findProjectById(projectId);
-        if (project != null) {
-            affectedResidents = project.getAffectedResidents(); 
+    public static List<Resident> linkResidentsToProject(Project project) {
+        List<Resident> affectedResidents = new LinkedList<>();
+        List<Resident> residents = ResidentController.getAllResidents(); 
+
+        // Comparaison des quartiers
+        for (Resident resident : residents) {
+            if (resident.getQuartier().equals(project.getProjectAddress())) { 
+                affectedResidents.add(resident);
+            }
         }
-        
-        return affectedResidents;
+
+        // Envoi des notifications aux résidents affectés
+        for (Resident resident : affectedResidents) {
+            Notification notification = new Notification(
+                notificationId++, 
+                "Nouveau projet ou changement de statut dans votre quartier.", 
+                new Date()
+            );
+            resident.addNotification(notification);
+        }
+
+        project.setAffectedResidents(new LinkedList<>(affectedResidents));
+        return affectedResidents; // Retourne la liste des résidents affectés
     }
 }

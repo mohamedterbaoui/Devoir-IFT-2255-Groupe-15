@@ -46,7 +46,8 @@ public class ResidentController extends Controller {
 
     // Ajoute une requête de travail pour le résident connecté
     public void addWorkRequest(String title, String description, String workType, Date expectedStartDate, Street workRequestAddress) {
-        WorkRequest newWorkRequest = new WorkRequest(title, description, expectedStartDate, workType, workRequestAddress);
+        int id = 0; // id mit à 0 par défaut pour que ça génère un id random dans le constructeur de la classe WorkRequest
+        WorkRequest newWorkRequest = new WorkRequest(id, title, description, expectedStartDate, workType, workRequestAddress);
         newWorkRequest.setResident(currentResident); // Associe la requête au résident connecté
         currentResident.getWorkRequests().add(newWorkRequest); // Ajoute la requête à la liste du résident
         WorkRequestController.addWorkRequest(newWorkRequest); // Ajoute la requête à la liste globale

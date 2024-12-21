@@ -41,7 +41,7 @@ public class ResidentControllerTest {
         // Create an instance of the class under test (ResidentController)
         ResidentController controller = new ResidentController(new Resident("Alice",
                 "Dupont", null, "alice@mail.com", "password123",
-                "1234567890", "123 Rue A", "Montréal"));
+                "1234567890", "123 Rue A", "h4p 1z6","Montréal"));
 
         // Call the jsonParsing function
         JsonArray result = controller.jsonParsing(mockResponse);
@@ -68,7 +68,7 @@ public class ResidentControllerTest {
     void testViewAllProjects() {
         ResidentController controller = new ResidentController(new Resident("Alice",
                 "Dupont", null, "alice@mail.com", "password123",
-                "1234567890", "123 Rue A", "Montréal"));
+                "1234567890", "123 Rue A", "h4p 1z6","Montréal"));
 
         // Redirect System.out to a ByteArrayOutputStream to capture the output
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -89,7 +89,7 @@ public class ResidentControllerTest {
     void testViewAllEntraves() {
         ResidentController controller = new ResidentController(new Resident("Alice",
                 "Dupont", null, "alice@mail.com", "password123",
-                "1234567890", "123 Rue A", "Montréal"));
+                "1234567890", "123 Rue A", "h4p 1z6","Montréal"));
 
         // Redirect System.out to a ByteArrayOutputStream to capture the output
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -107,4 +107,3 @@ public class ResidentControllerTest {
     }
 
 }
-

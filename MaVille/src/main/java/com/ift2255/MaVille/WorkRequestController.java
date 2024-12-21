@@ -125,6 +125,11 @@ public class WorkRequestController extends Controller {
         }
         return null; // Retourne null si aucune requête n'est trouvée
     }
+
+    public static Intervenant getIntervenant(int requestId) {
+        WorkRequest request = getWorkRequestOnId(requestId);
+        return (request != null) ? request.getIntervenant() : null;
+    }
 }
 
 

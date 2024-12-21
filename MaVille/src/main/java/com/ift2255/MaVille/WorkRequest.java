@@ -4,9 +4,9 @@
 package com.ift2255.MaVille;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
 public class WorkRequest implements Serializable  {
-    private static int idCounter = 0;  // Compteur pour générer un ID unique pour chaque requête
     private int requestID;
     private Resident resident;
     private String title;
@@ -19,8 +19,9 @@ public class WorkRequest implements Serializable  {
 
     // Constructeur
     public WorkRequest(int id, String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
-        if (this.requestID == 0) {
-            this.requestID = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
+        if (id == 0) {
+            Random random = new Random();
+            this.requestID = random.nextInt(10000) + 1; // Génère un nombre aléatoire entre 1 et 1000
         }
         else {
             this.requestID = id;

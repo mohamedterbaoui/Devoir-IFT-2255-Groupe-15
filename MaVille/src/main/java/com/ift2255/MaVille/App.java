@@ -20,7 +20,7 @@ public class App {
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Saving data before exiting...");
-            Initialization.saveData();
+            Initialization.saveData(); // Save data of intervenants, work requests and projects (need to add for residents)
         }));
     }
 }

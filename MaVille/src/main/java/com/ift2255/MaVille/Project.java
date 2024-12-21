@@ -13,7 +13,7 @@ public class Project implements Serializable  {
     private int projectId;
     private String title;
     private String description;
-    private String projectAddress;
+    private Quartiers projectAddress;
     private Date startDate;
     private Date endDate;
     private ProjectStatusEnum status;
@@ -25,8 +25,8 @@ public class Project implements Serializable  {
     private ProjectType projectType;
     private Boolean completed;
 
-    public Project(int id, String title, String projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
-        if (this.projectId == 0) {
+    public Project(int id, String title, Quartiers projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
+        if (id == 0) {
             Random random = new Random();
             this.projectId = random.nextInt(10000) + 1; // Génère un nombre aléatoire entre 1 et 1000
         }
@@ -107,7 +107,7 @@ public class Project implements Serializable  {
      *
      * @return the address of the project
      */
-    public String getProjectAddress() {
+    public Quartiers getProjectAddress() {
         return projectAddress;
     }
 
@@ -225,7 +225,7 @@ public class Project implements Serializable  {
      *
      * @param projectAddress the address to set for the project
      */
-    public void setProjectAddress(String projectAddress) {
+    public void setProjectAddress(Quartiers projectAddress) {
         this.projectAddress = projectAddress;
     }
 
@@ -290,21 +290,5 @@ public class Project implements Serializable  {
      */
     public void setTitle(String title) {
         this.title = title;
-    }
-    
-    /**
-     * Lie les résidents affectés à ce projet en fonction de leur adresse.
-     * Cette méthode itère sur une liste de résidents fournie et ajoute ceux qui vivent à l'adresse du projet
-     * à la liste des résidents affectés du projet.
-     *
-     * @param residents La liste des résidents à vérifier.
-     */
-    public void linkAffectedResidents(List<Resident> residents) {
-        this.affectedResidents = new LinkedList<>();
-        for (Resident resident : residents) {
-            if (resident.livesAtAddress(this.projectAddress)) {
-                this.affectedResidents.add(resident);
-            }
-        }
     }
 }
