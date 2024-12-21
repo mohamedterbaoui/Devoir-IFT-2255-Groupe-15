@@ -17,7 +17,7 @@ public class WorkRequestControllerTest {
 
         Resident resident = new Resident("Alice", "Dupont", dateFormat.parse("1998-10-23"), "alice@mail.com","password123", "1234567890", "123 Rue A", "Montréal");
         Street address = new Street(123, "Main Street"); 
-        WorkRequest request = new WorkRequest("Réparation de trottoir", "Trottoirs fissurés devant le 123 Main Street", dateFormat.parse("2024-03-15"), "Réparation", address);
+        WorkRequest request = new WorkRequest(456, "Réparation de trottoir", "Trottoirs fissurés devant le 123 Main Street", dateFormat.parse("2024-03-15"), "Réparation", address);
         request.setResident(resident); 
 
         WorkRequestController.addWorkRequest(request);

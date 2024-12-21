@@ -5,10 +5,11 @@
 package com.ift2255.MaVille;
 import java.util.LinkedList;
 import java.util.List;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Random;
 
-public class Project {
-    private static int idCounter = 0;  // Compteur pour générer un ID unique pour chaque projet
+public class Project implements Serializable  {
     private int projectId;
     private String title;
     private String description;
@@ -24,8 +25,14 @@ public class Project {
     private ProjectType projectType;
     private Boolean completed;
 
-    public Project(String title, String projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
-        this.projectId = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
+    public Project(int id, String title, String projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
+        if (this.projectId == 0) {
+            Random random = new Random();
+            this.projectId = random.nextInt(10000) + 1; // Génère un nombre aléatoire entre 1 et 1000
+        }
+        else {
+            this.projectId = id;
+        }
         this.title = title;
         this.projectAddress = projectAddress;
         this.startDate = startDate;

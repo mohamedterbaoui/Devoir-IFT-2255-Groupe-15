@@ -12,11 +12,14 @@ public class WorkRequestController extends Controller {
     private static List<WorkRequest> workRequests = new ArrayList<>();
 
     /**
-     * Ajoute une requête de travail à la liste des requêtes de travail actuelles.
+     * Ajoute une requête de travail à la liste des requêtes de travail actuelles.  Gère les cas où la liste est nulle.
      *
      * @param request la requête de travail à ajouter
      */
     public static void addWorkRequest(WorkRequest request) {
+        if (workRequests == null) {
+            workRequests = new ArrayList<>();
+        }
         workRequests.add(request);
     }
 
@@ -122,7 +125,6 @@ public class WorkRequestController extends Controller {
         }
         return null; // Retourne null si aucune requête n'est trouvée
     }
-
 }
 
 

@@ -158,6 +158,10 @@ public class ProjectController extends Controller {
         return null;
     }
 
+    public static void addProject(Project project) {
+        projectList.add(project); 
+    }
+
     /**
      * Ajoute un nouveau projet.
      * 
@@ -281,6 +285,9 @@ public class ProjectController extends Controller {
         }
 
         Project newProject = new Project(title, projectAddress, startDate, endDate, description, IntervenantController.getCurrentIntervenant(), heureDebut, heureFin, projectType);
+        if (projectList == null) {
+            projectList = new ArrayList<>();
+        }
         projectList.add(newProject);
         System.out.println("Le projet a bien été ajouté.");
 

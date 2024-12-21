@@ -18,5 +18,9 @@ public class App {
         // Page de bienvenue et login via AuthView
         AuthView authView = new AuthView(authController); 
 
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            System.out.println("Saving data before exiting...");
+            Initialization.saveData();
+        }));
     }
 }

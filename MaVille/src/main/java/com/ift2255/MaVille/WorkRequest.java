@@ -2,9 +2,10 @@
 //IFT2255 - Équipe 15
 //Classe WorkRequest
 package com.ift2255.MaVille;
+import java.io.Serializable;
 import java.util.Date;
 
-public class WorkRequest {
+public class WorkRequest implements Serializable  {
     private static int idCounter = 0;  // Compteur pour générer un ID unique pour chaque requête
     private int requestID;
     private Resident resident;
@@ -17,8 +18,13 @@ public class WorkRequest {
     private Intervenant intervenant;
 
     // Constructeur
-    public WorkRequest(String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
-        this.requestID = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
+    public WorkRequest(int id, String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
+        if (this.requestID == 0) {
+            this.requestID = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
+        }
+        else {
+            this.requestID = id;
+        }
         this.title = title;
         this.description = description;
         this.expectedStartDate = expectedStartDate;
