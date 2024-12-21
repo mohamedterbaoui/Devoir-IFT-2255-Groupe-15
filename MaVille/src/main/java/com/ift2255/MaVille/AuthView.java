@@ -60,18 +60,6 @@ public class AuthView extends View{
                 System.exit(0); // Quitte le programme
                 break;
         }
-        // Pour le résident 
-        if (authController.isResidentConnected()) { 
-            ResidentController residentController = authController.getResidentController();
-            ResidentView residentView = new ResidentView(residentController);
-            residentView.displayOptions();
-
-        // Pour l'intervenant
-        } else {
-            IntervenantController intervenantController = authController.getIntervenantController();
-            IntervenantView intervenantView = new IntervenantView(intervenantController);
-            intervenantView.displayOptions();
-        }
     }
 
     /**Gère le logique pour qu'un résident puisse se connecter
@@ -107,23 +95,15 @@ public class AuthView extends View{
      * @return [courriel, motDePasse];
      */
     public String[] displayLoginPage(){
-
 	String input[] = new String[2];
-	System.out.println("Adresse courriel (Si vous souhaitez revenir au menu principal, écriver 'annuler'): ");
-    input[0] = scn.nextLine().trim();
-      if (input[0].equals("annuler")){
-        this.displayWelcomePage();
-      }
+	System.out.println("Adresse courriel : ");
+    input[0] = scn.nextLine().trim(); // Suppression des espaces
 	System.out.println("Mot de Passe");
-    input[1] = scn.nextLine().trim();
-    if (input[1].equals("annuler"){
-      this.displayWelcomePage();
-    } else {// Suppression des espaces
-        try{
-	        input[1] = Hash.hasher(input[1]);
-        } catch (Exception e){
-	        e.printStackTrace();
-        }
+    input[1] = scn.nextLine().trim(); // Suppression des espaces
+    try{
+	    input[1] = Hash.hasher(input[1]);
+    } catch (Exception e){
+	    e.printStackTrace();
     }
 	return input;
     }

@@ -32,7 +32,6 @@ public class Resident extends User{
         this.city = city;
         this.workRequests = new LinkedList<>(); // Initialisation de la liste
 	this.notifications = new Notifications();
-
 	this.quartier = PostalCodes.valueOf(this.postalCode.split(" ")[0].toUpperCase()).getQuartier();
     }
 /**Ajouter un subscripton à un projet
@@ -134,9 +133,4 @@ public class Resident extends User{
 
     public void editPreferences(){}
     
-    public boolean livesAtAddress(String address) {
-        // À implémenter. Il faut faire en sorte qu'un résident ait une adresse avec quelque chose qu'on peut comparer (comme un code postal par exemple)
-        // Pour pouvoir envoyer les notifications aux bonnes personnes
-        return false;
-    }
 }
