@@ -39,12 +39,21 @@ public class Intervenant extends User{
         this.workRequests = new LinkedList<>();
     }
 
-    public void applyToWorkRequest(){
-        //fonction
+    public void applyToWorkRequest() { // Fonction qui appelle applyToWorkRequest() de IntervenantController
+        IntervenantController intervenantController = new IntervenantController(this); 
+        intervenantController.applyToWorkRequest(); 
     }
 
-    public void addNewProject(){
-        //fonction
+    public String getName() {
+        return firstName;
+    }
+
+    public String getType() {
+        return typeIntervenant;
+    }
+
+    public void addNewProject(){ //fonction qui appelle submitProject(Project project) de IntervenantController
+        
     }
     /**Afficher les heures préférées d'un résident pour des projets
      * @param resident Le résident qui nous intéresse
@@ -54,8 +63,12 @@ public class Intervenant extends User{
        return(resident.getPreferredProjectTimes());
     }
 
-    public void editProjectDetails(Project project){
-        //fonction
+    public void modifyProjectStatus(Project project, String newStatus){ //fonction qui appelle modifyProjectStatus(Project project, String newStatus) de IntervenantController
+        
+    }
+
+    public void trackApplicationStatus() { // Fonction qui appelle trackApplicationStatus(int requestID) de IntervenantController
+        
     }
 
 

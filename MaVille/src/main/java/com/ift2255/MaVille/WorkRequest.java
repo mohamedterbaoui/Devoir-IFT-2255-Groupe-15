@@ -12,7 +12,7 @@ public class WorkRequest {
     private String description;
     private String workType; // Initialisé dans le constructeur
     private Date expectedStartDate;
-    private String status;
+    private WorkRequestStatusEnum status;
     private Street workRequestAddress;  // Utilisation de la classe Street pour l'adresse
     private Intervenant intervenant;
 /**Constructeur pour un requête de travail
@@ -24,11 +24,11 @@ public class WorkRequest {
  */
     // Constructeur
     public WorkRequest(String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
-        this.requestID = idCounter++;  // Incrémenter l'ID pour chaque nouvelle requête
+        this.requestID = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
         this.title = title;
         this.description = description;
         this.expectedStartDate = expectedStartDate;
-        this.status = "Pas encore commencé";  // Valeur par défaut pour le statut
+        this.status = WorkRequestStatusEnum.NOT_YET_STARTED; // Valeur par défaut
 
         if (workType == null) {
             this.workType = "Non spécifié";  // Utilise un type par défaut si null
@@ -39,114 +39,174 @@ public class WorkRequest {
         } else { this.workRequestAddress = workRequestAddress; }
     }
 
+    /**
+     * Envoie une notification associée à cette requête de travail.
+     * La notification peut informer le résident et/ou l'intervenant
+     * des mises à jour ou des changements de statut dans la requête.
+     */
     public void sendNotification(){
         // Function
     }
-/**Afficher le déscription de la requête
- * @return le déscription de la requête
- */
+
+    /**
+     * Returns the description of the work request.
+     *
+     * @return the description of the work request
+     */
     public String getDescription() {
         return description;
     }
-/**Afficher la date de début
- * @return la date prévu de début
- */
+
+    /**
+     * Returns the expected start date of the work request.
+     *
+     * @return the expected start date of the work request
+     */
     public Date getExpectedStartDate() {
         return expectedStartDate;
     }
-/**Afficher l'intervenant
- * @return l'intérvenant
- */
+
+    /**
+     * Returns the Intervenant associated with this work request.
+     *
+     * @return the Intervenant associated with this work request
+     */
     public Intervenant getIntervenant() {
         return intervenant;
     }
-/**Afficher l'ID de la requête
- * @return id de la requête
- */
+
+    /**
+     * Returns the ID of the work request.
+     *
+     * @return the ID of the work request
+     */
     public int getRequestID() {
         return requestID;
     }
-/**Afficher le résident qui a fait la demande
- * @return le resident qui a fait la demande
- */
+
+    /**
+     * Returns the Resident who made this work request.
+     *
+     * @return the Resident who made this work request
+     */
     public Resident getResident() {
         return resident;
     }
-/**Afficher le statut de la requête
- * @return Le statut de la requête
- */
-    public String getStatus() {
+
+    /**
+     * Returns the current status of the work request.
+     *
+     * @return the current status of the work request as a WorkRequestStatusEnum
+     */
+    public WorkRequestStatusEnum getStatus() { 
         return status;
     }
-/**Afficher le titre 
- * @return le titre
- */
+
+    /**
+     * Returns the title of the work request.
+     *
+     * @return the title of the work request
+     */
     public String getTitle() {
         return title;
     }
-/**Afficher l'adresse de la requête
- * @return l'adresse
- */
+
+    /**
+     * Returns the address of the work request.
+     *
+     * @return the address of the work request as a Street object
+     */
     public Street getWorkRequestAddress() {
         return workRequestAddress;
     }
-/**Afficher le type de travail
- * @return le type de travail
- */
+
+    /**
+     * Returns the type of work associated with this work request.
+     *
+     * @return the type of work as a String
+     */
     public String getWorkType() {
         return workType;
     }
-/**Changer le déscription de la requête
- * @param description le nouveau déscription
- */
+
+
+    /**
+     * Sets the description of this work request.
+     *
+     * @param description the new description for this work request
+     */
     public void setDescription(String description) {
         this.description = description;
     }
-/**Changer la date de début prévu
- * @param expectedStartDate la nouvelle date de début
- */
+
+    /**
+     * Sets the expected start date for the work request.
+     *
+     * @param expectedStartDate the date to set as the expected start date for the work request
+     */
     public void setExpectedStartDate(Date expectedStartDate) {
         this.expectedStartDate = expectedStartDate;
     }
-/**Changer l'intérvenant
- * @param intervenant Le nouveau intérvenant
- */
+
+    /**
+     * Sets the Intervenant associated with this work request.
+     *
+     * @param intervenant the Intervenant to associate with this work request
+     */
     public void setIntervenant(Intervenant intervenant) {
         this.intervenant = intervenant;
     }
-/**Changer l'ID de la requête
- * @param requestID La nouvelle Id de ce requête
- */
+
+    /**
+     * Sets the ID of the work request.
+     *
+     * @param requestID the ID to set for the work request
+     */
     public void setRequestID(int requestID) {
         this.requestID = requestID;
     }
-/**Changer le résident demandeur
- * @param resident le nouveau resident
- */
+
+    /**
+     * Sets the Resident associated with this work request.
+     *
+     * @param resident the Resident to associate with this work request
+     */
     public void setResident(Resident resident) {
         this.resident = resident;
     }
-/**Changer le statut de la requête
- * @param status nouveau statut
- */
-    public void setStatus(String status) {
+
+    /**
+     * Sets the current status of the work request.
+     *
+     * @param status the status to set for the work request, represented as a WorkRequestStatusEnum
+     */
+    public void setStatus(WorkRequestStatusEnum status) {
         this.status = status;
     }
-/**Changer le titre pour la requête
- * @param title nouveau titre
- */
+
+    /**
+     * Sets the title of the work request.
+     *
+     * @param title the title to set for the work request
+     */
     public void setTitle(String title) {
         this.title = title;
     }
-/**Changer l'adresse de la requête de travail
- * @param workRequestAddress la nouvelle adresse
- */
+
+    /**
+     * Sets the address of the work request.
+     *
+     * @param workRequestAddress the address to set for the work request
+     */
     public void setWorkRequestAddress(Street workRequestAddress) {
         this.workRequestAddress = workRequestAddress;
     }
-/**Changer le type de requête
- * @param workType le nouveau type de travail
- */
+
+    /**
+     * Sets the type of work for the work request.
+     *
+     * @param workType the type of work to set for the work request
+     */
     public void setWorkType(String workType) {
         this.workType = workType;
     }

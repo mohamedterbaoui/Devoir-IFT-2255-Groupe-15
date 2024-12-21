@@ -1,3 +1,4 @@
+
 //Hash.java
 //IFT2255 - Équipe 15
 //Fichier qui gère les méthodes pour faire un hash d'un String

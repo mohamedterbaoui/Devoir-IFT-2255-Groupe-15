@@ -8,6 +8,8 @@ package com.ift2255.MaVille;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -16,7 +18,7 @@ import java.util.Date;
 /**La classe qui gère les activités des résidents
  */
 public class ResidentController extends Controller {
-
+    private static List<Resident> residents = new ArrayList<>(); // Liste statique pour stocker les résidents
     private Resident currentResident;
 
     public ResidentController(Resident resident) {
@@ -181,6 +183,16 @@ public class ResidentController extends Controller {
         JsonObject rootObject = JsonParser.parseString(responseEntrave.getBody()).getAsJsonObject();
         JsonObject result = rootObject.getAsJsonObject("result");
         return result.getAsJsonArray("records");
+    }
+
+    // Méthode pour ajouter un résident (si nécessaire)
+    public static void addResident(Resident resident) {
+        residents.add(resident);
+    }
+
+    // Méthode pour obtenir tous les résidents
+    public static List<Resident> getAllResidents() {
+        return new ArrayList<>(residents); 
     }
 }
 
