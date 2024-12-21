@@ -6,23 +6,18 @@ package com.ift2255.MaVille;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 /**Controlleur pour les fonctions d'intérvenant
  */
 public class IntervenantController extends Controller {
     /**l'intervenant actuel
      */
-    private Intervenant currentIntervenant;
+    private static Intervenant currentIntervenant;
 /**Constructeur pour cette classe
  * @param intervenant L'intérvenant actuel
  */
     public IntervenantController(Intervenant intervenant) {
         currentIntervenant = intervenant;
-    }
-/**Retourne l'intervenant actuel
- * @return intervenant actuel
- */
-    public Intervenant getCurrentIntervenant() {
-        return currentIntervenant;
     }
 /**Soumission d'un projet
  * @param project le nouveau projet
@@ -30,21 +25,6 @@ public class IntervenantController extends Controller {
     public void submitProject(Project project) {
         // Fonction pour soumettre un projet
     }
-
-    /**Affichage des requêtes des travail et les envoyer vers le view pour affichage
-     */
-    public void viewWorkRequests() {
-       List<WorkRequest> workRequests = WorkRequestController.getAllRequests();
-       if (workRequests.isEmpty()){
-	      view.display("Aucune requête de travail disponible.");
-       } else {
-	      for(WorkRequest wr : workRequests){
-		     view.display(wr.toString());
-	      } 
-    }
-    }
-    
-=======
 
     /**
      * Sets the current Intervenant in the IntervenantController.
