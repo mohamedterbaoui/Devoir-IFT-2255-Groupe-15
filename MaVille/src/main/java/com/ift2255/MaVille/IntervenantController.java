@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class IntervenantController extends Controller {
     private static Intervenant currentIntervenant;
 
+
     public IntervenantController(Intervenant intervenant) {
         currentIntervenant = intervenant;
     }
@@ -233,4 +234,4 @@ public class IntervenantController extends Controller {
             }
         } while (choice != 0);
     }
-}
+

@@ -2,6 +2,8 @@
 //IFT2255 - Équipe 15
 //Classe project
 
+/**Classe qui gère la classe projet
+ */
 package com.ift2255.MaVille;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,8 +26,16 @@ public class Project {
     private ProjectType projectType;
     private Boolean completed;
 
-    public Project(String title, String projectAddress, Date startDate, Date endDate, String description, Intervenant intervenant, String heureDebut, String heureFin, ProjectType projectType){
+    public Project(String title,
+                   String projectAddress, 
+                   Date startDate, Date endDate, 
+                   String description, 
+                   Intervenant intervenant, 
+                   String heureDebut, 
+                   String heureFin, 
+                   ProjectType projectType){
         this.projectId = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
+
         this.title = title;
         this.projectAddress = projectAddress;
         this.startDate = startDate;
@@ -44,11 +54,15 @@ public class Project {
      *
      * @return true if the project is completed, false otherwise
      */
+
     public Boolean isCompleted(){
         return this.completed;
     }
   
     //getters
+/**Affiche les residents affecté
+ * @return les résidents affectés
+ */
     public LinkedList<Resident> getAffectedResidents() {
         return affectedResidents;
     }
@@ -163,6 +177,7 @@ public class Project {
      *
      * @return the title of the project
      */
+
     public String getTitle() {
         return title;
     }
@@ -281,6 +296,7 @@ public class Project {
      *
      * @param title the title to set for the project
      */
+
     public void setTitle(String title) {
         this.title = title;
     }

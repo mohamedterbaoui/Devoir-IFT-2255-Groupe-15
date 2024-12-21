@@ -5,7 +5,8 @@
 package com.ift2255.MaVille;
 
 import java.util.Scanner;
-
+/**Classe qui gère la vue des intérvenants
+ */
 public class IntervenantView extends View {
     private IntervenantController intervenantController;
     Scanner scanner = new Scanner(System.in);
@@ -32,6 +33,7 @@ public class IntervenantView extends View {
      * Si l'utilisateur entre une option invalide, la fonction affiche un message d'erreur
      * et redemande une option.
      */
+
     public void displayOptions() {
         int choice = -1;
         boolean validChoice = false;
@@ -100,6 +102,7 @@ public class IntervenantView extends View {
      * 
      * Appele la méthode viewWorkRequests() du contrôleur d'intervenant pour
      * afficher la liste des requêtes de travail.
+
      */
     public void displayWorkRequests() {
         intervenantController.viewWorkRequests(); 

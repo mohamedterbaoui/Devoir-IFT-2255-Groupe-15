@@ -3,7 +3,7 @@
 //Classe WorkRequest
 package com.ift2255.MaVille;
 import java.util.Date;
-
+/**Classe qui gère les requêtes de travail */
 public class WorkRequest {
     private static int idCounter = 0;  // Compteur pour générer un ID unique pour chaque requête
     private int requestID;
@@ -15,7 +15,13 @@ public class WorkRequest {
     private WorkRequestStatusEnum status;
     private Street workRequestAddress;  // Utilisation de la classe Street pour l'adresse
     private Intervenant intervenant;
-
+/**Constructeur pour un requête de travail
+ * @param title Titre pour le requête de travail
+ * @param description Description des travaux à faire 
+ * @param expectedStartDate date de début prévu
+ * @param workType Type de travail
+ * @param workRequestAddress Rue du demandeur de travail
+ */
     // Constructeur
     public WorkRequest(String title, String description, Date expectedStartDate, String workType, Street workRequestAddress) {
         this.requestID = idCounter++;  // Incrémente l'ID pour chaque nouvelle requête
@@ -204,6 +210,20 @@ public class WorkRequest {
     public void setWorkType(String workType) {
         this.workType = workType;
     }
-    
-    
+   
+    public String toString(){
+	StringBuilder sb = new StringBuilder();
+	   
+        sb.append("-------------------------------------\n");
+        sb.append("ID : " + this.getRequestID()+"\n");
+        sb.append("Titre : " + getTitle() + "\n");
+        sb.append("Description : " + getDescription()+ "\n");
+        sb.append("Type de travaux : " + getWorkType()+"\n");
+        sb.append("Date prévue de début : " + getExpectedStartDate()+"\n");
+        sb.append("Adresse : " + getWorkRequestAddress()+"\n");
+        sb.append("Statut : " + getStatus()+"\n");
+        sb.append("Résident affecté : " + getResident().getFirstName() + " " + getResident().getLastName()+"\n");
+        sb.append("-------------------------------------\n");
+	return sb.toString();
+   }
 }

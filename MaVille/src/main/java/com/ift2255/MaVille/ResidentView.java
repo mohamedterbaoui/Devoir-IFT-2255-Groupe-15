@@ -4,13 +4,18 @@
 package com.ift2255.MaVille;
 
 import java.util.Scanner;
-
+/**Classe qui gère la vue des résidents
+ */
 public class ResidentView extends View {
     private ResidentController residentController;
 
     public ResidentView(ResidentController residentController) {
         this.residentController = residentController;
+	residentController.setView(this);
+	System.out.println("ResidentController");
     }
+/**Affiche les options pour l'utilisateur
+ */
 
     /**
      * Affiche le menu principal pour les résidents.
@@ -76,6 +81,8 @@ public class ResidentView extends View {
     }
 
     // Affiche toutes les projets associés au résident
+    /**Afficher et imprimer les requêtes de travail
+     */
     public void viewWorkRequestsResident() {
         System.out.println("\nVoici vos requêtes de travail :");
         residentController.viewWorkRequests(); 
@@ -98,6 +105,7 @@ public class ResidentView extends View {
      * Cette méthode appelle la fonction viewAllEntraves() du contrôleur de résident
      * pour récupérer et afficher la liste des entraves.
      */
+
     public void viewEntravesfromApi(){
         System.out.println("\nVoici la liste des Entraves:");
         residentController.viewAllEntraves();

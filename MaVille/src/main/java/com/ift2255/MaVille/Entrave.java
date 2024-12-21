@@ -17,6 +17,19 @@ public class Entrave {
     private double length; // "length"
 
     // Constructor
+    /**Constructeur pour la classe Entrave
+     * @param id l'ID pour l'entrave
+     * @param idRequest demande d'ID? Je suis pas trop certain
+     * @param streetName nom de la rue
+     * @param impactWidth Portée d'impact?
+     * @param impactType type d'impact
+     * @param fromName le rue de début?
+     * @param toName Le rue de fin?
+     * @param freeParkingPlaces espaces de stationnement disponibles
+     * @param sidewalkBlocked Si le trottoir est barré
+     * @param bikePathBlocked si le piste cyclable est bloqué
+     * @param length le longeur de bloquage?
+     */
     public Entrave(int id, String idRequest, String streetName, String impactWidth, String impactType,
                    int freeParkingPlaces, String sidewalkBlocked, String bikePathBlocked,
                    String fromName, String toName, double length) {

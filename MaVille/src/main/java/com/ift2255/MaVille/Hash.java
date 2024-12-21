@@ -1,8 +1,8 @@
-package com.ift2255.MaVille;
+
 //Hash.java
 //IFT2255 - Équipe 15
 //Fichier qui gère les méthodes pour faire un hash d'un String
-
+package com.ift2255.MaVille;
 import java.security.MessageDigest;
 /**
  * Cette classe sert à créer un hash SHA-256 du mot de passe

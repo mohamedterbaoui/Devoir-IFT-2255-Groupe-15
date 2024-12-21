@@ -1,9 +1,8 @@
-package com.ift2255.MaVille;
 
 //PostalCodes.java
 //IFT2255 - Équipe 15
 //Enum pour les codes postaux
-
+package com.ift2255.MaVille;
 public enum PostalCodes {
 	 H1A(Quartiers.RiviereDesPrairiesPointeAuxTrembles),
 	 H1C(Quartiers.RiviereDesPrairiesPointeAuxTrembles),
@@ -128,6 +127,11 @@ public enum PostalCodes {
 
 	public Quartiers getQuartier(){
 		return this.quartier;
+	}
+
+
+	public static void main(String[] args){
+		System.out.println(PostalCodes.valueOf(args[0]).getQuartier().name());
 	}
 }
 
