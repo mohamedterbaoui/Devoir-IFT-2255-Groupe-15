@@ -20,13 +20,27 @@ import java.util.Date;
 public class ResidentController extends Controller {
     private static List<Resident> residents = new ArrayList<>(); // Liste statique pour stocker les résidents
     private Resident currentResident;
+    private ResidentView residentView;
 
     public ResidentController(Resident resident) {
+        this.currentResident = resident;
+	this.residentView = new ResidentView(this);
+	//this.residentView.displayOptions();
+    }
+
+    public ResidentController(Resident resident, boolean debug){
         this.currentResident = resident;
     }
 
     public Resident getCurrentResident() {
         return currentResident;
+
+    }
+
+    public void handoff(boolean debug){
+        if(!debug){
+            residentView.displayOptions();
+        }
     }
 
     // Affiche les requêtes de travail pour le résident

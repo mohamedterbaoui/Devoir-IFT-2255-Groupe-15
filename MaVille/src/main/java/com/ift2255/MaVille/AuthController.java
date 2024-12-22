@@ -19,11 +19,15 @@ public class AuthController extends Controller {
     
     private ResidentController residentController;
     private IntervenantController intervenantController;
+    private boolean debug;
 
     private boolean isResidentConnected = false;  // Variable pour suivre l'état de la connexion résident
     private boolean isIntervenantConnected = false;  // Variable pour suivre l'état de la connexion intervenant
 
     public AuthController() {}
+    public AuthController(boolean debug){
+        this.debug = debug;
+    }
     /**Méthode pour qu'un résident puisse se connecter. Cela accepte le courriel et le mot de passe de l'utilisateur
      * et retourne un objet Resident
      * @param email    String avec l'adresse courriel
@@ -34,6 +38,7 @@ public class AuthController extends Controller {
         for (Resident resident : residents) {
             if (resident.getEmail().equals(email) && resident.getPassword().equals(password)) {
                 residentController = new ResidentController(resident); // Passer l'utilisateur dans le contrôleur
+		        this.residentController.handoff(this.debug);
                 isResidentConnected = true; //On n'utilise pas cet variable dans le code
                 return true;
             }

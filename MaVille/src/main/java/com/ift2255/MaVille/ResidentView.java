@@ -11,9 +11,10 @@ public class ResidentView extends View {
 
     public ResidentView(ResidentController residentController) {
         this.residentController = residentController;
-	residentController.setView(this);
-	System.out.println("ResidentController");
+	//residentController.setView(this);
+	//System.out.println("ResidentController");
     }
+
 /**Affiche les options pour l'utilisateur
  */
 

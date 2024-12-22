@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * Unit test for simple App.
  */
 public class AuthControllerTest {
-    AuthController auth = new AuthController();
+    AuthController auth = new AuthController(true);
     Resident resident = new Resident("Seven",
             "Nine",
             null,
