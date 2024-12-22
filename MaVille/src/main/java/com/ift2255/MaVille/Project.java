@@ -28,9 +28,9 @@ public class Project implements Serializable  {
     private Boolean completed;
 
 /**Le constructeur pour la classe
- * @param projectId l'ID du projet
+ * @param id l'ID du projet
  * @param title le titre du projet
- * @param projetAddress l'adresse du projet
+ * @param projectAddress l'adresse du projet
  * @param startDate la date de début
  * @param endDate la date de fin
  * @param description le déscription du projet

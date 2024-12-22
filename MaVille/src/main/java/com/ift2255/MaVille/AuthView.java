@@ -96,12 +96,18 @@ public class AuthView extends View{
      */
     public String[] displayLoginPage(){
 	String input[] = new String[2];
-	System.out.println("Adresse courriel : ");
+	System.out.println("Adresse courriel (Si vous souhaitez revenir au menu principal, écrivez annuler) : ");
     input[0] = scn.nextLine().trim(); // Suppression des espaces
-	System.out.println("Mot de Passe");
-    input[1] = scn.nextLine().trim(); // Suppression des espaces
+    if(input[0].equals("annuler")){
+	    this.displayWelcomePage();
+    }
+	System.out.println("Mot de Passe (Si vous souhaitez revenir au menu principal, écrivez annuler) : ");
+    input[1] = scn.nextLine().trim();
+    if(input[1].equals("annuler")){
+	   this.displayWelcomePage();
+    }
     try{
-	    input[1] = Hash.hasher(input[1]);
+	    input[1] = Hash.hasher(input[1]); 
     } catch (Exception e){
 	    e.printStackTrace();
     }
