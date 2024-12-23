@@ -63,29 +63,21 @@ public class ResidentController extends Controller {
         currentResident.getWorkRequests().add(newWorkRequest); // Ajoute la requête à la liste du résident
         WorkRequestController.addWorkRequest(newWorkRequest); // Ajoute la requête à la liste globale
     }
-/**Afficher tous les projets à partir de l'API
- */
-    public void viewAllProjects(){
+
+    private ArrayList<Travaux> fetchAllTravaux() {
         ArrayList<Travaux> travauxList = new ArrayList<>();
-
         HttpClientApi api = new HttpClientApi();
-
-        String resourceIdTravaux = "cc41b532-f12d-40fb-9f55-eb58c9a2b12b"; // ID for Travaux
+        String resourceIdTravaux = "cc41b532-f12d-40fb-9f55-eb58c9a2b12b"; // ID des travaux
 
         ApiResponse responseTravaux = api.getData(resourceIdTravaux);
 
         if (responseTravaux != null && responseTravaux.getStatusCode() == 200) {
             try {
-
-                // Parse Json using Gson library
                 JsonArray records = jsonParsing(responseTravaux);
-
-                // Loop through each record
                 for (int i = 0; i < records.size(); i++) {
-
                     JsonObject record = records.get(i).getAsJsonObject();
 
-                    // Extract fields
+                    // Extraction des champs
                     int id = record.get("_id").getAsInt();
                     String projectId = record.get("id").getAsString();
                     String permitPermitId = record.get("permit_permit_id").isJsonNull() ? null : record.get("permit_permit_id").getAsString();
@@ -103,79 +95,121 @@ public class ResidentController extends Controller {
                     double longitude = record.has("longitude") && !record.get("longitude").isJsonNull() ? record.get("longitude").getAsDouble() : 0.0;
                     double latitude = record.has("latitude") && !record.get("latitude").isJsonNull() ? record.get("latitude").getAsDouble() : 0.0;
 
-                    // Create and add Travaux object to the list
-                    Travaux travaux = new Travaux(id, projectId, permitPermitId, contractNumber, boroughId,
-                            permitCategory, currentStatus, durationStartDate, durationEndDate, reasonCategory,
-                            occupancyName, submitterCategory, organizationName, loadDate, longitude, latitude);
+                    Travaux travaux = new Travaux(id, projectId, permitPermitId, contractNumber, boroughId, permitCategory,
+                            currentStatus, durationStartDate, durationEndDate, reasonCategory, occupancyName,
+                            submitterCategory, organizationName, loadDate, longitude, latitude);
                     travauxList.add(travaux);
                 }
-
-                // Display all Travaux objects
-                for (Travaux travaux : travauxList) {
-                    System.out.println(travaux.toString());
-                }
-
             } catch (Exception e) {
                 System.err.println("Error parsing JSON: " + e.getMessage());
             }
         } else {
             System.err.println("Failed to retrieve data");
         }
+        return travauxList;
     }
-/**Afficher les entraves et les envoyer sur la vue
+
+/**Afficher tous les projets à partir de l'API
  */
-    public void viewAllEntraves(){
-        ArrayList<Entrave> entraves = new ArrayList<>();
+    // Méthode pour afficher les projets dans les trois prochains mois
+    public void viewUpcomingProjects() {
+        ArrayList<Travaux> travauxList = fetchAllTravaux();
+        Date currentDate = new Date();
+        Date threeMonthsFromNow = new Date(currentDate.getTime() + (90L * 24 * 60 * 60 * 1000)); // 90 jours
 
+        System.out.println("Projets à venir dans les 3 prochains mois:");
+        for (Travaux travaux : travauxList) {
+            if (travaux.getDurationStartDate() != null) {
+                Date startDate = Travaux.parseDate(travaux.getDurationStartDate());
+                if (startDate != null && startDate.after(currentDate) && startDate.before(threeMonthsFromNow)) {
+                    System.out.println(travaux.toString());
+                }
+            }
+        }
+    }
+
+    // Méthode pour filtrer ou rechercher des travaux par quartier
+    public void filterWorkByBorough(String borough) {
+        ArrayList<Travaux> travauxList = fetchAllTravaux();
+        System.out.println("Travaux dans le quartier " + borough + ":");
+        if (borough.equalsIgnoreCase("0")){
+            for (Travaux travaux : travauxList) {{
+                    System.out.println(travaux.toString());
+        }}}
+        else {for (Travaux travaux : travauxList) {
+            if (borough.equalsIgnoreCase(travaux.getBoroughId())) {
+                System.out.println(travaux.toString());
+            }
+        }
+    }}
+
+    /** Récupérer toutes les entraves depuis l'API */
+    public List<Entrave> fetchAllEntraves() {
+        List<Entrave> entraves = new ArrayList<>();
         HttpClientApi api = new HttpClientApi();
-
-        String resourceIdEntraves = "a2bc8014-488c-495d-941b-e7ae1999d1bd"; // id entraves
+        String resourceIdEntraves = "a2bc8014-488c-495d-941b-e7ae1999d1bd"; // ID API
 
         ApiResponse responseEntrave = api.getData(resourceIdEntraves);
 
         if (responseEntrave != null && responseEntrave.getStatusCode() == 200) {
             try {
-
-                // Parse JSON using Gson library
                 JsonArray records = jsonParsing(responseEntrave);
 
-
-                // Loop through each record
                 for (int i = 0; i < records.size(); i++) {
                     JsonObject record = records.get(i).getAsJsonObject();
 
-                    int id = record.get("_id").getAsInt();
-                    String idRequest = record.get("id_request").getAsString();
-                    String streetName = record.get("name").getAsString();
-                    String impactWidth = record.get("streetimpactwidth").getAsString();
-                    String impactType = record.get("streetimpacttype").getAsString();
-                    int freeParkingPlaces = record.has("nbfreeparkingplace") && !record.get("nbfreeparkingplace").isJsonNull()
-                            ? Integer.parseInt(record.get("nbfreeparkingplace").getAsString())
-                            : 0;
-                    String sidewalkBlocked = record.get("sidewalk_blockedtype").getAsString();
-                    String bikePathBlocked = record.get("bikepath_blockedtype").getAsString();
-                    String fromName = record.get("fromname").getAsString();
-                    String toName = record.get("toname").getAsString();
-                    double length = Double.parseDouble(record.get("length").getAsString());
+                    // Récupérer et convertir isArterial
+                    boolean isArterial = "t".equals(record.get("isarterial").getAsString());
 
-                    // Create and add Entrave object to the list
-                    Entrave entrave = new Entrave(id, idRequest, streetName, impactWidth, impactType, freeParkingPlaces,
-                            sidewalkBlocked, bikePathBlocked, fromName, toName, length);
+                    Entrave entrave = new Entrave(
+                            record.get("_id").getAsInt(),
+                            record.get("id_request").getAsString(),
+                            record.get("streetid").getAsString().trim(),
+                            record.get("shortname").getAsString().trim(), // Ajout du shortName
+                            record.get("streetimpactwidth").getAsString(),
+                            record.get("streetimpacttype").getAsString(),
+                            record.has("nbfreeparkingplace") && !record.get("nbfreeparkingplace").isJsonNull()
+                                    ? Integer.parseInt(record.get("nbfreeparkingplace").getAsString())
+                                    : 0,
+                            record.get("sidewalk_blockedtype").getAsString(),
+                            record.get("bikepath_blockedtype").getAsString(),
+                            record.get("fromname").getAsString(),
+                            record.get("toname").getAsString(),
+                            Double.parseDouble(record.get("length").getAsString()),
+                            isArterial // Ajouter isArterial
+                    );
                     entraves.add(entrave);
-                }
-
-                // Display all Entrave objects
-                for (Entrave entrave : entraves) {
-                    System.out.println(entrave.toString());
                 }
 
             } catch (Exception e) {
                 System.err.println("Error parsing JSON: " + e.getMessage());
             }
         } else {
-            System.err.println("Failed to retrieve data: " + (responseEntrave != null ? responseEntrave.getMessage() : "No responseEntrave"));
+            System.err.println("Failed to retrieve data: " +
+                    (responseEntrave != null ? responseEntrave.getMessage() : "No response"));
         }
+
+        return entraves;
     }
+
+    /** Filtrer les entraves par le nom de la rue */
+    public void filterEntraveByRue(String streetName) {
+        List<Entrave> allEntraves = fetchAllEntraves();
+        System.out.println("Entraves dans la rue" + streetName + ":");
+
+        if (streetName.equalsIgnoreCase("0")){
+            for (Entrave entrave : allEntraves) {{
+                System.out.println(entrave.toString());
+            }}}
+        else {
+            for (Entrave entrave : allEntraves)
+            {
+                if (streetName.equalsIgnoreCase(entrave.getShortName())) {
+                System.out.println(entrave.toString());
+            }
+        }}
+    }
+
 /**Fonction pour parser le Json
  * @param responseEntrave la réponse de l'API pour les éntraves
  * @return Un array JSON

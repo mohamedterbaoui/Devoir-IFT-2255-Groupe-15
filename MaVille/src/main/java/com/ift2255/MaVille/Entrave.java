@@ -1,5 +1,5 @@
-//Entrave.java
-//IFT2255 - Équipe 15
+// Entrave.java
+// IFT2255 - Équipe 15
 // Classe Entrave
 package com.ift2255.MaVille;
 
@@ -7,6 +7,7 @@ public class Entrave {
     private int id; // "_id"
     private String idRequest; // "id_request"
     private String streetName; // "name"
+    private String shortName; // "shortname"
     private String impactWidth; // "streetimpactwidth"
     private String impactType; // "streetimpacttype"
     private int freeParkingPlaces; // "nbfreeparkingplace"
@@ -15,27 +16,16 @@ public class Entrave {
     private String fromName; // "fromname"
     private String toName; // "toname"
     private double length; // "length"
+    private boolean isArterial; // "isarterial"
 
-    // Constructor
-    /**Constructeur pour la classe Entrave
-     * @param id l'ID pour l'entrave
-     * @param idRequest demande d'ID? Je suis pas trop certain
-     * @param streetName nom de la rue
-     * @param impactWidth Portée d'impact?
-     * @param impactType type d'impact
-     * @param fromName le rue de début?
-     * @param toName Le rue de fin?
-     * @param freeParkingPlaces espaces de stationnement disponibles
-     * @param sidewalkBlocked Si le trottoir est barré
-     * @param bikePathBlocked si le piste cyclable est bloqué
-     * @param length le longeur de bloquage?
-     */
-    public Entrave(int id, String idRequest, String streetName, String impactWidth, String impactType,
-                   int freeParkingPlaces, String sidewalkBlocked, String bikePathBlocked,
-                   String fromName, String toName, double length) {
+    // Constructeur
+    public Entrave(int id, String idRequest, String streetName, String shortName, String impactWidth, String impactType,
+                   int freeParkingPlaces, String sidewalkBlocked, String bikePathBlocked, String fromName,
+                   String toName, double length, boolean isArterial) {
         this.id = id;
         this.idRequest = idRequest;
         this.streetName = streetName;
+        this.shortName = shortName;
         this.impactWidth = impactWidth;
         this.impactType = impactType;
         this.freeParkingPlaces = freeParkingPlaces;
@@ -44,19 +34,131 @@ public class Entrave {
         this.fromName = fromName;
         this.toName = toName;
         this.length = length;
+        this.isArterial = isArterial;
     }
 
-    // toString method for display
+    // Getters et setters
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getIdRequest() {
+        return idRequest;
+    }
+
+    public void setIdRequest(String idRequest) {
+        this.idRequest = idRequest;
+    }
+
+    public String getStreetName() {
+        return streetName;
+    }
+
+    public void setStreetName(String streetName) {
+        this.streetName = streetName;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getImpactWidth() {
+        return impactWidth;
+    }
+
+    public void setImpactWidth(String impactWidth) {
+        this.impactWidth = impactWidth;
+    }
+
+    public String getImpactType() {
+        return impactType;
+    }
+
+    public void setImpactType(String impactType) {
+        this.impactType = impactType;
+    }
+
+    public int getFreeParkingPlaces() {
+        return freeParkingPlaces;
+    }
+
+    public void setFreeParkingPlaces(int freeParkingPlaces) {
+        this.freeParkingPlaces = freeParkingPlaces;
+    }
+
+    public String getSidewalkBlocked() {
+        return sidewalkBlocked;
+    }
+
+    public void setSidewalkBlocked(String sidewalkBlocked) {
+        this.sidewalkBlocked = sidewalkBlocked;
+    }
+
+    public String getBikePathBlocked() {
+        return bikePathBlocked;
+    }
+
+    public void setBikePathBlocked(String bikePathBlocked) {
+        this.bikePathBlocked = bikePathBlocked;
+    }
+
+    public String getFromName() {
+        return fromName;
+    }
+
+    public void setFromName(String fromName) {
+        this.fromName = fromName;
+    }
+
+    public String getToName() {
+        return toName;
+    }
+
+    public void setToName(String toName) {
+        this.toName = toName;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+
+    public boolean isArterial() {
+        return isArterial;
+    }
+
+    public void setArterial(boolean arterial) {
+        isArterial = arterial;
+    }
+
+    // Méthode toString pour affichage
     @Override
     public String toString() {
         return "Entrave{" +
                 "ID=" + id +
-                ", Street='" + streetName + '\'' +
+                ", ID Request='" + idRequest + '\'' +
+                ", Street Name='" + streetName + '\'' +
+                ", Short Name='" + shortName + '\'' +
                 ", Impact Width='" + impactWidth + '\'' +
                 ", Impact Type='" + impactType + '\'' +
+                ", Free Parking Places=" + freeParkingPlaces +
+                ", Sidewalk Blocked='" + sidewalkBlocked + '\'' +
+                ", Bike Path Blocked='" + bikePathBlocked + '\'' +
                 ", From='" + fromName + '\'' +
                 ", To='" + toName + '\'' +
                 ", Length=" + length + " meters" +
+                ", Is Arterial=" + isArterial +
                 '}';
     }
 }

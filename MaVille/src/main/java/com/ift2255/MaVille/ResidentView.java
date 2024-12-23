@@ -41,8 +41,9 @@ public class ResidentView extends View {
                     System.out.println("1. Voir mes requêtes de travail");
                     System.out.println("2. Ajouter une requête de travail");
                     System.out.println("3. Consulter les travaux en cours ou à venir");
-                    System.out.println("4. Consulter les entraves");
-                    System.out.println("5. Se déconnecter");
+                    System.out.println("4. Consulter les travaux à venir dans les 3 prochains mois");
+                    System.out.println("5. Consulter les entraves");
+                    System.out.println("6. Se déconnecter");
                 }
             } else {
                 System.out.println("Entrée invalide. Veuillez entrer un nombre entier.");
@@ -60,16 +61,21 @@ public class ResidentView extends View {
                 // Appel la méthode pour ajouter une requête de travail
                 break;
             case 3:
-                // Consulter la listes des travaux
+                // Consulter la liste des travaux
                 viewProjectsfromApi();
                 displayOptions();
                 break;
             case 4:
+                // Consulter la liste des travaux
+                viewUpcomingProjects();
+                displayOptions();
+                break;
+            case 5:
                 // Consulter les entraves
                 viewEntravesfromApi();
                 displayOptions();
                 break;
-            case 5:
+            case 6:
                 // Se déconnecte ou revient à l'écran d'accueil -- A IMPLÉMENTER, présentement ça ferme le programme
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
                 logoutResident();
@@ -80,7 +86,7 @@ public class ResidentView extends View {
         scanner.close();
     }
 
-    // Affiche toutes les projets associés au résident
+    // Affiche touts les projets associés au résident
     /**Afficher et imprimer les requêtes de travail
      */
     public void viewWorkRequestsResident() {
@@ -95,8 +101,15 @@ public class ResidentView extends View {
      * Affiche ensuite cette liste.
      */
     public void viewProjectsfromApi(){
-        System.out.println("\nVoici la liste des travaux en cours ou à venir:");
-        residentController.viewAllProjects();
+        System.out.println("\nEntrer le nom du quartier pour filtrer l'affichage, sinon 0 pour tout afficher");
+        Scanner scan = new Scanner(System.in);
+        String borough = scan.nextLine();
+        residentController.filterWorkByBorough(borough);
+    }
+
+    public void viewUpcomingProjects(){
+        System.out.println("\nVoici la liste des travaux à venir dans 3 mois:");
+        residentController.viewUpcomingProjects();
     }
 
     /**
@@ -106,8 +119,10 @@ public class ResidentView extends View {
      * pour récupérer et afficher la liste des entraves.
      */
     public void viewEntravesfromApi(){
-        System.out.println("\nVoici la liste des Entraves:");
-        residentController.viewAllEntraves();
+        System.out.println("\nEntrer le nom de la rue pour filtrer l'affichage, sinon 0 pour tout afficher\"");
+        Scanner scan = new Scanner(System.in);
+        String street = scan.nextLine();
+        residentController.filterEntraveByRue(street);
     }
 
     /**
