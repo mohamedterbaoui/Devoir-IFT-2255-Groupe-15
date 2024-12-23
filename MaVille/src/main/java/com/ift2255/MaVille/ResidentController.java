@@ -114,17 +114,18 @@ public class ResidentController extends Controller {
  */
     // Méthode pour afficher les projets dans les trois prochains mois
     public void viewUpcomingProjects() {
-        ArrayList<Travaux> travauxList = fetchAllTravaux();
+        List<Project> projects = ProjectController.getProjectList();
         Date currentDate = new Date();
         Date threeMonthsFromNow = new Date(currentDate.getTime() + (90L * 24 * 60 * 60 * 1000)); // 90 jours
 
         System.out.println("Projets à venir dans les 3 prochains mois:");
-        for (Travaux travaux : travauxList) {
-            if (travaux.getDurationStartDate() != null) {
-                Date startDate = Travaux.parseDate(travaux.getDurationStartDate());
-                if (startDate != null && startDate.after(currentDate) && startDate.before(threeMonthsFromNow)) {
-                    System.out.println(travaux.toString());
-                }
+        for (Project project : projects) {
+            // Vérifiez si la date de début du projet est entre la date actuelle et 3 mois plus tard
+            if (project.getStartDate() != null &&
+                    project.getStartDate().after(currentDate) &&
+                    project.getStartDate().before(threeMonthsFromNow)) {
+                // Affichez les détails du projet
+                System.out.println(project);
             }
         }
     }
@@ -139,7 +140,7 @@ public class ResidentController extends Controller {
         }}}
         else {for (Travaux travaux : travauxList) {
             if (borough.equalsIgnoreCase(travaux.getBoroughId())) {
-                System.out.println(travaux.toString());
+                System.out.println(travaux);
             }
         }
     }}

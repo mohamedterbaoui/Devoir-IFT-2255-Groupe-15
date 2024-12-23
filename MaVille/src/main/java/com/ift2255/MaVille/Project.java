@@ -314,30 +314,14 @@ public class Project implements Serializable  {
 
     @Override
     public String toString() {
-        // Formater la date de début et de fin
-        String startDateString = (startDate != null) ? new SimpleDateFormat("yyyy-MM-dd").format(startDate) : "N/A";
-        String endDateString = (endDate != null) ? new SimpleDateFormat("yyyy-MM-dd").format(endDate) : "N/A";
-
-        // Récupérer les détails de l'intervenant
-        String intervenantName = (intervenant != null) ? intervenant.getFirstName() + " " + intervenant.getLastName() : "Aucun intervenant";
-
-        // Construire la chaîne de caractères représentant le projet
-        return String.format("Projet ID: %d\nTitre: %s\nDescription: %s\nAdresse: %s\nDate de début: %s\nDate de fin: %s\n" +
-                        "Heure de début: %s\nHeure de fin: %s\nType: %s\nStatut: %s\nIntervenant: %s\n" +
-                        "Complété: %s",
-                projectId,
-                title,
-                description,
-                projectAddress != null ? projectAddress.toString() : "Adresse inconnue",
-                startDateString,
-                endDateString,
-                heureDebut,
-                heureFin,
-                projectType != null ? projectType.toString() : "Type inconnu",
-                status != null ? status.toString() : "Statut inconnu",
-                intervenantName,
-                completed ? "Oui" : "Non");
+        String sb = "---------------------------------------------------------\n" +
+                    "Project ID :" + projectId + "\n" +
+                    "Titre :" + title + "\n" +
+                    "description : " + description + "\n" +
+                    "Adresse : " + projectAddress + "\n" +
+                    "date de debut : " + startDate + "\n" +
+                    "date de fin : " + endDate + "\n" +
+                    "---------------------------------------------------------\n";
+        return sb;
     }
-
-
 }

@@ -31,8 +31,8 @@ public class ResidentView extends View {
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1; // Initialiser choice
-        while (choice < 1 || choice > 5) { // Boucle jusqu'à une entrée valide
-            System.out.print("\nVeuillez entrer votre choix (1-5) : ");
+        while (choice < 1 || choice > 6) { // Boucle jusqu'à une entrée valide
+            System.out.print("\nVeuillez entrer votre choix (1-6) : ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 if (choice < 1 || choice > 6) {

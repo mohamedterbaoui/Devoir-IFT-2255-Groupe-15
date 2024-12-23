@@ -145,20 +145,15 @@ public class Entrave {
     // Méthode toString pour affichage
     @Override
     public String toString() {
-        return "Entrave{" +
-                "ID=" + id +
-                ", ID Request='" + idRequest + '\'' +
-                ", Street Name='" + streetName + '\'' +
-                ", Short Name='" + shortName + '\'' +
-                ", Impact Width='" + impactWidth + '\'' +
-                ", Impact Type='" + impactType + '\'' +
-                ", Free Parking Places=" + freeParkingPlaces +
-                ", Sidewalk Blocked='" + sidewalkBlocked + '\'' +
-                ", Bike Path Blocked='" + bikePathBlocked + '\'' +
-                ", From='" + fromName + '\'' +
-                ", To='" + toName + '\'' +
-                ", Length=" + length + " meters" +
-                ", Is Arterial=" + isArterial +
-                '}';
+        return  "---------------------------------------------\n" +
+                "ID=" + id + "\n" +
+                "Street Name= " + streetName + "\n" +
+                "Short Name= " + shortName + "\n" +
+                "Impact Width= " + impactWidth + "\n" +
+                "Impact Type= " + impactType + "\n" +
+                "From= " + fromName + "\n" +
+                "To= " + toName + "\n" +
+                "Length= " + length + " meters" + "\n" +
+                "---------------------------------------------\n";
     }
 }

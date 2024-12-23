@@ -211,14 +211,14 @@ public class Travaux {
 
     @Override
     public String toString() {
-        return "Travaux{" +
-                "ID=" + id +
-                ", Borough='" + boroughId + '\'' +
-                ", Permit Category='" + permitCategory + '\'' +
-                ", Current Status='" + currentStatus + '\'' +
-                ", Start Date='" + durationStartDate + '\'' +
-                ", End Date='" + durationEndDate + '\'' +
-                ", Coordinates=(" + latitude + ", " + longitude + ")" +
-                '}';
+        return  "----------------------------------------------------------\n" +
+                "ID=" + id + "\n" +
+                "Borough=" + boroughId + "\n" +
+                "Permit Category=" + permitCategory + "\n" +
+                "Current Status=" + currentStatus + "\n" +
+                "Start Date=" + durationStartDate + "\n" +
+                "End Date=" + durationEndDate + "\n" +
+                "Coordinates=(" + latitude + ", " + longitude + ")" + "\n" +
+                "----------------------------------------------------------\n";
     }
 }
