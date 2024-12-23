@@ -1,0 +1,5 @@
+Alice,Smith,1990-05-12,alice.smith@example.com,test,555-1234,123 Elm Street,H3Z 2Y7,Montreal
+Bob,Johnson,1985-08-20,bob.johnson@example.com,hashedpassword2,555-5678,456 Oak Avenue,H2X 3R5,Quebec
+Charlie,Brown,1992-11-15,charlie.brown@example.com,hashedpassword3,555-9012,789 Pine Road,H1Y 1K9,Toronto
+Diana,Prince,1995-03-25,diana.prince@example.com,hashedpassword4,555-3456,321 Maple Lane,H3A 2K2,Ottawa
+Eve,White,1988-10-10,eve.white@example.com,hashedpassword5,555-7890,654 Birch Street,H3B 1R1,Vancouver

@@ -132,5 +132,11 @@ public class Resident extends User{
     }
 
     public void editPreferences(){}
+
+    @Override
+    public String toString(){
+        String message = firstName + ": " + email + "\n" + password + "\n";
+        return message;
+    }
     
 }

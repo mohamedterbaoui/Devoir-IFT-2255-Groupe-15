@@ -229,7 +229,6 @@ public class WorkRequest implements Serializable  {
         sb.append("Date prévue de début : " + getExpectedStartDate()+"\n");
         sb.append("Adresse : " + getWorkRequestAddress()+"\n");
         sb.append("Statut : " + getStatus()+"\n");
-        sb.append("Résident affecté : " + getResident().getFirstName() + " " + getResident().getLastName()+"\n");
         sb.append("-------------------------------------\n");
 	return sb.toString();
    }
