@@ -5,6 +5,7 @@
 /**Classe qui gère la classe projet
  */
 package com.ift2255.MaVille;
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.io.Serializable;
@@ -309,4 +310,34 @@ public class Project implements Serializable  {
     public void setTitle(String title) {
         this.title = title;
     }
+
+
+    @Override
+    public String toString() {
+        // Formater la date de début et de fin
+        String startDateString = (startDate != null) ? new SimpleDateFormat("yyyy-MM-dd").format(startDate) : "N/A";
+        String endDateString = (endDate != null) ? new SimpleDateFormat("yyyy-MM-dd").format(endDate) : "N/A";
+
+        // Récupérer les détails de l'intervenant
+        String intervenantName = (intervenant != null) ? intervenant.getFirstName() + " " + intervenant.getLastName() : "Aucun intervenant";
+
+        // Construire la chaîne de caractères représentant le projet
+        return String.format("Projet ID: %d\nTitre: %s\nDescription: %s\nAdresse: %s\nDate de début: %s\nDate de fin: %s\n" +
+                        "Heure de début: %s\nHeure de fin: %s\nType: %s\nStatut: %s\nIntervenant: %s\n" +
+                        "Complété: %s",
+                projectId,
+                title,
+                description,
+                projectAddress != null ? projectAddress.toString() : "Adresse inconnue",
+                startDateString,
+                endDateString,
+                heureDebut,
+                heureFin,
+                projectType != null ? projectType.toString() : "Type inconnu",
+                status != null ? status.toString() : "Statut inconnu",
+                intervenantName,
+                completed ? "Oui" : "Non");
+    }
+
+
 }
