@@ -23,6 +23,7 @@ public class ResidentController extends Controller {
 
     public ResidentController(Resident resident) {
         this.currentResident = resident;
+        new ResidentView (this);
     }
 
     public Resident getCurrentResident() {

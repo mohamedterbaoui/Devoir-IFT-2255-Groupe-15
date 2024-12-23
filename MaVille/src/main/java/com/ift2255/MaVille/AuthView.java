@@ -2,7 +2,7 @@
 //IFT2255 - Équipe 15
 //Classe AuthView
 package com.ift2255.MaVille;
-/** Gère le vue pour l'authentication et l'inscription d'un utilisateur
+/** Gère la vue pour l'authentication et l'inscription d'un utilisateur
  */
 public class AuthView extends View{
     private String emailField;
@@ -27,7 +27,7 @@ public class AuthView extends View{
     public void displayWelcomePage(){
         afficherLogo();
         System.out.println("Bienvenue à l'Application MaVille");
-	this.mainMenu();
+	    this.mainMenu();
     }
     public void mainMenu(){
         System.out.println("Vous-êtes: ");

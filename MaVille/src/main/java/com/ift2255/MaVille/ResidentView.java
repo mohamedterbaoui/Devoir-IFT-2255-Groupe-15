@@ -11,8 +11,7 @@ public class ResidentView extends View {
 
     public ResidentView(ResidentController residentController) {
         this.residentController = residentController;
-	residentController.setView(this);
-	System.out.println("ResidentController");
+	    displayOptions();
     }
 /**Affiche les options pour l'utilisateur
  */
@@ -26,8 +25,9 @@ public class ResidentView extends View {
         System.out.println("1. Voir mes requêtes de travail");
         System.out.println("2. Ajouter une requête de travail");
         System.out.println("3. Consulter les travaux en cours ou à venir");
-        System.out.println("4. Consulter les entraves");
-        System.out.println("5. Se déconnecter");
+        System.out.println("4. Consulter les travaux à venir dans les 3 prochains mois");
+        System.out.println("5. Consulter les entraves");
+        System.out.println("6. Se déconnecter");
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1; // Initialiser choice
@@ -35,7 +35,7 @@ public class ResidentView extends View {
             System.out.print("\nVeuillez entrer votre choix (1-5) : ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
-                if (choice < 1 || choice > 5) {
+                if (choice < 1 || choice > 6) {
                     System.out.println("Option invalide. Essayez à nouveau.");
                     System.out.println("\nVoici les options disponibles :");
                     System.out.println("1. Voir mes requêtes de travail");
