@@ -12,8 +12,8 @@ import java.text.ParseException;
 /** Controlleur pour le processus d'authentication*/
 public class AuthController extends Controller {
 
-    LinkedList<Resident> residents = new LinkedList<>();
-    private static LinkedList<Intervenant> intervenants = new LinkedList<>();
+    static LinkedList<Resident> residents = new LinkedList<>();
+    static LinkedList<Intervenant> intervenants = new LinkedList<>();
 
     private SimpleDateFormat dateFormatter= new SimpleDateFormat("yyyy-MM-dd");
     

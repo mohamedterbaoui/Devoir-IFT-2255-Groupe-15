@@ -13,8 +13,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Initialization {
-    /*
-    public static void initialize(AuthController authController) {
+
+    /*public static void initialize(AuthController authController) {
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -32,36 +32,29 @@ public class Initialization {
             Intervenant intervenant2 = new Intervenant("Entreprise B", "Privé", dateFormat.parse("1965-09-16"), "entrepriseB@mail.com", Hash.hasher("securepass"), "1234567890", "654 Rue E", "Entrepreneur privé", 102);
             Intervenant intervenant3 = new Intervenant("Entreprise C", "Particulier", dateFormat.parse("1999-07-17"), "entrepriseC@mail.com", Hash.hasher("pass789"), "1234567890", "987 Rue F", "Particulier", 103);
 
-            authController.intervenants.add(intervenant1);
-            authController.intervenants.add(intervenant2);
-            authController.intervenants.add(intervenant3);
-
-            // Requêtes de travail
-            ResidentController residentController1 = new ResidentController(resident1);
-            ResidentController residentController2 = new ResidentController(resident2);
-
-            // Requêtes de travail associées aux résidents
-            resident1.addWorkRequest(residentController1, "Réparation route", "Réparer les nids-de-poule sur la rue principale.", "Travaux routiers", dateFormat.parse("2024-10-30"), new Street(1, "912 Rue F"));
-
-            resident1.addWorkRequest(residentController1, "Panneau stop à ajouter", "Installer un nouveau panneau stop sur la rue", "Travaux de signalisation", dateFormat.parse("2024-11-15"), new Street(2, "345 Rue T"));
-
-            resident2.addWorkRequest(residentController2, "Entretien paysager", "Tailler les arbres et nettoyer les espaces verts.", "Entretien paysager", dateFormat.parse("2024-11-20"), new Street(3, "567 Rue Y"));
+            AuthController.intervenants.add(intervenant1);
+            AuthController.intervenants.add(intervenant2);
+            AuthController.intervenants.add(intervenant3);
         
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-     */
-    private static final String PROJECTS_FILE = "projects.txt";
-    private static final String WORK_REQUESTS_FILE = "workRequests.txt";
+    }*/
+
+    private static final String PROJECTS_FILE = "src/main/java/com/ift2255/MaVille/projects.txt";
+    private static final String WORK_REQUESTS_FILE = "src/main/java/com/ift2255/MaVille/workRequests.txt";
+
+    private static final String INTERVENANT_FILE ="src/main/java/com/ift2255/MaVille/intervenants.txt";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static List<Intervenant> intervenants = new LinkedList<>();
+
+    //private static List<Intervenant> intervenants = new LinkedList<>();
 
 
     public static void initialize(AuthController authController) {
-        loadProjects();
-        loadWorkRequests();  
         initializeIntervenants();
+        loadProjects();
+        System.out.println(ProjectController.getProjectList());
+        loadWorkRequests();
     }
 
     private static void loadProjects() {
@@ -73,7 +66,7 @@ public class Initialization {
                 if (parts.length >= 10) {
                     int id = Integer.parseInt(parts[0]);
                     String title = parts[1];
-                    Quartiers projectAddress = Quartiers.valueOf(parts[2].toUpperCase());
+                    Quartiers projectAddress = Quartiers.valueOf(parts[2]);
                     Date startDate = dateFormat.parse(parts[3]);
                     Date endDate = dateFormat.parse(parts[4]);
                     String description = parts[5];
@@ -83,10 +76,10 @@ public class Initialization {
                     ProjectType projectType = ProjectType.valueOf(parts[9]);
 
                     // Supposons que vous ayez une méthode pour obtenir tous les intervenants
-                    List<Intervenant> intervenants = AuthController.getAllIntervenants(); 
+                    //List<Intervenant> intervenants = AuthController.getAllIntervenants();
 
                     Intervenant intervenant = null;
-                    for (Intervenant i : intervenants) {
+                    for (Intervenant i : AuthController.getAllIntervenants()) {
                         if (i.getCityId() == intervenantCityId) { // Assurez-vous que getId() retourne l'ID correct
                             intervenant = i;
                             break;
@@ -144,20 +137,47 @@ public class Initialization {
     }
 
     public static void initializeIntervenants() {
-        List<Intervenant> loadedIntervenants = FileOps.<Intervenant>loadFromFile("intervenants.dat");
-        if (loadedIntervenants != null) {
-            for (Intervenant intervenant : loadedIntervenants) {
-                if (intervenants == null) {
-                    intervenants = new LinkedList<>();
+        // Lire le fichier texte
+        try (BufferedReader br = new BufferedReader(new FileReader(INTERVENANT_FILE))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Diviser la ligne en fonction des virgules
+                String[] data = line.split(",");
+                // S'assurer qu'il y a suffisamment de données
+                if (data.length == 9) {
+                    try {
+                        // Extraire les données de la ligne
+                        String firstName = data[0].trim();
+                        String lastName = data[1].trim();
+                        Date birthDate = new SimpleDateFormat("yyyy-MM-dd").parse(data[2].trim()); // Assurez-vous que le format de la date est correct
+                        String email = data[3].trim();
+                        String password = data[4].trim();
+                        String phone = data[5].trim();
+                        String userAddress = data[6].trim();
+                        String typeIntervenant = data[7].trim();
+                        int cityId = Integer.parseInt(data[8].trim());
+
+                        // Créer un nouvel intervenant avec les données extraites
+                        Intervenant intervenant = new Intervenant(firstName, lastName, birthDate, email, password, phone, userAddress, typeIntervenant, cityId);
+
+                        // Ajouter l'intervenant à la liste
+                        AuthController.intervenants.add(intervenant);
+
+                    } catch (Exception e) {
+                        System.err.println("Erreur lors de la lecture d'une ligne du fichier : " + e.getMessage());
+                    }
+                } else {
+                    System.err.println("Ligne mal formatée dans le fichier intervenants.txt : " + line);
                 }
-                intervenants.add(intervenant);
             }
+        } catch (IOException e) {
+            System.err.println("Erreur lors de la lecture du fichier : " + e.getMessage());
         }
     }
 
     public static void saveData() {
         FileOps.saveToFile(ProjectController.getProjectList(), FileOps.PROJECTS_FILE);
         FileOps.saveToFile(WorkRequestController.getAllRequests(), FileOps.WORK_REQUESTS_FILE);
-        FileOps.saveToFile(AuthController.getAllIntervenants(), "intervenants.dat"); 
+        //FileOps.saveToFile(AuthController.getAllIntervenants(), FileOps.INTERVENANT_FILE);
     }
 }

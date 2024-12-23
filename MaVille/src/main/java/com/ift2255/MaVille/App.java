@@ -15,12 +15,12 @@ public class App {
 
         Initialization.initialize(authController);
 
-        // Page de bienvenue et login via AuthView
-        AuthView authView = new AuthView(authController); 
+        //Page de bienvenue et login via AuthView
+        AuthView authView = new AuthView(authController);
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             System.out.println("Saving data before exiting...");
-            Initialization.saveData(); // Save data of intervenants, work requests and projects (need to add for residents)
+            //Initialization.saveData(); // Save data of intervenants, work requests and projects (need to add for residents)
         }));
     }
 }
