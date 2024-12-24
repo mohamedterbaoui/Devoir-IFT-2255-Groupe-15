@@ -62,6 +62,13 @@ public class Resident extends User{
         residentController.addWorkRequest(title, description, workType, expectedStartDate, workRequestAddress);
     }
 
+    /**
+     * Fonction pour associer une requete de travail a un resident
+     * @return
+     */
+    public void linkWorkRequest(WorkRequest workRequest){
+        this.workRequests.add(workRequest);
+    }
     public Project searchProject(){
       return null;
     }

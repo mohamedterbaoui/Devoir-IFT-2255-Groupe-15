@@ -3,6 +3,9 @@
 //Classe view pour les résidents
 package com.ift2255.MaVille;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 /**Classe qui gère la vue des résidents
  */
@@ -61,6 +64,8 @@ public class ResidentView extends View {
                 break;
             case 2:
                 // Appel la méthode pour ajouter une requête de travail
+                addWorkRequest();
+                displayOptions();
                 break;
             case 3:
                 // Consulter la liste des travaux avec option de recherche
@@ -92,13 +97,65 @@ public class ResidentView extends View {
         scanner.close();
     }
 
-    // Affiche touts les projets associés au résident
     /**Afficher et imprimer les requêtes de travail
      */
     public void viewWorkRequestsResident() {
         System.out.println("\nVoici vos requêtes de travail :");
         residentController.viewWorkRequests(); 
     }
+
+    /**
+     * Ajouter une requete de travail
+     */
+    public void addWorkRequest() {
+        // Demander les informations à l'utilisateur
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Veuillez entrer l'identifiant de la demande de travaux : ");
+        int workRequestId = Integer.parseInt(scanner.nextLine());
+
+        System.out.println("Veuillez entrer le titre de la demande de travaux : ");
+        String title = scanner.nextLine();
+
+        System.out.println("Veuillez entrer la description des travaux : ");
+        String description = scanner.nextLine();
+
+        System.out.println("Veuillez entrer la date de début prévue (format: yyyy-MM-dd) : ");
+        String dateInput = scanner.nextLine();
+        Date expectedStartDate = null;
+        try {
+            expectedStartDate = new SimpleDateFormat("yyyy-MM-dd").parse(dateInput);
+        } catch (ParseException e) {
+            System.out.println("Format de date invalide. Veuillez entrer une date valide.");
+            return;
+        }
+
+        System.out.println("Veuillez entrer le type de travaux (ex: Construction, Réparation, etc.) : ");
+        String workType = scanner.nextLine();
+
+        System.out.println("Veuillez entrer l'adresse du lieu des travaux : ");
+        System.out.println("Numéro de rue : ");
+        int streetNumber = scanner.nextInt();
+        scanner.nextLine();  // Consommer la nouvelle ligne
+        System.out.println("Nom de la rue : ");
+        String streetName = scanner.nextLine();
+
+        // Créer une nouvelle rue avec les informations fournies
+        Street workRequestAddress = new Street(streetNumber, streetName);
+
+        // Créer la nouvelle requête de travail avec les informations saisies
+        WorkRequest newRequest = new WorkRequest(workRequestId, title, description, expectedStartDate, workType, workRequestAddress);
+
+        // associer cette requete avec l'utilisateur actif
+        this.residentController.getCurrentResident().linkWorkRequest(newRequest);
+
+        // Ajouter la requête à la liste de demandes de travaux
+        // (Cela pourrait être une méthode dans un contrôleur qui gère les demandes)
+        WorkRequestController.addWorkRequest(newRequest);
+
+        System.out.println("La requête de travail a été ajoutée avec succès !");
+    }
+
 
     /**
      * Affiche la liste des travaux en cours ou à venir.
