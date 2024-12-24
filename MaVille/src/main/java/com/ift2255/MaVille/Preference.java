@@ -15,6 +15,10 @@ public class Preference {
         this.preferenceId = id;
         this.schedule = schedule;
     }
+
+    public Preference(String schedule){
+        this.schedule = schedule;
+    }
 /** Afficher l'id de la préférence
  * @return l'ID de la préférence
  */
@@ -38,5 +42,8 @@ public class Preference {
  */
     public void setSchedule(String schedule) {
         this.schedule = schedule;
+    }
+    public String toString(){
+        return this.schedule;
     }
 }

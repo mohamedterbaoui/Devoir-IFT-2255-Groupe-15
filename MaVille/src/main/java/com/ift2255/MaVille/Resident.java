@@ -10,6 +10,7 @@ import java.util.Date;
 public class Resident extends User{
     private String city;
     private LinkedList<String> preferredProjectTimes;
+    private LinkedList<Preference> preferences;
     private LinkedList<Project> subscriptions;
     private LinkedList<WorkRequest> workRequests;
     private Notifications notifications;
@@ -132,5 +133,20 @@ public class Resident extends User{
     }
 
     public void editPreferences(){}
+
+    public void addPreference(Preference preference){
+        if (this.preferences == null){
+            preferences = new LinkedList<Preference>();
+        }
+	    preferences.add(preference);
+    }
+
+    public void removePreference(int index){
+	    this.preferences.remove(index);
+    }
+
+   public LinkedList<Preference> getPreferences(){
+        return preferences;
+   }
     
 }

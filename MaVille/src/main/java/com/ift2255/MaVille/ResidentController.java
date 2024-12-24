@@ -58,6 +58,10 @@ public class ResidentController extends Controller {
         }
     }
 
+    public LinkedList<Preference> getPreferences(){
+        return this.currentResident.getPreferences();
+    }
+
     public void viewProjects() {
         // Fonction pour gérer les projets
     }
@@ -76,6 +80,9 @@ public class ResidentController extends Controller {
         newWorkRequest.setResident(currentResident); // Associe la requête au résident connecté
         currentResident.getWorkRequests().add(newWorkRequest); // Ajoute la requête à la liste du résident
         WorkRequestController.addWorkRequest(newWorkRequest); // Ajoute la requête à la liste globale
+    }
+    public void addPreference(String prefString) {
+        this.currentResident.addPreference(new Preference(prefString));
     }
 /**Afficher tous les projets à partir de l'API
  */
