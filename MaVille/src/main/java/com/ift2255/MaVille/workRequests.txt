@@ -1,3 +1,5 @@
 1,Demande A,Travaux de plomberie,2024-02-10,Plomberie,1,Rue des Fleurs
 2,Demande B,Réparation électrique,2024-04-20,Électricité,2,Rue de la Paix
 3,Demande C,Entretien des routes,2024-06-05,Entretien,3,Rue de l'École
+4,Demande D,Plomberie,2024-06-05,Plomberie,3,Rue de l'Église
+5,Demande E,Nettoyage des routes,2024-08-05,Entretien,3,Rue de l'érable
