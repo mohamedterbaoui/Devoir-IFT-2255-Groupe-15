@@ -6,6 +6,7 @@ package com.ift2255.MaVille;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Scanner;
 /**Classe qui gère la vue des résidents
  */
@@ -31,15 +32,16 @@ public class ResidentView extends View {
         System.out.println("4. Consulter les travaux à venir dans les 3 prochains mois");
         System.out.println("5. Consulter les entraves");
         System.out.println("6. Consulter les entraves engendrées par un travail");
-        System.out.println("7. Se déconnecter");
+        System.out.println("7. Consulter mes préférences horaires");
+        System.out.println("8. Se déconnecter");
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1; // Initialiser choice
-        while (choice < 1 || choice > 7) { // Boucle jusqu'à une entrée valide
-            System.out.print("\nVeuillez entrer votre choix (1-7) : ");
+        while (choice < 1 || choice > 8) { // Boucle jusqu'à une entrée valide
+            System.out.print("\nVeuillez entrer votre choix (1-8) : ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
-                if (choice < 1 || choice > 7) {
+                if (choice < 1 || choice > 8) {
                     System.out.println("Option invalide. Essayez à nouveau.");
                     System.out.println("\nVoici les options disponibles :");
                     System.out.println("1. Voir mes requêtes de travail");
@@ -48,7 +50,8 @@ public class ResidentView extends View {
                     System.out.println("4. Consulter les travaux à venir dans les 3 prochains mois");
                     System.out.println("5. Consulter les entraves");
                     System.out.println("6. Consulter les entraves engendrées par un travail");
-                    System.out.println("7. Se déconnecter");
+                    System.out.println("7. Consulter mes préférences horaires");
+                    System.out.println("8. Se déconnecter");
                 }
             } else {
                 System.out.println("Entrée invalide. Veuillez entrer un nombre entier.");
@@ -88,6 +91,11 @@ public class ResidentView extends View {
                 displayOptions();
                 break;
             case 7:
+                // Consulter mes preferences
+                this.viewPreferences();
+                displayOptions();
+                break;
+            case 8:
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
                 logoutResident();
             default:
@@ -203,6 +211,7 @@ public class ResidentView extends View {
         System.out.println("Entrer l'ID du Projet pour voir les entraves conséquentes :");
         Scanner scan = new Scanner(System.in);
         int projectID = scan.nextInt();
+        scan.nextLine();
 
         // trouver le projet et afficher sa liste d'entrave
         for (Project p : ProjectController.getProjectList()){
@@ -212,6 +221,134 @@ public class ResidentView extends View {
                 } else { System.out.println("Aucune entrave associée avec ce projet");break;}
             }else {
                 System.out.println("Aucun projet avec ID:" + projectID + " n'existe");
+            }
+        }
+    }
+    /**
+     * Affiche et gère les préférences d'un résident.
+     *
+     * Cette méthode permet au résident de :
+     * <ul>
+     *   <li>Visualiser ses préférences actuelles.</li>
+     *   <li>Ajouter une nouvelle préférence.</li>
+     *   <li>Supprimer ou modifier une préférence existante.</li>
+     *   <li>Revenir au menu précédent.</li>
+     * </ul>
+     *
+     * La méthode s'exécute dans une boucle infinie et interagit avec l'utilisateur
+     * pour obtenir des choix via la console. Elle repose sur la méthode
+     * {@link #getUserChoice(int, int)} pour valider les entrées utilisateur et
+     * utilise {@link #handlePreferenceAction(LinkedList, int)} pour gérer les
+     * actions spécifiques sur une préférence.
+     *
+     * @throws NumberFormatException si l'utilisateur saisit un choix invalide lors de l'interaction.
+     * @see #getUserChoice(int, int)
+     * @see #handlePreferenceAction(LinkedList, int)
+     */
+    public void viewPreferences() {
+        while (true) {
+            LinkedList<Preference> preferences = this.residentController.getPreferences();
+            if (preferences == null || preferences.isEmpty()) {
+                System.out.println("1. Ajouter une préférence");
+                System.out.println("2. Revenir en arrière");
+
+                int choix = getUserChoice(1, 2);
+                switch (choix) {
+                    case 1:
+                        System.out.println("Veuillez saisir votre nouvelle préférence :");
+                        String preferenceString = scn.nextLine();
+                        residentController.addPreference(preferenceString);
+                        break; // Rafraîchir après ajout
+                    case 2:
+                        return; // Quitter la méthode
+                }
+            } else {
+                System.out.println("Préférences actuelles :");
+                for (int i = 0; i < preferences.size(); i++) {
+                    System.out.println((i + 1) + ". " + preferences.get(i));
+                }
+                System.out.println((preferences.size() + 1) + ". Ajouter une nouvelle préférence");
+                System.out.println((preferences.size() + 2) + ". Revenir en arrière");
+
+                int choice = getUserChoice(1, preferences.size() + 2);
+                if (choice > 0 && choice <= preferences.size()) {
+                    handlePreferenceAction(preferences, choice - 1);
+                } else if (choice == preferences.size() + 1) {
+                    System.out.println("Veuillez saisir votre nouvelle préférence :");
+                    String preferenceString = scn.nextLine();
+                    residentController.addPreference(preferenceString);
+                } else if (choice == preferences.size() + 2) {
+                    return; // Quitter la méthode
+                }
+            }
+        }
+    }
+
+    /**
+     * Gère les actions associées à une préférence spécifique.
+     *
+     * Cette méthode permet à l'utilisateur de :
+     * <ul>
+     *   <li>Supprimer une préférence existante.</li>
+     *   <li>Modifier une préférence existante.</li>
+     *   <li>Revenir au menu précédent.</li>
+     * </ul>
+     *
+     * Elle affiche un sous-menu avec les options disponibles pour la préférence
+     * sélectionnée, puis exécute l'action choisie.
+     *
+     * @param preferences la liste des préférences associées au résident.
+     * @param index l'indice de la préférence sélectionnée dans la liste.
+     * @throws IndexOutOfBoundsException si l'indice fourni est invalide.
+     * @see #viewPreferences()
+     */
+    private void handlePreferenceAction(LinkedList<Preference> preferences, int index) {
+        Preference selectedPreference = preferences.get(index);
+        System.out.println("1. Supprimer cette préférence");
+        System.out.println("2. Modifier cette préférence");
+        System.out.println("3. Revenir en arrière");
+
+        int choice = getUserChoice(1, 3);
+        switch (choice) {
+            case 1:
+                preferences.remove(index);
+                System.out.println("Préférence supprimée.");
+                break;
+            case 2:
+                System.out.println("Saisissez le nouveau horaire pour cette préférence :");
+                String nouveauHoraire = scn.nextLine();
+                selectedPreference.setSchedule(nouveauHoraire);
+                System.out.println("Préférence mise à jour.");
+                break;
+            case 3:
+                // Ne rien faire, revenir à l'affichage principal
+                break;
+        }
+    }
+    /**
+     * Demande à l'utilisateur de faire un choix dans une plage spécifiée.
+     *
+     * Cette méthode s'assure que l'utilisateur saisit un entier valide
+     * compris entre les valeurs minimales et maximales fournies.
+     *
+     * @param min la valeur minimale acceptable pour le choix.
+     * @param max la valeur maximale acceptable pour le choix.
+     * @return le choix de l'utilisateur, un entier compris entre min et max.
+     * @throws IllegalArgumentException si min est supérieur à max.
+     */
+    private int getUserChoice(int min, int max) {
+        int choice = -1;
+        while (true) {
+            try {
+                System.out.print("Votre choix : ");
+                choice = Integer.parseInt(scn.nextLine());
+                if (choice >= min && choice <= max) {
+                    return choice;
+                } else {
+                    System.out.println("Veuillez entrer un nombre entre " + min + " et " + max + ".");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrée invalide. Veuillez entrer un nombre.");
             }
         }
     }

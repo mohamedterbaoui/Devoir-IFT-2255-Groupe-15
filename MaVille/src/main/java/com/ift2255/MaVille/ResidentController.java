@@ -45,6 +45,22 @@ public class ResidentController extends Controller {
         }
     }
 
+    /**
+     * Permet d'avoir toutes les preferences d'un resident
+     * @return list of preferences
+     */
+    public LinkedList<Preference> getPreferences(){
+        return this.currentResident.getPreferences();
+    }
+
+    /**
+     * Permet d'ajouter une preference
+     * @param prefString
+     */
+    public void addPreference(String prefString) {
+        this.currentResident.addPreference(new Preference(prefString));
+    }
+
     public void viewProjects() {
         // Fonction pour gérer les projets
     }
@@ -255,6 +271,9 @@ public class ResidentController extends Controller {
     public static List<Resident> getAllResidents() {
         return new ArrayList<>(residents); 
     }
+
+
+
 }
 
 

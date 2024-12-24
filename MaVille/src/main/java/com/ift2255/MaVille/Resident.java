@@ -10,6 +10,7 @@ import java.util.Date;
 public class Resident extends User{
     private String city;
     private LinkedList<String> preferredProjectTimes;
+    private LinkedList<Preference> preferences;
     private LinkedList<Project> subscriptions;
     private LinkedList<WorkRequest> workRequests;
     private Notifications notifications;
@@ -145,7 +146,45 @@ public class Resident extends User{
 	    System.out.println(this.notifications.getNewNotifications());
     }
 
-    public void editPreferences(){}
+    /**
+     * Permet de modifier les préférences associées à un utilisateur ou à un objet.
+     * Cette méthode est un point d'entrée pour les modifications des préférences,
+     * mais elle ne contient pas encore de logique spécifique.
+     */
+    public void editPreferences() { }
+
+    /**
+     * Ajoute une préférence à la liste des préférences existantes.
+     * Si la liste des préférences est nulle, elle est initialisée.
+     *
+     * @param preference La préférence à ajouter à la liste.
+     */
+    public void addPreference(Preference preference) {
+        if (this.preferences == null) {
+            preferences = new LinkedList<Preference>();
+        }
+        preferences.add(preference);
+    }
+
+    /**
+     * Supprime une préférence de la liste en fonction de son index.
+     *
+     * @param index L'index de la préférence à supprimer dans la liste.
+     * @throws IndexOutOfBoundsException si l'index est invalide (en dehors des limites de la liste).
+     */
+    public void removePreference(int index) {
+        this.preferences.remove(index);
+    }
+
+    /**
+     * Retourne la liste des préférences associées à un utilisateur ou un objet.
+     *
+     * @return Une liste de préférences (LinkedList<Preference>), ou null si aucune préférence n'est définie.
+     */
+    public LinkedList<Preference> getPreferences() {
+        return preferences;
+    }
+
     /**
      * Renvoie une représentation sous forme de chaîne de caractères de l'objet, incluant le prénom, l'email et le mot de passe de l'utilisateur.
      * Cette méthode est utilisée pour obtenir une vue textuelle de l'utilisateur.
