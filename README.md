@@ -1,43 +1,66 @@
-# Devoir-IFT-2255-Groupe-15
+# MaVille
 
-## Membres de l'équipe : 
-  Thomas Bate | Jérémy Faubert | Mohamed Terbaoui
+## Description
+Une application pour la gestion des travaux publics et privés à Montréal. Elle facilite la communication entre les résidents et les intervenants pour réduire les perturbations et améliorer la mobilité.
 
-## MaVille
-Une application de gestion des travaux publics et privés à Montréal, visant à améliorer la communication entre les résidents et les différents acteurs pour réduire les perturbations et faciliter la mobilité en ville.
+---
+
+## Fonctionnalités par rôle
+
+### Résident :
+- Créer un compte
+- Se connecter/déconnecter
+- Modifier ses préférences horaires
+- Voir ses notifications  
+  - Afficher le nombre de nouvelles notifications (non lues) dans le menu
+- Consulter les travaux en cours
+- Consulter les travaux à venir (3 prochains mois)
+- Chercher ou filtrer les travaux par quartier
+- Consulter les entraves engendrées par un travail
+- Chercher ou filtrer les entraves par rue
+- Soumettre une requête de travail
+- Faire le suivi d'une requête de travail
+- Consulter les requêtes de travail
+
+### Intervenant :
+- Créer un compte
+- Se connecter/déconnecter
+- Soumettre/Soustraire sa candidature
+- Faire le suivi de sa candidature
+- Soumettre un projet  
+  - Envoyer une notification aux résidents du quartier
+- Modifier le statut d'un projet  
+  - Envoyer une notification aux résidents du quartier
+
+---
 
 ## Organisation du répertoire
-- **index.html** : Rapport du projet en format HTML.
-- **/prototype** : Contient le code source du prototype de l'application développé en Java pour le devoir 1.
-- **/MaVille** : Contient l'implémentation de l'application pour le devoir 2.
-- **/images** : Contient les diagrammes utilisés dans le rapport.
-- **/feedback** : Feedback continue de l'auxiliare sur le travail.
+- **index.html** : Rapport du projet en HTML.
+- **/prototype** : Contient le prototype de l'application (Devoir 1).
+- **/MaVille** : Code source de l'application complète (Devoir 2 & 3).
+- **/images** : Diagrammes et illustrations du rapport.
+- **/feedback** : Commentaires de l'auxiliaire sur le projet.
 
-### Technologies utilisées
+---
 
-Notre application a été développée en utilisant plusieurs outils et bibliothèques pour assurer une gestion efficace et une organisation claire :
+## Données incluses
+- Comptes de test pour les résidents :
+  - alice@example.com / test
+  - bob.johnson@example.com / hashedpassword2
+  - charlie.brown@example.com / hashedpassword3
+- Comptes de test pour les intervenants :
+  - john.doe@example.com / password123
+  - jane.smith@example.com / password456
 
-- **Maven** : Utilisé pour gérer le build et les dépendances du projet.  
-- **Gson** : Employé pour traiter les fichiers JSON, notamment pour la sérialisation et la désérialisation des données.  
-- **JUnit** : Utilisé pour écrire et exécuter les tests unitaires, garantissant la qualité et la robustesse du code.  
-- **Architecture MVC** : Le projet est structuré selon le modèle MVC (Modèle-Vue-Contrôleur), permettant une séparation claire des responsabilités entre la logique métier, l'interface utilisateur et le contrôle des interactions. 
+Les utilisateurs peuvent tester les fonctionnalités en se connectant avec ces comptes.
 
-### Cas d'utilisation implémentés
+---
 
-L'application intègre les fonctionnalités suivantes :
-
-1. **Se connecter comme résident et intervenant** : Permet aux utilisateurs de s'authentifier en fonction de leur rôle pour accéder à des interfaces adaptées.  
-2. **Consulter les travaux en cours ou à venir** : Offre la possibilité de visualiser les travaux publics ou privés planifiés ou en cours.  
-3. **Consulter les entraves** : Permet aux utilisateurs de consulter les perturbations causées par les travaux, facilitant ainsi la planification.  
-4. **Soumettre une requête de travail** : Les résidents peuvent déposer des demandes concernant des travaux spécifiques dans leur quartier.  
-5. **Consulter la liste des requêtes de travail** : Affiche les requêtes soumises et leur statut actuel.  
-
-## Compte préconfigurés pour tester les prototype : 
-- Résident : 
-  > alice@mail.com  password123
-  > bob@mail.com  securepass
-  > caroline@mail.com  pass789
-- Intervenant :
-  > entrepriseA@mail.com  password123
-  > entrepriseB@mail.com  securepass
-  > entrepriseC@mail.com  pass789
+## Instructions d'installation
+1. **Prérequis :**
+   - Java (JDK 17+)
+   - Maven
+2. **Cloner le dépôt :**
+   ```bash
+   git clone https://github.com/<ton-github>/Devoir-IFT-2255-Groupe-15.git
+   cd Devoir-IFT-2255-Groupe-15
