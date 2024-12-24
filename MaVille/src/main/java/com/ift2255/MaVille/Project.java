@@ -21,7 +21,7 @@ public class Project implements Serializable  {
     private Date endDate;
     private ProjectStatusEnum status;
     private Intervenant intervenant;
-    private LinkedList<Entrave> entraves;
+    private LinkedList<Entrave> entraves = new LinkedList<>();
     private LinkedList<Resident> affectedResidents;
     private String heureDebut;
     private String heureFin;

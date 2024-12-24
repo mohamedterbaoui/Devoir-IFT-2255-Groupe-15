@@ -141,8 +141,8 @@ public class ResidentView extends View {
         for (Project p : ProjectController.getProjectList()){
             if (p.getProjectId() == projectID){
                 if (p.getEntraves() != null){
-                    System.out.println(p.getEntraves());
-                } else { System.out.println("Aucune entrave associée avec ce projet");}
+                    System.out.println(p.getEntraves());break;
+                } else { System.out.println("Aucune entrave associée avec ce projet");break;}
             }else {
                 System.out.println("Aucun projet avec ID:" + projectID + " n'existe");
             }
