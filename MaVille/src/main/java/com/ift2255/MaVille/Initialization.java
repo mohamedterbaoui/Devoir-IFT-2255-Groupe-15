@@ -54,8 +54,13 @@ public class Initialization {
         Entrave entrave1 = new Entrave(1, "REQ123", "Boulevard Gouin", "BG", "3m", "Travaux de drainage", 5, "Partiellement bloqué", "Non bloqué", "Rue des Sources", "Rue Notre-Dame", 500, true);
         Entrave entrave2 = new Entrave(2, "REQ124", "Rue Notre-Dame", "ND", "5m", "Réfection de la chaussée", 2, "Complètement bloqué", "Partiellement bloqué", "Boulevard Gouin", "Avenue Papineau", 1000, false);
 
+        // ajouter 2 entraves au premier projet
         ProjectController.getProjectList().get(0).getEntraves().add(entrave1);
         ProjectController.getProjectList().get(0).getEntraves().add(entrave2);
+
+        // ajouter 2 requetes au premier resident
+        AuthController.residents.getFirst().getWorkRequests().add(WorkRequestController.getWorkRequestOnId(1));
+        AuthController.residents.getFirst().getWorkRequests().add(WorkRequestController.getWorkRequestOnId(2));
     }
     /**
      * Charge les projets depuis le fichier texte spécifié.
