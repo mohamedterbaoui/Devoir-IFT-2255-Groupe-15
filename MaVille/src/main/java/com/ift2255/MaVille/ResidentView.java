@@ -27,7 +27,8 @@ public class ResidentView extends View {
         System.out.println("3. Consulter les travaux en cours ou à venir");
         System.out.println("4. Consulter les travaux à venir dans les 3 prochains mois");
         System.out.println("5. Consulter les entraves");
-        System.out.println("6. Se déconnecter");
+        System.out.println("6. Consulter les entraves engendrées par un travail");
+        System.out.println("7. Se déconnecter");
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1; // Initialiser choice
@@ -35,7 +36,7 @@ public class ResidentView extends View {
             System.out.print("\nVeuillez entrer votre choix (1-6) : ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
-                if (choice < 1 || choice > 6) {
+                if (choice < 1 || choice > 7) {
                     System.out.println("Option invalide. Essayez à nouveau.");
                     System.out.println("\nVoici les options disponibles :");
                     System.out.println("1. Voir mes requêtes de travail");
@@ -43,7 +44,8 @@ public class ResidentView extends View {
                     System.out.println("3. Consulter les travaux en cours ou à venir");
                     System.out.println("4. Consulter les travaux à venir dans les 3 prochains mois");
                     System.out.println("5. Consulter les entraves");
-                    System.out.println("6. Se déconnecter");
+                    System.out.println("6. Consulter les entraves engendrées par un travail");
+                    System.out.println("7. Se déconnecter");
                 }
             } else {
                 System.out.println("Entrée invalide. Veuillez entrer un nombre entier.");
@@ -61,12 +63,12 @@ public class ResidentView extends View {
                 // Appel la méthode pour ajouter une requête de travail
                 break;
             case 3:
-                // Consulter la liste des travaux
+                // Consulter la liste des travaux avec option de recherche
                 viewProjectsfromApi();
                 displayOptions();
                 break;
             case 4:
-                // Consulter la liste des travaux
+                // Consulter la liste des travaux des 3 prochains mois
                 viewUpcomingProjects();
                 displayOptions();
                 break;
@@ -76,6 +78,11 @@ public class ResidentView extends View {
                 displayOptions();
                 break;
             case 6:
+                // Consulter les entraves engendrées par un travail
+                viewEntravesfromProject();
+                displayOptions();
+                break;
+            case 7:
                 // Se déconnecte ou revient à l'écran d'accueil -- A IMPLÉMENTER, présentement ça ferme le programme
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
                 logoutResident();
@@ -119,10 +126,27 @@ public class ResidentView extends View {
      * pour récupérer et afficher la liste des entraves.
      */
     public void viewEntravesfromApi(){
-        System.out.println("\nEntrer le nom de la rue pour filtrer l'affichage, sinon 0 pour tout afficher\"");
+        System.out.println("\nEntrer le nom de la rue pour filtrer l'affichage, sinon 0 pour tout afficher");
         Scanner scan = new Scanner(System.in);
         String street = scan.nextLine();
         residentController.filterEntraveByRue(street);
+    }
+
+    public void viewEntravesfromProject(){
+        System.out.println("Entrer l'ID du Projet pour voir les entraves conséquentes :");
+        Scanner scan = new Scanner(System.in);
+        int projectID = scan.nextInt();
+
+        // trouver le projet et afficher sa liste d'entrave
+        for (Project p : ProjectController.getProjectList()){
+            if (p.getProjectId() == projectID){
+                if (p.getEntraves() != null){
+                    System.out.println(p.getEntraves());
+                } else { System.out.println("Aucune entrave associée avec ce projet");}
+            }else {
+                System.out.println("Aucun projet avec ID:" + projectID + " n'existe");
+            }
+        }
     }
 
     /**
