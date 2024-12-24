@@ -7,12 +7,26 @@ public enum WorkRequestStatusEnum {
 
     private final String label;
 
-    // Constructeur existant
+    /**
+     * Constructeur pour initialiser un statut de demande de travaux avec un label spécifique.
+     *
+     * Ce constructeur permet de créer une instance de l'énumération WorkRequestStatusEnum en attribuant
+     * une étiquette (label) qui représente le statut de la demande de travaux.
+     *
+     * @param label L'étiquette qui représente le statut de la demande de travaux.
+     */
+
     WorkRequestStatusEnum(String label) {
         this.label = label;
     }
 
-    // Constructeur par défaut
+    /**
+     * Constructeur par défaut pour initialiser un statut de demande de travaux avec l'étiquette "En attente".
+     *
+     * Ce constructeur crée une instance de l'énumération WorkRequestStatusEnum avec l'étiquette par défaut
+     * "En attente", ce qui peut être utilisé lorsqu'aucun statut spécifique n'est fourni.
+     */
+
     WorkRequestStatusEnum() {
         this("En attente");
     }

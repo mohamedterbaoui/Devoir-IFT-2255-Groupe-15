@@ -69,6 +69,25 @@ public class AuthController extends Controller {
         //au lieu de le faire dans la vue
     }
 
+    /**
+     * Inscrit un nouveau résident en utilisant les données fournies.
+     * Les données sont extraites du tableau `donnees` et utilisées pour créer un nouvel objet
+     * `Resident` qui est ensuite ajouté à la liste des résidents.
+     *
+     * Cette méthode gère également la conversion de la date de naissance au format `String` vers un objet `Date`.
+     * Si la date de naissance est mal formatée, une erreur est affichée.
+     *
+     * @param donnees un tableau de chaînes de caractères contenant les informations du résident :
+     *                - [0] : prénom
+     *                - [1] : nom
+     *                - [2] : date de naissance (au format chaîne)
+     *                - [3] : email
+     *                - [4] : mot de passe
+     *                - [5] : numéro de téléphone
+     *                - [6] : adresse
+     *                - [7] : code postal
+     *                - [8] : ville
+     */
     public void signUpResident(String[] donnees){
 	    
 	    try{
@@ -99,7 +118,26 @@ public class AuthController extends Controller {
         intervenants.add(intervenant);
         //Je dois aussi ajouter la logique pour Gson pour stocker les données
     }
-
+    /**
+     * Inscrit un nouvel intervenant en utilisant les données fournies.
+     * Les données sont extraites du tableau `donnees` et utilisées pour créer un nouvel objet
+     * `Intervenant` qui est ensuite ajouté à la liste des intervenants.
+     *
+     * Cette méthode gère également la conversion de la date de naissance au format `String` vers un objet `Date`,
+     * ainsi que la conversion du matricule de l'intervenant en un entier. Si la date de naissance est mal formatée,
+     * une erreur est affichée.
+     *
+     * @param donnees un tableau de chaînes de caractères contenant les informations de l'intervenant :
+     *                - [0] : prénom
+     *                - [1] : nom
+     *                - [2] : date de naissance (au format chaîne)
+     *                - [3] : email
+     *                - [4] : mot de passe
+     *                - [5] : numéro de téléphone
+     *                - [6] : adresse
+     *                - [7] : type (type de l'intervenant)
+     *                - [8] : matricule (au format chaîne)
+     */
     public void signUpIntervenant(String[] donnees){
 	try{
 	    String firstName = donnees[0];
@@ -123,8 +161,9 @@ public class AuthController extends Controller {
 	}
     }
 
-		
-
+    /**
+     * Methode pour se deconnecter
+     */
     public void logout(){
 
     }
@@ -163,10 +202,22 @@ public class AuthController extends Controller {
         return isIntervenantConnected;
     }
 
+    /**
+     * Retourne la liste statique de tous les intervenants.
+     * Cette méthode permet d'accéder à la liste complète des intervenants enregistrés dans l'application.
+     *
+     * @return la liste des intervenants sous forme de `LinkedList<Intervenant>`.
+     */
     public static LinkedList<Intervenant> getAllIntervenants() {
         return intervenants; 
     }
 
+    /**
+     * Retourne la liste des intervenants pour l'instance actuelle de la classe.
+     * Cette méthode permet d'accéder à la liste des intervenants associée à l'instance courante de l'objet.
+     *
+     * @return la liste des intervenants sous forme de `LinkedList<Intervenant>`.
+     */
     public LinkedList<Intervenant> getIntervenants() {
         return intervenants;
     }

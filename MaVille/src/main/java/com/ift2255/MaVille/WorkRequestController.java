@@ -126,6 +126,16 @@ public class WorkRequestController extends Controller {
         return null; // Retourne null si aucune requête n'est trouvée
     }
 
+    /**
+     * Récupère l'intervenant associé à une demande de travaux identifiée par son ID.
+     *
+     * Cette méthode recherche la demande de travaux correspondante à l'ID donné et retourne l'intervenant associé.
+     * Si la demande de travaux n'existe pas, la méthode retourne null.
+     *
+     * @param requestId L'ID de la demande de travaux pour laquelle l'intervenant doit être récupéré.
+     * @return L'intervenant associé à la demande de travaux, ou null si la demande n'existe pas.
+     */
+
     public static Intervenant getIntervenant(int requestId) {
         WorkRequest request = getWorkRequestOnId(requestId);
         return (request != null) ? request.getIntervenant() : null;

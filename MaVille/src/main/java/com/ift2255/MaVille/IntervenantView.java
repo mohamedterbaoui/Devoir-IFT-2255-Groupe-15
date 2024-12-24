@@ -10,6 +10,12 @@ import java.util.Scanner;
 public class IntervenantView extends View {
     private IntervenantController intervenantController;
     Scanner scanner = new Scanner(System.in);
+    /**
+     * Constructeur de la classe {@link IntervenantView}.
+     * Initialise l'objet {@link IntervenantController} utilisé par la vue pour interagir avec la logique de l'intervenant.
+     *
+     * @param intervenantController le contrôleur d'intervenant à associer à la vue.
+     */
 
     public IntervenantView(IntervenantController intervenantController) {
         this.intervenantController = intervenantController;

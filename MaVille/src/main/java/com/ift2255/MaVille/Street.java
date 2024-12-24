@@ -6,7 +6,7 @@ public class Street {
     String streetName;
 /**Constructeur de Street
  * @param id id de cette rue
- * @param nom nom de la rue
+ * @param name nom de la rue
  */
     public Street(int id, String name){
         this.streetID = id;
@@ -37,7 +37,13 @@ public class Street {
         this.streetName = streetName;
     }
 
-    // Pour affichage 
+    /**
+     * Retourne le nom de la rue de l'entrave sous forme de chaîne de caractères.
+     * Cette méthode est utilisée pour l'affichage de l'objet Entrave, affichant uniquement le nom de la rue.
+     *
+     * @return Le nom de la rue de l'entrave.
+     */
+
     @Override
     public String toString() {
         return streetName; 

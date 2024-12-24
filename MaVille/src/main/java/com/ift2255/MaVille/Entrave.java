@@ -18,7 +18,24 @@ public class Entrave {
     private double length; // "length"
     private boolean isArterial; // "isarterial"
 
-    // Constructeur
+    /**
+     * Constructeur de la classe Entrave, permettant d'initialiser les attributs de l'objet avec les valeurs spécifiées.
+     *
+     * @param id l'identifiant unique de l'entrave.
+     * @param idRequest l'identifiant de la demande liée à l'entrave.
+     * @param streetName le nom de la rue où l'entrave a lieu.
+     * @param shortName un nom court pour la rue.
+     * @param impactWidth la largeur de l'impact de l'entrave.
+     * @param impactType le type d'impact (par exemple, sur la circulation, le stationnement, etc.).
+     * @param freeParkingPlaces le nombre de places de stationnement libres.
+     * @param sidewalkBlocked indique si le trottoir est bloqué.
+     * @param bikePathBlocked indique si la piste cyclable est bloquée.
+     * @param fromName le nom du point de départ de l'entrave.
+     * @param toName le nom du point de fin de l'entrave.
+     * @param length la longueur de l'entrave en mètres.
+     * @param isArterial indique si l'entrave se trouve sur une artère principale.
+     */
+
     public Entrave(int id, String idRequest, String streetName, String shortName, String impactWidth, String impactType,
                    int freeParkingPlaces, String sidewalkBlocked, String bikePathBlocked, String fromName,
                    String toName, double length, boolean isArterial) {
@@ -142,7 +159,14 @@ public class Entrave {
         isArterial = arterial;
     }
 
-    // Méthode toString pour affichage
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères des détails d'un objet, incluant ses attributs clés.
+     * La méthode retourne une chaîne structurée affichant l'ID, le nom de rue, le nom court, la largeur d'impact,
+     * le type d'impact, les noms de début et de fin, ainsi que la longueur de l'impact en mètres.
+     *
+     * @return une chaîne formatée représentant les informations de l'objet.
+     */
+
     @Override
     public String toString() {
         return  "---------------------------------------------\n" +

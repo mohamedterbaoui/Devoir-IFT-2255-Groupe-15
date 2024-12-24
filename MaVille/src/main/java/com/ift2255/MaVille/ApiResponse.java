@@ -48,6 +48,12 @@ public class ApiResponse {
         return body;
     }
 
+    /**
+     * La chaîne inclut le code de statut, le message et le corps associés à cet objet.
+     *
+     * @return une chaîne de caractères représentant l'objet sous la forme :
+     *         "Status Code: <code de statut>, Message: <message>, Body: <corps>".
+     */
     @Override
     public String toString() {
         return "Status Code: " + statusCode + ", Message: " + message + ", Body: " + body;

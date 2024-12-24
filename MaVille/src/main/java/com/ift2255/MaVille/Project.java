@@ -311,6 +311,13 @@ public class Project implements Serializable  {
         this.title = title;
     }
 
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères de l'objet {@link Project}.
+     * Cette méthode fournit les informations essentielles d'un projet, telles que l'ID, le titre, la description, l'adresse,
+     * ainsi que les dates de début et de fin, sous une forme formatée pour une meilleure lisibilité.
+     *
+     * @return une chaîne représentant les détails du projet.
+     */
 
     @Override
     public String toString() {

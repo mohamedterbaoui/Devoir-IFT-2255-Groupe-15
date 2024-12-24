@@ -209,6 +209,14 @@ public class Travaux {
         }
     }
 
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères de l'objet représentant un projet de travaux.
+     * Cette méthode permet d'afficher les informations clés d'un projet, telles que son ID, son quartier, sa catégorie de permis,
+     * son statut actuel, la durée du projet et ses coordonnées géographiques.
+     *
+     * @return Une chaîne de caractères contenant les détails du projet, formatée pour l'affichage.
+     */
+
     @Override
     public String toString() {
         return  "----------------------------------------------------------\n" +

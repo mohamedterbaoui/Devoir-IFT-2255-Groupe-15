@@ -113,6 +113,11 @@ public class ResidentView extends View {
         String borough = scan.nextLine();
         residentController.filterWorkByBorough(borough);
     }
+    /**
+     * Affiche la liste des travaux à venir dans les 3 prochains mois.
+     * Cette méthode appelle la méthode {@link ResidentController#viewUpcomingProjects()}
+     * pour afficher les projets à venir.
+     */
 
     public void viewUpcomingProjects(){
         System.out.println("\nVoici la liste des travaux à venir dans 3 mois:");
@@ -131,6 +136,12 @@ public class ResidentView extends View {
         String street = scan.nextLine();
         residentController.filterEntraveByRue(street);
     }
+
+    /**
+     * Permet à l'utilisateur de saisir l'ID d'un projet pour afficher les entraves associées à ce projet.
+     * Si le projet existe et qu'il a des entraves, elles seront affichées.
+     * Sinon, un message d'erreur sera affiché si le projet n'existe pas ou s'il n'a pas d'entraves.
+     */
 
     public void viewEntravesfromProject(){
         System.out.println("Entrer l'ID du Projet pour voir les entraves conséquentes :");

@@ -217,7 +217,15 @@ public class WorkRequest implements Serializable  {
     public void setWorkType(String workType) {
         this.workType = workType;
     }
-   
+
+    /**
+     * Retourne une représentation sous forme de chaîne de caractères d'une demande de travaux.
+     * Cette méthode permet d'afficher les informations essentielles concernant une demande, telles que son ID,
+     * son titre, sa description, le type de travaux, la date prévue de début, l'adresse du chantier et son statut actuel.
+     *
+     * @return Une chaîne de caractères formatée contenant les détails de la demande de travaux pour l'affichage.
+     */
+
     public String toString(){
 	StringBuilder sb = new StringBuilder();
 	   

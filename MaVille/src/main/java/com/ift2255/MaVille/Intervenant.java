@@ -39,6 +39,10 @@ public class Intervenant extends User implements Serializable {
         this.cityId = cityId; 
         this.workRequests = new LinkedList<>();
     }
+    /**
+     * Applique une demande de travail en appelant la méthode {@link IntervenantController#applyToWorkRequest()}.
+     * Cette méthode crée une instance d' {@link IntervenantController} et utilise celle-ci pour traiter la demande de travail.
+     */
 
     public void applyToWorkRequest() { // Fonction qui appelle applyToWorkRequest() de IntervenantController
         IntervenantController intervenantController = new IntervenantController(this); 
@@ -63,10 +67,22 @@ public class Intervenant extends User implements Serializable {
     public LinkedList<String> viewResidentPreferences(Resident resident){
        return(resident.getPreferredProjectTimes());
     }
+    /**
+     * Modifie le statut d'un projet en appelant la méthode {@link IntervenantController (Project, String)}.
+     * Cette méthode permet de mettre à jour le statut du projet spécifié avec le nouveau statut donné.
+     *
+     * @param project le projet dont le statut doit être modifié.
+     * @param newStatus le nouveau statut à attribuer au projet.
+     */
 
-    public void modifyProjectStatus(Project project, String newStatus){ //fonction qui appelle modifyProjectStatus(Project project, String newStatus) de IntervenantController
+    public void modifyProjectStatus(Project project, String newStatus){
+        //fonction qui appelle modifyProjectStatus(Project project, String newStatus) de IntervenantController
         
     }
+    /**
+     * Modifie le statut d'un projet en appelant la méthode
+     * Cette méthode met à jour le statut du projet spécifié avec le nouveau statut fourni.
+     */
 
     public void trackApplicationStatus() { // Fonction qui appelle trackApplicationStatus(int requestID) de IntervenantController
         
@@ -89,7 +105,7 @@ public class Intervenant extends User implements Serializable {
 /**Affiche les projets de l'intérvenant
  *@return Les projets de l'intérvenant
     public LinkedList<Project> getProjects() {
-        return projects;
+        return projects ;
     }
 /**Afficher les requêtes de travail de l'intérvenant
  * @return une liste chaîné des requêtes de travail
@@ -99,7 +115,7 @@ public class Intervenant extends User implements Serializable {
     }
 
     // setters
-    /**changer la matricule de l'intérvenant
+    /**Changer la matricule de l'intérvenant
      * @param cityId le nouveau matricule
      */
     public void setCityId(int cityId) {
@@ -117,7 +133,8 @@ public class Intervenant extends User implements Serializable {
     public void setTypeIntervenant(String typeIntervenant) {
         this.typeIntervenant = typeIntervenant;
     }
-/**remplacer la liste de requêtes de travail avec une nouvelle liste
+/**
+ * Remplacer la liste de requêtes de travail avec une nouvelle liste
  * @param workRequests la nouvelle liste chaînée de requêtes
  */
     public void setWorkRequests(LinkedList<WorkRequest> workRequests) {

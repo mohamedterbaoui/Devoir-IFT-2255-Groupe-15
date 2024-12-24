@@ -30,13 +30,5 @@ class Hash{
 	    } 
 	return hexString.toString();
 	}
-
-	public static void main(String[] args){
-		System.out.println(args[0]);
-		try{
-			System.out.println(hasher(args[0]));
-	} catch (Exception e){
-	}
-	}
 }
 

@@ -29,6 +29,15 @@ public class AuthView extends View{
         System.out.println("Bienvenue à l'Application MaVille");
 	    this.mainMenu();
     }
+
+    /**
+     * Affiche le menu principal de l'application et permet à l'utilisateur de choisir une option.
+     * Le menu offre quatre choix : se connecter en tant que résident, se connecter en tant qu'intervenant,
+     * s'inscrire, ou quitter l'application. L'utilisateur doit entrer une option valide pour continuer.
+     *
+     * Si l'utilisateur entre une valeur non valide, un message d'erreur est affiché et il lui est demandé de
+     * refaire son choix jusqu'à ce qu'une option valide soit sélectionnée.
+     */
     public void mainMenu(){
         System.out.println("Vous-êtes: ");
         System.out.println("1. Résident\n2. Intervenant\n3. S'inscrire\n4. Quitter");
@@ -137,6 +146,14 @@ public class AuthView extends View{
 	    System.out.println("Veuillez séléctionner une option valide");
     }
     }
+    /**
+     * Affiche la page d'enregistrement générique et recueille les informations nécessaires pour l'inscription d'un utilisateur.
+     * Cette méthode demande à l'utilisateur de saisir son prénom, nom, date de naissance, email, mot de passe, numéro de téléphone (optionnel) et adresse.
+     * Les informations sont validées et récupérées à l'aide de méthodes spécifiques telles que `verifierNonVide` et `verifierMotDePasse`.
+     *
+     * @return un tableau de chaînes de caractères contenant les informations saisies par l'utilisateur :
+     *         [0] : prénom, [1] : nom, [2] : date de naissance, [3] : email, [4] : mot de passe, [5] : téléphone (optionnel), [6] : adresse.
+     */
 
     public String[] displayRegistrationPageGeneric(){
 	    System.out.println("Veuillez saisir les informations suivents");
@@ -153,6 +170,15 @@ public class AuthView extends View{
 	    String[] responses = {firstName, lastName,birthday,email,motDePasse,phone,address};
 	    return responses;
     }
+    /**
+     * Affiche la page d'enregistrement pour un résident et recueille les informations nécessaires à son inscription.
+     * Cette méthode appelle `displayRegistrationPageGeneric` pour récupérer les informations de base (prénom, nom, etc.),
+     * puis demande des informations supplémentaires spécifiques au résident, telles que le code postal et la ville.
+     * Enfin, elle enregistre le résident en appelant la méthode `signUpResident` du contrôleur d'authentification
+     * et affiche le menu principal après l'inscription.
+     *
+     * @see #displayRegistrationPageGeneric()
+     */
 
     public void displayRegistrationPageResident(){
 	    String[] responses = displayRegistrationPageGeneric();
@@ -164,6 +190,15 @@ public class AuthView extends View{
 	    authController.signUpResident(residentResponses);
 	    this.mainMenu();
     }
+    /**
+     * Affiche la page d'enregistrement pour un intervenant et recueille les informations nécessaires à son inscription.
+     * Cette méthode appelle `displayRegistrationPageGeneric` pour récupérer les informations de base (prénom, nom, etc.),
+     * puis demande des informations supplémentaires spécifiques à l'intervenant, telles que le type d'intervenant et le matricule de la ville.
+     * Enfin, elle enregistre l'intervenant en appelant la méthode `signUpIntervenant` du contrôleur d'authentification
+     * et affiche le menu principal après l'inscription.
+     *
+     * @see #displayRegistrationPageGeneric()
+     */
 
     public void displayRegistrationPageIntervenant(){
 	    String[] responses = displayRegistrationPageGeneric();
@@ -176,6 +211,13 @@ public class AuthView extends View{
 	    authController.signUpIntervenant(intervenantResponses);
 	    this.mainMenu();
     }
+    /**
+     * Vérifie la validité du mot de passe en demandant à l'utilisateur de saisir et confirmer son mot de passe.
+     * Si les deux mots de passe saisis correspondent, le mot de passe est haché à l'aide de la méthode `Hash.hasher` et retourné.
+     * Si les mots de passe ne correspondent pas, la méthode redemande la saisie du mot de passe jusqu'à ce qu'une correspondance soit trouvée.
+     *
+     * @return le mot de passe haché si la confirmation est correcte, sinon une nouvelle demande de mot de passe est effectuée.
+     */
 
     private String verifierMotDePasse(){
 	    System.out.println("Mot de passe : ");
@@ -194,6 +236,14 @@ public class AuthView extends View{
 		    return verifierMotDePasse();
 	    }
     }
+    /**
+     * Demande à l'utilisateur de saisir une réponse et vérifie qu'elle n'est pas vide.
+     * Si la réponse est vide, un message d'erreur est affiché et l'utilisateur est invité à entrer une réponse valide.
+     * La méthode continue à demander une réponse jusqu'à ce qu'une entrée non vide soit fournie.
+     *
+     * @param prompt le message à afficher avant que l'utilisateur saisisse sa réponse.
+     * @return la réponse saisie par l'utilisateur, garantie non vide.
+     */
 
     private String verifierNonVide(String prompt){
 	    System.out.println(prompt);

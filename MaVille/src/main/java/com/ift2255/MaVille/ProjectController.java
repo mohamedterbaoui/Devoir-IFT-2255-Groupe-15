@@ -328,6 +328,14 @@ public class ProjectController extends Controller {
             return false;
         }
     }
+    /**
+     * Lie les résidents au projet en fonction de leur quartier et envoie des notifications aux résidents affectés.
+     * Cette méthode parcourt tous les résidents, vérifie si leur quartier correspond à l'adresse du projet, puis les ajoute
+     * à la liste des résidents affectés. Une notification est envoyée à chaque résident concerné.
+     *
+     * @param project le projet auquel les résidents doivent être associés.
+     * @return une liste des résidents affectés par le projet.
+     */
 
     public static List<Resident> linkResidentsToProject(Project project) {
         List<Resident> affectedResidents = new LinkedList<>();

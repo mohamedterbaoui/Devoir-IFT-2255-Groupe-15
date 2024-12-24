@@ -50,13 +50,13 @@ public class ResidentController extends Controller {
     }
 
     // Ajoute une requête de travail pour le résident connecté
-/**Faire une demande de travaux 
-* @param title Le titre de la demande
-* @param description la demande
-* @param workType le type de travail
-* @param expectedStartDate la date de début attendé
-* @param workRequestAddress l'adresse pour la demande
-*/
+    /**Faire une demande de travaux
+    * @param title Le titre de la demande
+    * @param description la demande
+    * @param workType le type de travail
+    * @param expectedStartDate la date de début attendé
+    * @param workRequestAddress l'adresse pour la demande
+    */
     public void addWorkRequest(String title, String description, String workType, Date expectedStartDate, Street workRequestAddress) {
         int id = 0; // id mit à 0 par défaut pour que ça génère un id random dans le constructeur de la classe WorkRequest
         WorkRequest newWorkRequest = new WorkRequest(id, title, description, expectedStartDate, workType, workRequestAddress);
@@ -64,6 +64,12 @@ public class ResidentController extends Controller {
         currentResident.getWorkRequests().add(newWorkRequest); // Ajoute la requête à la liste du résident
         WorkRequestController.addWorkRequest(newWorkRequest); // Ajoute la requête à la liste globale
     }
+    /**
+     * Récupère tous les travaux disponibles.
+     * Cette méthode accède à la base de données ou à une autre source de données pour récupérer une liste complète des travaux.
+     *
+     * @return une liste d'objets {@link Travaux} contenant tous les travaux récupérés.
+     */
 
     private ArrayList<Travaux> fetchAllTravaux() {
         ArrayList<Travaux> travauxList = new ArrayList<>();
@@ -110,8 +116,9 @@ public class ResidentController extends Controller {
         return travauxList;
     }
 
-/**Afficher tous les projets à partir de l'API
- */
+    /**
+     * Afficher tous les projets à partir de l'API
+     */
     // Méthode pour afficher les projets dans les trois prochains mois
     public void viewUpcomingProjects() {
         List<Project> projects = ProjectController.getProjectList();
@@ -130,7 +137,13 @@ public class ResidentController extends Controller {
         }
     }
 
-    // Méthode pour filtrer ou rechercher des travaux par quartier
+    /**
+     * Filtre les travaux en fonction du quartier spécifié.
+     * Cette méthode parcourt les travaux disponibles et sélectionne ceux qui correspondent au quartier donné.
+     *
+     * @param borough le nom du quartier utilisé pour filtrer les travaux.
+     */
+
     public void filterWorkByBorough(String borough) {
         ArrayList<Travaux> travauxList = fetchAllTravaux();
         System.out.println("Travaux dans le quartier " + borough + ":");
@@ -222,12 +235,23 @@ public class ResidentController extends Controller {
         return result.getAsJsonArray("records");
     }
 
-    // Méthode pour ajouter un résident (si nécessaire)
+    /**
+     * Ajoute un résident à la liste des résidents.
+     * Cette méthode ajoute un objet {@link Resident} à la collection des résidents.
+     *
+     * @param resident l'objet {@link Resident} à ajouter à la liste.
+     */
+
     public static void addResident(Resident resident) {
         residents.add(resident);
     }
 
-    // Méthode pour obtenir tous les résidents
+    /**
+     * Récupère la liste de tous les résidents.
+     *
+     * @return une liste contenant tous les résidents sous forme d'une nouvelle {@link ArrayList}.
+     */
+
     public static List<Resident> getAllResidents() {
         return new ArrayList<>(residents); 
     }

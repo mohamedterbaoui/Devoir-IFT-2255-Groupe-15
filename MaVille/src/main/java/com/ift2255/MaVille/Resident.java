@@ -34,12 +34,19 @@ public class Resident extends User{
 	this.notifications = new Notifications();
 	this.quartier = PostalCodes.valueOf(this.postalCode.split(" ")[0].toUpperCase()).getQuartier();
     }
-/**Ajouter un subscripton à un projet
- * @param project le projet auquel le resident veut s'abonner
- */
+    /**Ajouter un subscripton à un projet
+     * @param project le projet auquel le resident veut s'abonner
+     */
     public void subscribeToProject(Project project){
         subscriptions.add(project);
     }
+    /**
+     * Permet à un résident de se désinscrire d'un projet.
+     * Cette méthode retire le résident de la liste des résidents affectés par le projet et peut inclure d'autres logiques
+     * spécifiques à la désinscription, comme l'envoi d'une notification de désinscription ou la mise à jour de l'état du projet.
+     *
+     * @param project le projet duquel le résident souhaite se désinscrire.
+     */
 
     public void unsubscribeFromProject(Project project){
         // fonction
@@ -132,6 +139,12 @@ public class Resident extends User{
     }
 
     public void editPreferences(){}
+    /**
+     * Renvoie une représentation sous forme de chaîne de caractères de l'objet, incluant le prénom, l'email et le mot de passe de l'utilisateur.
+     * Cette méthode est utilisée pour obtenir une vue textuelle de l'utilisateur.
+     *
+     * @return une chaîne de caractères représentant les informations principales de l'utilisateur (prénom, email, mot de passe).
+     */
 
     @Override
     public String toString(){
