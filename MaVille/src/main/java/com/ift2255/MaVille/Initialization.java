@@ -166,8 +166,10 @@ public class Initialization {
                         String typeIntervenant = data[7].trim();
                         int cityId = Integer.parseInt(data[8].trim());
 
+                        String hashedPassword = Hash.hasher(password);
+
                         // Créer un nouvel intervenant avec les données extraites
-                        Intervenant intervenant = new Intervenant(firstName, lastName, birthDate, email, password, phone, userAddress, typeIntervenant, cityId);
+                        Intervenant intervenant = new Intervenant(firstName, lastName, birthDate, email, hashedPassword, phone, userAddress, typeIntervenant, cityId);
 
                         // Ajouter l'intervenant à la liste
                         AuthController.intervenants.add(intervenant);
