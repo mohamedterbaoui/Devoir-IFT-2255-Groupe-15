@@ -19,6 +19,7 @@ public class IntervenantView extends View {
 
     public IntervenantView(IntervenantController intervenantController) {
         this.intervenantController = intervenantController;
+        displayOptions();
     }
 
     /**

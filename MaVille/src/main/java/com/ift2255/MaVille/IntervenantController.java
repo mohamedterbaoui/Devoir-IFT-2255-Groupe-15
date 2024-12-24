@@ -18,6 +18,7 @@ public class IntervenantController extends Controller {
  */
     public IntervenantController(Intervenant intervenant) {
         currentIntervenant = intervenant;
+        new IntervenantView(this);
     }
 /**Soumission d'un projet
  * @param project le nouveau projet
