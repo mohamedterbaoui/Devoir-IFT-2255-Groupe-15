@@ -32,8 +32,8 @@ public class ResidentView extends View {
 
         Scanner scanner = new Scanner(System.in);
         int choice = -1; // Initialiser choice
-        while (choice < 1 || choice > 6) { // Boucle jusqu'à une entrée valide
-            System.out.print("\nVeuillez entrer votre choix (1-6) : ");
+        while (choice < 1 || choice > 7) { // Boucle jusqu'à une entrée valide
+            System.out.print("\nVeuillez entrer votre choix (1-7) : ");
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 if (choice < 1 || choice > 7) {
@@ -83,7 +83,6 @@ public class ResidentView extends View {
                 displayOptions();
                 break;
             case 7:
-                // Se déconnecte ou revient à l'écran d'accueil -- A IMPLÉMENTER, présentement ça ferme le programme
                 System.out.println("Merci d'avoir utilisé l'application. À bientôt !");
                 logoutResident();
             default:
