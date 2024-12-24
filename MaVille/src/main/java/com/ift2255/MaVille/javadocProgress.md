@@ -1,0 +1,32 @@
+ ## Progrès sur le javadoc
+  
+- [x] ApiResponse.java
+- [x] App.java
+- [x] AuthController.java
+- [x] AuthView.java
+- [x] Controller.java
+- [x] Criteria.java
+- [x] District.java
+- [x] Entrave.java
+- [x] FileOps.java
+- [x] Hash.java
+- [x] HttpClientApi.java
+- [ ] Initialization.java
+- [x] Intervenant.java
+- [x] IntervenantController.java
+- [x] IntervenantView.java
+- [x] Issue.java
+- [x] Notification.java
+- [x] Preference.java
+- [x] Project.java
+- [x] ProjectController.java - non pas complété en fait
+- [x] ProjectType.java
+- [x] Resident.java
+- [x] ResidentController.java
+- [x] ResidentView.java
+- [x] Street.java
+- [x] Travaux.java
+- [x] User.java
+- [x] View.java
+- [x] WorkRequest.java
+- [x] WorkRequestController.java

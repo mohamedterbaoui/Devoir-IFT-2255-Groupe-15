@@ -1,0 +1,5 @@
+John,Doe,1990-01-01,john.doe@example.com,password123,555-1234,1234 Some St,Technicien,1
+Jane,Smith,1985-02-14,jane.smith@example.com,password456,555-5678,5678 Other St,Ingénieur,2
+Alice,Johnson,1980-03-22,alice.johnson@example.com,password789,555-8765,9101 Elm St,Architecte,3
+Bob,Brown,1975-07-30,bob.brown@example.com,password101,555-2345,2020 Oak St,Urbaniste,4
+Charlie,White,1988-11-11,charlie.white@example.com,password102,555-6789,3030 Pine St,Technicien,5
